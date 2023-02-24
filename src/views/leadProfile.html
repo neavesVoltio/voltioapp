@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Voltio dashboard">
+  <style>
+*,
+*:before,
+*:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+} 
+
+.containerSet {
+  height: 400px;
+  width: 400px;
+  background-color: #ffffff;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border-radius: 8px;
+  box-shadow: 20px 20px 40px rgba(60, 60, 150, 0.25);
+  display: grid;
+  place-items: center;
+}
+.circular-progress {
+  position: relative;
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.circular-progress:before {
+  content: "";
+  position: absolute;
+  height: 84%;
+  width: 84%;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+.value-container {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 50px;
+  color: #231c3d;
+}
+
+
+  </style>
+
+	<title>Voltio Dashboard</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <!-- End fonts -->
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../resources/sweetAlert.css">
+  
+
+</head>
+<body>
+	<div class="main-wrapper">
+
+		<!-- partial -->
+    <section id="profileViewSection">
+      <div class="page-wrapper">
+        <div class="page-content">
+            <!-- profile -->
+            <div class="row" id="profile">
+            <div class="col-12 grid-margin">
+              <div class="card rounded bg-transparent border-info">
+                  <div class="d-flex justify-content-between align-items-center position-absolute  px-3 px-md-5 mt-3">
+                    <div>
+                      <span class="h4 p-4 text-secondary" id="usernameTextAddUser"><strong>PROJECTS</strong></span>
+                      <span class="h4 p-4 text-secondary" ><strong>xxxxx</strong></span>
+                    </div>
+          
+                  </div>
+                <div class="d-flex justify-content-center p-4 rounded-bottom shadow">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- view lead section -->
+          <!-- middle wrapper start -->
+          <div class="container d-flex justify-content-center mb-4">
+              <div class="circular-progress">
+                <div class="value-container"><button type="button" class="btn btn-primary" id="updateStatusChart">
+    update chart
+    </button></div>
+    
+              </div>
+              
+          </div>
+          <div class="row profile-body">
+            
+            <div class="col-md-12 col-lg-5 middle-wrapper">
+              <div class="row">
+                <div class="col-md-12 grid-margin">
+                  <div class="card rounded bg-transparent border-info">
+                    <div class="card-header">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 id="titleOfEditLeadView">Projects</h5>
+                        </div>
+                          <button type="button" class="btn btn-primary" id="openProfileView">
+    View profile
+    </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <form>
+                        <div class="mb-3">
+                          <label for="leadVoltioId" class="form-label">Voltio Id</label>
+                          <input type="text" class="form-control border-0 text-end" id="leadVoltioId" aria-describedby="voltio id" readonly>
+                        </div>
+                        <div class="mb-3">
+                          <label for="leadName" class="form-label">NAME</label>
+                          <input type="text" class="form-control  text-end" id="leadName" aria-describedby="about">
+                        </div>
+                        <div class="mb-3">
+                          <label for="leadEmail" class="form-label">EMAIL</label>
+                          <input type="email" class="form-control  text-end" id="leadEmail" aria-describedby="email">
+                        </div>
+                        <div class="mb-3">
+                          <label for="leadPhone" class="form-label">PHONE</label>
+                          <input type="text" class="form-control  text-end" id="leadPhone" aria-describedby="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="leadLanguage" class="form-label">LANGUAGE</label>
+                            <select class="form-select  text-end" aria-label="state" id="leadLanguage">
+                              <option>SPANISH</option>
+                              <option>ENGLISH</option>
+                            </select>
+                        </div>
+                        
+                        <div class="container shadow-sm mb-4">
+                            <div class="row">
+                              <div class="mb-3 ">
+                                <label for="leadAddress" class="form-label mt-3 ">ADDRESS</label>
+                                <input type="text" class="form-control  text-end" id="leadAddress" aria-describedby="address">
+                              </div>
+                              <div class="mb-3">
+                                <label for="leadCity" class="form-label">CITY</label>
+                                <input type="text" class="form-control  text-end" id="leadCity" aria-describedby="city">
+                              </div>
+                              <div class="mb-3">
+                                <label for="stateDropdown" class="form-label">STATE</label>
+                              <select class="form-select  text-end" aria-label="state" id="stateDropdown">
+    <option></option>
+                              </select>  
+                              </div>
+                              <div class="mb-3">
+                                <label for="leadZip" class="form-label">Zip</label>
+                                <input type="text" class="form-control mb-3  text-end" id="leadZip" aria-describedby="state">
+                              </div>
+                            </div>
+                        </div>
+                        
+                        <div class="container">
+                          <div class="row">
+                            <a class="btn btn-primary me-2 mb-2 text-white" id="editLeadButtonToServer">Save</a>
+                            <div class="alert alert-success invisible col-8 " id= "save-success-message" role="alert"></div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="card-footer">
+                      <div class="d-flex post-actions">
+                          <a href="javascript:;" class="d-flex align-items-center text-muted">
+                          <i class="icon-md" data-feather="share"></i>
+                          <p class="d-none d-md-block ms-2">Share</p>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- middle wrapper end -->
+            <!-- right wrapper start -->
+            <div class="col-md-12 col-lg-7">
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                  <div class="accordion-item"> <!--UPLOAD VIEW -->
+                    <h2 class="accordion-header" id="flush-headingOne">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        <strong>Upload Images</strong>
+                      </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                        <div class="mb-3">
+                        <label for="customerFilesUpload" class="form-label">Upload Files</label>
+                        <input class="form-control" name="upFileCustomer" type="file" id="customerFilesUpload" multiple> <!-- multiple -->
+                        </div>
+                        <div class="container mb-4">
+                        <div class="row">
+                        </div>
+                        </div>
+                        <div class="mb-3">
+                          <button type="button" class="btn btn-secondary me-2 mb-2 " id="uploadCustomerImageButton">Add File</button>
+                          <button type="button" class="btn btn-dark me-2 mb-2 " id="viewCustomersImageButton">View uploaded Images</button>
+                          <div class="messageCustomerFiles mb-3"></div>
+                        </div>
+                        <div class="messageCustomer mb-3"></div>
+                        <div id="previewCustomerFiles"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item"> <!--IMAGES VIEW -->
+                    <h2 class="accordion-header" id="flushImageView">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flushImageViewCollapse" aria-expanded="false" aria-controls="flushImageViewCollapse">
+                        <strong>Project Images</strong>
+                      </button>
+                    </h2>
+                    <div id="flushImageViewCollapse" class="accordion-collapse collapse" aria-labelledby="flushImageView" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                        <button type="button" class="btn btn-light mb-3" onclick="getCustomerImagesGalery()">Get Images</button>
+                        <div class="row" id="imageCustomerGallery">
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item"> <!--CUST NOTES -->
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        <strong>Customer Notes</strong>
+                      </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                        <div class="form-floating">
+                              <textarea class="form-control mb-2" placeholder="Leave a comment here" id="customerComment"></textarea>
+                              <label for="customerComment">Comments</label>
+                              <button type="button" class="btn btn-light mb-3" id="saveCustomerCommentButton">Save</button>
+                              <button type="button" class="btn btn-light mb-3" id="refreshCustomerCommentButton">Refresh</button>
+                              
+                        </div>
+                        <div class="container shadow p-2" id="listOfCommentsCustomer"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">  <!--ADMIN NOTES -->
+                    <h2 class="accordion-header" id="flush-headingThree">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" href="#adminComment" aria-expanded="false" aria-controls="flush-collapseThree">
+                        <strong>Project Notes</strong>
+                      </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                        <div class="accordion-body">
+                          <div class="form-floating">
+                              <textarea class="form-control mb-2" placeholder="Leave a comment here" id="adminComment"></textarea>
+                              <label for="adminComment">Comments</label>
+                              <button type="button" class="btn btn-light mb-3" id="saveAdminCommentButton">Save</button>
+                              <button type="button" class="btn btn-light mb-3" id="refreshAdminCommentButton">Refresh</button>
+                          </div>
+    
+                          <div class="container shadow p-2" id="listOfCommentsAdmin"></div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="accordion-item" id="internalNotesAccordion">  <!--INTERNAL NOTES -->
+                    <h2 class="accordion-header" id="flush-headingThree">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-internalNotes" aria-expanded="false" aria-controls="flush-internalNotes">
+                        <strong>Internal Notes</strong>
+                      </button>
+                    </h2>
+                    <div id="flush-internalNotes" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                        <div class="accordion-body">
+                          <div class="form-floating">
+                              <textarea class="form-control mb-2" placeholder="Leave a comment here" id="internalNotes"></textarea>
+                              <label for="internalNotes">Comments</label>
+                              <button type="button" class="btn btn-light mb-3" id="saveInternalNotesButton">Save</button>
+                              <button type="button" class="btn btn-light mb-3" id="refreshInternalNotesButton">Refresh</button>
+                          </div>
+    
+                          <div class="container shadow p-2" id="listOfInternalNotes"></div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="accordion-item">  <!--LEAD NOTES -->
+                    <h2 class="accordion-header" id="flush-headingThree">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-leadNotes" aria-expanded="false" aria-controls="flush-leadNotes">
+                        <strong>Lead Notes</strong>
+                      </button>
+                    </h2>
+                    <div id="flush-leadNotes" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                        <div class="accordion-body">
+                          <div class="form-floating">
+                              <textarea class="form-control mb-2" placeholder="Leave a comment here" id="leadNotes"></textarea>
+                              <label for="leadNotes">Comments</label>
+                              <button type="button" class="btn btn-light mb-3" id="saveleadNotesButton">Save</button>
+                              <button type="button" class="btn btn-light mb-3" id="refreshleadNotesButton">Refresh</button>
+                          </div>
+    
+                          <div class="container shadow p-2" id="listOfleadNotes"></div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="accordion-item">  <!--STATUS -->
+                    <h2 class="accordion-header" id="flush-headingThree">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseThree">
+                        <strong>Status</strong>
+                      </button>
+                    </h2>
+                    <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                            <div class="card rounded">
+                    <div class="card-header">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                          <i class="fa-solid fa-user"></i>												
+                          <div class="ms-2">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <form>
+                        <div class="mb-3">
+                          <label for="closingDate" class="form-label">CLOSING DATE</label>
+                          <input type="date" class="form-control  text-end" id="closingDate" aria-describedby="about">
+                        </div>
+                        <div class="mb-3">
+                          <label for="epc" class="form-label">EPC</label>
+                          <input type="text" class="form-control  text-end" id="epc" aria-describedby="epc">
+                        </div>
+                        <div class="mb-3">
+                          <label for="status" class="form-label">STATUS</label>
+                          <select class="form-select  text-end" aria-label="status" id="status">
+                              <option selected></option>
+                              
+                          </select>
+    
+                        </div>
+                        <div class="mb-3">
+                          <label for="stage" class="form-label">STAGE</label>
+                          <select class="form-select  text-end" aria-label="stage" id="stage">
+                              <option selected></option>
+                              
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label for="ssStatus" class="form-label">SS STATUS</label>
+                          <select class="form-select  text-end" aria-label="status" id="ssStatus">
+                            <option></option>
+                            
+                          </select>
+    
+                          
+                        </div>
+                        <div class="mb-3">
+                          <label for="ssDocsLinks" class="form-label">SS DOCS LINKS</label>
+                          <input type="text" class="form-control  text-end" id="ssDocsLinks" aria-describedby="ssDocsLinks">
+                        </div>
+                        <div class="mb-3">
+                          <label for="apptDate" class="form-label">AAPT DATE</label>
+                          <input type="date" class="form-control  text-end" id="apptDate" aria-describedby="apptDate">
+                        </div>
+                        <div class="mb-3">
+                          <div class="btn-group  d-flex flex-row-reverse" role="group" aria-label="Basic checkbox toggle button group">
+                            <input type="checkbox" class="btn-check rounded-pill" id="ss" autocomplete="off">
+                            <label class="btn btn-outline-secondary" for="ss">SS</label>
+                            <input type="checkbox" class="btn-check rounded-pill" id="docs" autocomplete="off">
+                            <label class="btn btn-outline-secondary" for="docs">DOCS</label>
+                          </div>
+                        </div>
+                        
+                        
+                      </form>
+                    </div>
+                    <div class="card-footer">
+                      <div class="d-flex post-actions">
+    
+                      </div>
+                    </div>
+                  </div>
+    
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">  <!--PROJECT INFO -->
+                    <h2 class="accordion-header" id="flush-projectInfoAccordion">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-InfoAccordion" aria-expanded="false" aria-controls="flush-collapseThree">
+                        <strong>Project Info</strong>
+                      </button>
+                    </h2>
+                    <div id="flush-InfoAccordion" class="accordion-collapse collapse" aria-labelledby="flush-InfoAccordion" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                            <div class="card rounded">
+                    <div class="card-header">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                          <i class="fa-solid fa-user"></i>												
+                          <div class="ms-2">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <form>
+                        <div class="mb-3">
+                          <label for="lastUpdate" class="form-label">LAST UPDATE</label>
+                          <input type="date" class="form-control  text-end" id="lastUpdate" aria-describedby="about">
+                        </div>
+                        <div class="mb-3">
+                          <label for="projectManager" class="form-label">PROJECT MANAGER</label>
+                          <input type="text" class="form-control  text-end" id="projectManager" aria-describedby="projectManager">
+                        </div>
+                        <div class="mb-3">
+                          <label for="leadInstaller" class="form-label">INSTALLER</label>
+                          <select class="form-select  text-end" aria-label="leadInstaller" id="leadInstaller">
+                              <option selected></option>
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label for="leadFinancing" class="form-label">FINANCING</label>
+                          <select class="form-select  text-end" aria-label="leadFinancing" id="leadFinancing">
+                              <option selected></option>
+                              
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label for="contractDate" class="form-label">CONTRACT DATE</label>
+                          <input type="date" class="form-control  text-end" id="contractDate" aria-describedby="contractDate">
+                        </div>
+                        <div class="mb-3">
+                          <label for="systemSize" class="form-label">SYSTEM SIZE</label>
+                          <input type="number" class="form-control  text-end" id="systemSize" aria-describedby="systemSize">
+                        </div>
+                        <div class="mb-3">
+                          <label for="contractAmount" class="form-label">CONTRACT AMOUNT</label>
+                          <input type="number" class="form-control  text-end" id="contractAmount" aria-describedby="contractAmount">
+                        </div>
+                        <div class="mb-3">
+                          <label for="roofStatus" class="form-label">ROOF STATUS</label>
+                          <input type="text" class="form-control  text-end" id="roofStatus" aria-describedby="roofStatus">
+                        </div>
+    
+                      </form>
+                    </div>
+                    <div class="card-footer">
+                      <div class="d-flex post-actions">
+    
+                      </div>
+                    </div>
+                  </div>
+    
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item" id="runCreditView">  <!--RUN CREDIT -->
+                    <h2 class="accordion-header" id="flush-headingThree">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-runCredit" aria-expanded="false" aria-controls="flush-runCredit">
+                        <strong>Run Credit</strong>
+                      </button>
+                    </h2>
+                    <div id="flush-runCredit" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                        <div class="container shadow p-2">
+                          <div class="mb-3">
+                            <label for="leadDob" class="form-label">DOB</label>
+                            <input type="date" class="form-control  text-end" id="leadDob" aria-describedby="leadDob">
+                          </div>
+                          <div class="mb-3">
+                            <label for="leadJobOcupation" class="form-label">Job/Occupation</label>
+                            <input type="text" class="form-control  text-end" id="leadJobOcupation" aria-describedby="leadJobOcupation">
+                          </div>
+                          <div class="mb-3">
+                            <label for="leadSSN" class="form-label">SSN</label>
+                            <input type="number" class="form-control  text-end" id="leadSSN" aria-describedby="leadSSN">
+                          </div>
+                          <div class="mb-3">
+                            <label for="leadAnnualIncome" class="form-label">Annual Income</label>
+                            <input type="number" class="form-control  text-end" id="leadAnnualIncome" aria-describedby="leadAnnualIncome">
+                          </div>
+                          <div class="mb-3"> <!-- start upload images -->
+                        <label for="creditFilesUpload" class="form-label">Upload Files</label>
+                        <input class="form-control" name="upFileCredit" type="file" id="creditFilesUpload" multiple> <!-- multiple -->
+                        </div>
+                        <div class="container mb-4">
+                        <div class="row">
+                        </div>
+                        </div>
+                        <div class="mb-3">
+                          <button type="button" class="btn btn-secondary me-2 mb-2 " id="uploadCreditImageButton">Add File</button>
+                          <button type="button" class="btn btn-dark me-2 mb-2 " id="viewCreditImageButton">View uploaded Images</button>
+                          <div class="messageCreditFiles mb-3"></div>
+                        </div>
+                        <div class="messageCredit mb-3"></div>
+                        <div id="previewCreditFiles"></div> <!-- end upload images -->
+                          <div class="row justify-content-center">
+                          <div class="container mb-4">
+                          <!-- Button trigger modal -->
+                          <div class="container">
+                            <div class="row">
+                              <button type="button" class="btn btn-secondary me-2 mb-2 text-white" data-bs-toggle="modal" data-bs-target="#signatureModal">Signature</button>
+                            </div>
+                          </div>
+                          </div>
+                          <!-- Modal -->
+                          <div class="modal fade" id="signatureModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-fullscreen">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Signature Pad</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="col-12 mb-5">
+                                    <canvas class = "border shadow mx-auto d-block" id="siganturePad" width="1000" height="500" style="border:1px solid #000000;"></canvas>
+                                  </div>
+                                  
+                                  <div class="alert alert-success invisible" id= "save-success-message-signature" role="alert"></div>
+                                  <div class="container shadow-sm mb-4" id="imageViewerSignature"></div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-primary me-2 mb-2 " id="saveSignature">Save Signature</button>
+                                  <button type="button" class="btn btn-dark me-2 mb-2 " id="clearSignature">Clear</button>
+                                  <button type="button" class="btn btn-dark me-2 mb-2 " id="viewSignatures">View Signatures</button>
+                                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
+                        <div class="row justify-content-center p-4">
+                          <button type="button" class="btn btn-primary me-2 mb-2 text-white" id="saveCreditInfoButton">Save Credit Info</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item" id="flush-creditLinksAdminOnly"> <!--CREDIT LINKS -->
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-creditLinks" aria-expanded="false" aria-controls="flush-creditLinks">
+                        <strong>Credit Links</strong>
+                      </button>
+                    </h2>
+                    <div id="flush-creditLinks" class="accordion-collapse collapse" aria-labelledby="flush-creditLinks" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                        <div class="form-floating">
+                              <input class="form-control mb-2" placeholder="description" id="creditLinksName">
+                              <label for="creditLinks">Description</label>
+                              
+                        </div>
+                        <div class="form-floating">
+                              
+                              <input class="form-control mb-2" placeholder="paste link here" id="creditLinks">
+                              <label for="creditLinks">credit link</label>
+                        </div>
+                        <button type="button" class="btn btn-primary mb-3" id="saveCreditLinksButton">Save</button>
+                        <button type="button" class="btn btn-secondary mb-3" id="refreshCreditLinksButton">Refresh</button>
+                        <div class="container shadow p-2" id="listOfLinks">
+                          <div class="container p-4">
+                          <div class="row">
+    
+                          
+                          
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">  <!--ELECTRICITY USAGE -->
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-ElectricityUsage" aria-expanded="false" aria-controls="flush-collapseThree">
+                        <strong>Electricity usage</strong>
+                      </button>
+                    </h2>
+                    <div id="flush-ElectricityUsage" class="accordion-collapse collapse" aria-labelledby="flush-ElectricityUsage" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                            <div class="card rounded">
+                    <div class="card-header">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                          <i class="fa-solid fa-user"></i>												
+                          <div class="ms-2">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <form>
+                        <div class="mb-3">
+                          <label for="typeOfUsage" class="form-label">FINANCING</label>
+                          <select class="form-select  text-end" aria-label="typeOfUsage" id="typeOfUsage">
+                              <option selected></option>
+                              <option>Yearly Kwh Usage</option>                            
+                              <option>Yearly Cost Usage</option>                            
+                              <option>Monthy cost average</option>                            
+                              <option>Monthy Kwh Usage</option>                            
+                              <option>Home square feet</option>                            
+                          </select>
+                        </div>
+                        <div class="input-group mb-3">
+                          <span class="input-group-text" for="amountOfUsage">$</span>
+                          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="amountOfUsage">
+                          <span class="input-group-text" for="amountOfUsage" >.00</span>
+                        </div>
+                        <div class="mb-3">
+                          <label for="notesAdders" class="form-label">Notes</label>
+                          <input type="text" class="form-control  text-end" id="notesAdders" aria-describedby="notesAdders">
+                        </div>
+                        <div class="mb-3">
+                        <label for="billImages" class="form-label">Upload Bill Images</label>
+                        <input class="form-control" name="billImages" type="file" id="billImages" multiple> <!-- multiple -->
+                        </div>
+                        <div class="container mb-4">
+                        <div class="row">
+                        </div>
+                        </div>
+                        <div class="mb-3">
+                          <button type="button" class="btn btn-secondary me-2 mb-2 " id="uploadBillImagesButton">Add File</button>
+                          <button type="button" class="btn btn-dark me-2 mb-2 " id="viewBillImagesButton">View uploaded Images</button>
+                          <div class="messageBillUsageFiles mb-3"></div>
+                        </div>
+                        <div class="container mb-4">
+                            <div class="row"id="previewBillImages"></div>
+                        </div>
+                        <div class="message mb-3"></div>
+                        <div class="row">
+                          <div class="container shadow-sm mb-4" id="imageViewer">
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="card-footer">
+                      <div class="d-flex post-actions">
+    
+                      </div>
+                    </div>
+                  </div>
+    
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            <!-- right wrapper end -->
+          </div>
+          </div>
+        <!-- end view lead section -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small bg-dark text-light">
+          <p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a target="_blank">Voltio</a>.</p>
+        </footer>
+        <!-- partial -->
+    
+        </div>
+      </div>
+    </section>
+
+<!-- Modal profile -->
+<script src="../js/bootstrap.js"></script>
+<script src="../resources/sweetAlert.js"></script>
+<script type="module" src="../js/profileView.js"></script>
+  </div>
+</body>
+</html>
+	

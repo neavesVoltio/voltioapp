@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!--
+Template Name: NobleUI - HTML Bootstrap 5 Admin Dashboard Template
+Author: NobleUI
+Purchase: https://1.envato.market/nobleui_admin
+Website: https://www.nobleui.com
+Portfolio: https://themeforest.net/user/nobleui/portfolio
+Contact: nobleui123@gmail.com
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Voltio dashboard">
+  <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../resources/sweetAlert.css">
+	<title>Voltio Dashboard</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
+
+</head>
+<body>
+	<div class="main-wrapper bg-dark">
+
+
+		<!-- partial -->
+	
+    <div class="page-wrapper bg-dark">
+      <div class="page-content">
+          <!-- profile -->
+          <!-- profile -->
+        <div class="row" id="profile">
+          <div class="col-12 grid-margin">
+            <div class="card rounded bg-transparent border-info">
+                <div class="d-flex justify-content-between align-items-center position-absolute  px-3 px-md-5 mt-3">
+                  <div>
+                    <span class="h4 p-4 text-light" id="usernameTextAddUser">PROFILE</span>
+                  </div>
+                </div>
+              <div class="d-flex justify-content-center p-4 rounded-bottom shadow">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="row profile-body">
+
+          <!-- middle wrapper start -->
+          <!-- middle wrapper end -->
+          <!-- right wrapper start -->
+          <div class="col-md-12 col-lg-12 middle-wrapper">
+            <div class="row">
+              <div class="col-md-12 grid-margin">
+                <div class="card rounded bg-transparent border-info">
+                  <div class="card-header bg-dark">
+                    <H5>Edit your profile Info</H5>
+                  </div>
+                  <div class="card-body bg-dark">
+                        <form class="row g-3">
+                            
+                            <div class="col-12">
+                              <label for="inputAddress" class="form-label">Name</label>
+                              <input type="text" class="form-control border-info" id="profileName">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="profileRouting" class="form-label">Routing Number</label>
+                                <input type="number" class="form-control border-info bg-dark opacity-75 text-white" id="profileRouting">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="profileAccountNumber" class="form-label">Account Number</label>
+                                <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="profileAccountNumber">
+                            </div>
+                            <div class="col-12">
+                              <label for="profileAddress" class="form-label">Address</label>
+                              <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="profileAddress" placeholder="1234 Main st">
+                            </div>
+                            <div class="col-md-6">
+                              <label for="inputCity" class="form-label">City</label>
+                              <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="inputCity">
+                            </div>
+                            <div class="col-md-4">
+                              <label for="inputState" class="form-label">State</label>
+                              <select id="inputState" class="form-select border-info bg-dark opacity-75 text-white">
+                                <option selected>Choose...</option>
+                                <option>AA</option>
+                                <option>AE</option>
+                                <option>AK</option>
+                                <option>AL</option>
+                                <option>AP</option>
+                                <option>AR</option>
+                                <option>AS</option>
+                                <option>AZ</option>
+                                <option>CA</option>
+                                <option>CO</option>
+                                <option>CT</option>
+                                <option>DC</option>
+                                <option>DE</option>
+                                <option>FL</option>
+                                <option>FM</option>
+                                <option>GA</option>
+                                <option>GU</option>
+                                <option>HI</option>
+                                <option>IA</option>
+                                <option>ID</option>
+                                <option>IL</option>
+                                <option>IN</option>
+                                <option>KS</option>
+                                <option>KY</option>
+                                <option>LA</option>
+                                <option>MA</option>
+                                <option>MD</option>
+                                <option>ME</option>
+                                <option>MH</option>
+                                <option>MI</option>
+                                <option>MN</option>
+                                <option>MO</option>
+                                <option>MP</option>
+                                <option>MS</option>
+                                <option>MT</option>
+                                <option>NC</option>
+                                <option>ND</option>
+                                <option>NE</option>
+                                <option>NH</option>
+                                <option>NJ</option>
+                                <option>NM</option>
+                                <option>NV</option>
+                                <option>NY</option>
+                                <option>OH</option>
+                                <option>OK</option>
+                                <option>OR</option>
+                                <option>PA</option>
+                                <option>PR</option>
+                                <option>PW</option>
+                                <option>RI</option>
+                                <option>SC</option>
+                                <option>SD</option>
+                                <option>TN</option>
+                                <option>TX</option>
+                                <option>UT</option>
+                                <option>VA</option>
+                                <option>VI</option>
+                                <option>VT</option>
+                                <option>WA</option>
+                                <option>WI</option>
+                                <option>WV</option>
+                                <option>WY</option>
+                              </select>
+                            </div>
+                            <div class="col-md-2">
+                              <label for="inputZip" class="form-label">Zip</label>
+                              <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="inputZip">
+                            </div>
+                            <div class="col-12">
+                                <label for="profileNotes" class="form-label">Notes</label>
+                                <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="profileNotes" placeholder="...">
+                              </div>
+                            <div class="col-md-4">
+                                <label for="profilePhone" class="form-label">Phone</label>
+                                <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="profilePhone">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="profileSocialPhone" class="form-label">Social Phone</label>
+                                <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="profileSocialPhone">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="profileBirth" class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control border-info bg-dark opacity-75 text-white" id="profileBirth">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="profileFranchise" class="form-label">Franchise</label>
+                                <select id="profileFranchise" class="form-select border-info bg-dark opacity-75 text-white">
+                                    <option>Choose..</option>
+                                    <option>Champions</option>
+                                    <option>Lobos</option>
+                                    <option>Netzero</option>
+                                    <option>Smarts</option>
+                                    <option>Spartans</option>
+                                    <option>Voltio</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="profileFranchiseOwner" class="form-label">Franchise Owner</label>
+                                <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="profileFranchiseOwner" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="profileTeam" class="form-label">Team</label>
+                                <select id="profileTeam" class="form-select border-info bg-dark opacity-75 text-white">
+                                    <option>Choose..</option>
+                                    <option>Admin</option>
+                                    <option>Bisons</option>
+                                    <option>Champions</option>
+                                    <option>Diamond Team</option>
+                                    <option>Dream Team</option>
+                                    <option>El Paso</option>
+                                    <option>Gladiators</option>
+                                    <option>Lobos</option>
+                                    <option>Netzero</option>
+                                    <option>NetZero Cali</option>
+                                    <option>Smarts</option>
+                                    <option>Spartans</option>
+                                    <option>Sweeny's Team</option>
+                                    <option>Team</option>
+                                    <option>Thundercats</option>
+                                    <option>Titans</option>
+                                    <option>Trojans</option>
+                                    <option>Volterians</option>
+                                    <option>Volterians ⚡</option>
+                                    <option>Voltios</option>
+                                    <option>Warriors</option>
+                                    <option>Wolves</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-12">
+                              <button type="button" class="btn btn-outline-info" id="updateProfileButton">Save</button>
+                            </div>
+                          </form>
+                  </div>
+                  <div class="card-footer">
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- right wrapper end -->
+        </div>
+			</div>
+
+			<!-- partial:../../partials/_footer.html -->
+			<footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small bg-dark text-light">
+				<p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a target="_blank">Voltio</a>.</p>
+			</footer>
+			<!-- partial -->
+	
+		</div>
+	</div>
+
+	<!-- Custom js for this page -->
+  <script src="../js/bootstrap.js"></script>
+  <script type="module" src="../js/updateProfile.js"></script>
+  <script src="../resources/sweetAlert.js"></script>
+	<!-- End custom js for this page -->
+
+</body>
+</html>

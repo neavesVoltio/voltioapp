@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="src/style.css">
+<link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
+" rel="stylesheet">
+<link rel="stylesheet" href="@sweetalert2/theme-dark/dark.css">
+
+
+</head>
+<body class="bg-dark bg-gradient " onload="onLoadPage()">
+<!-- partial:../../partials/_sidebar.html -->
+  <nav class="sidebar bg-dark bg-gradient norol userLogged shadow-lg" id="sidebar" style="display: none;">
+    <div class="sidebar-header bg-transparent shadow-lg">
+    <a href="#" class="noble-ui-logo logo-light d-block mb-2">Voltio<span>Dashboard</span></a>
+    </div>
+    <div class="sidebar-body bg-transparent" >
+      <ul class="navbar-nav me-auto my-3 navbar-nav-scroll"  style="--bs-scroll-height: 700px; --bs-scroll-background: black;" id="sideBarMenu">
+        <div class="container" id="dashboardMenuSection">
+          <li class="nav-item nav-category  text-white p-2">Main</li>
+          <li class="nav-item  p-2">
+            <a class="nav-link dashboardView"  data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="dashboard" onclick="load_view('dashboard')">
+              <span class="material-symbols-outlined text-white dashboardView p-2">dashboard</span>
+              <span class="link-title dashboardView text-white">Dashboard view</span>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="stagesMenuSection">
+          <li class="nav-item p-2">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="users" onclick="load_view('stages')">
+              <span class="material-symbols-outlined text-white p-2">timeline</span>
+              <span class="link-title text-white" id="openStageView">Stages</span>
+              <i class="link-arrow text-white" data-feather="chevron-down"></i>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="userMenuSection">
+          <li class="nav-item nav-category text-white p-2">Users</li>
+          <li class="nav-item p-2">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="users" onclick="load_view('users')">
+              <span class="material-symbols-outlined text-white p-2">person</span>
+              <span class="link-title text-white" id="addUserView">Users</span>
+              <i class="link-arrow text-white" data-feather="chevron-down"></i>
+            </a>
+          </li>
+          <li class="nav-item p-2">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="users" onclick="load_view('profile')">
+              <span class="material-symbols-outlined text-white p-2">settings_account_box</span>
+              <span class="link-title text-white" id="addUserView">Profile</span>
+              <i class="link-arrow text-white" data-feather="chevron-down"></i>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="leadsMenuSection">
+          <li class="nav-item nav-category text-white p-2">Leads</li>
+          <li class="nav-item p-2">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="searchLeads" onclick="load_view('searchLeads')">
+              <span class="material-symbols-outlined text-white p-2">person_search</span>
+              <span class="link-title text-white" id="searchLeadsView">Leads</span>
+              <i class="link-arrow text-white" data-feather="chevron-down"></i>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="projectsMenuSection">
+          <li class="nav-item nav-category text-white p-2">Projects</li>
+          <li class="nav-item p-2">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers" onclick="load_view('projects')">
+              <span class="material-symbols-outlined text-white p-2">engineering</span>
+              <span class="link-title text-white" id="openCustomerView">Projects</span>
+              <i class="link-arrow text-white" data-feather="chevron-down"></i>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="suppliersMenuSection">
+          <li class="nav-item nav-category text-white p-2">EPC</li>
+          <li class="nav-item p-2">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="suppliers" onclick="load_view('epc')">
+              <span class="material-symbols-outlined text-white p-2">roofing</span>
+              <span class="link-title text-white" id="addNewSupplierView">EPC</span>
+              <i class="link-arrow text-white" data-feather="chevron-down"></i>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="resourcesMenuSection">
+          <li class="nav-item nav-category text-white p-2">Resources</li>
+          <li class="nav-item p-2">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers" onclick="load_view('resources')">
+              <span class="material-symbols-outlined text-white p-2">file_download</span>
+              <span class="link-title text-white" id="openResourcesView">Resources</span>
+              <i class="link-arrow text-white" data-feather="chevron-down"></i>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="calculatorMenuSection" style="display: none;">
+          <li class="nav-item nav-category text-white p-2">Calculator</li>
+          <li class="nav-item p-2">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="calculator">
+              <span class="material-symbols-outlined text-white p-2">calculate</span>
+              <span class="link-title text-white" id="openCalculatorView">Calculator</span>
+              <i class="link-arrow text-white" data-feather="chevron-down"></i>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="commissionsMenuSection" style="display: none;">
+          <li class="nav-item nav-category text-white p-2">Commissions</li>
+          <li class="nav-item p-2">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="calculator">
+              <span class="material-symbols-outlined text-white">request_quote</span>
+              <span class="link-title text-white" id="openCommissionsView">Commissions</span>
+              <i class="link-arrow text-white" data-feather="chevron-down"></i>
+            </a>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </nav>
+<!-- partial -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark bg-gradient norol d-flex userLogged" id="navbar" style="display: none;"> 
+  <div class="d-flex container-fluid justify-content-between" style="display: none;" id="navbar-container">
+    <form class="d-flex d-block d-sm-block d-md-block d-lg-none userLogged">
+      <div class="dropdown" >
+      <button class="btn btn-info userLogged norol" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
+         Menu
+      </button>
+      <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
+        <div class="container" id="menuDashboard">
+          <li class="nav-item mt-2 bg-dark">
+            <a class="nav-link dashboardView text-white" id="dashboardView" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="dashboard" onclick="load_view('dashboard')">
+              <span class="link-title dashboardView text-white">Dashboard </span>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="menuStage">
+          <li class="nav-item mt-2 bg-dark">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="users" onclick="load_view('stages')">
+              <span class="link-title text-white" id="openStageView">Stages</span>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="menuUsers">
+          <li class="nav-item mt-2 bg-dark">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="users" onclick="load_view('users')">
+              <span class="link-title text-white" id="addUserView">Users</span>
+            </a>
+          </li>
+          <li class="nav-item mt-2 bg-dark">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="users" onclick="load_view('profile')">
+              <span class="link-title text-white" id="addProfileView">Profile</span>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="menuLeadsSearc">
+          <li class="nav-item mt-2 bg-dark">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="leads" onclick="load_view('searchLeads')">
+              <span class="link-title text-white" id="searchLeadsView">Leads</span>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="menuProjects">
+          <li class="nav-item mt-2 bg-dark">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers" onclick="load_view('projects')">
+              <span class="link-title text-white" id="openCustomerView">Projects</span>
+            </a>
+          </li>
+        </div>
+        <div class="container rolRep" id="menuSuppliers">
+          <li class="nav-item mt-2 bg-dark">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="leads" onclick="load_view('epc')">
+              <span class="link-title text-white" id="addNewSupplierView">EPC</span>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="menuResources">
+          <li class="nav-item bg-dark">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers" onclick="load_view('resources')">
+              <span class="link-title text-white" id="openResourcesView">Resources</span>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="menuCalculator">
+          <li class="nav-item bg-dark">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers">
+              <span class="link-title text-white" id="openCalculatorView">Calculator</span>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="menuCommissions">
+          <li class="nav-item bg-dark">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers">
+              <span class="link-title text-white" id="openCommissionsView">Commissions</span>
+            </a>
+          </li>
+        </div>
+      </ul>
+      </div>
+    </form>
+    <p class="p-3 rounded-pill text-info userLogged" id="usernameOnMenu"></p> 
+    <a class="btn btn-info text-dark rounded-5 text-info userLogged" id="logoutButton">
+      <span class="material-symbols-outlined">
+      logout
+      </span>
+    </a> 
+  </div>
+
+  </nav>			
+
+    <!-- <div class="container"> -->
+      <div class="container">
+        <div id="app" class="position-absolute top-50 start-50 translate-middle  w-100 h-100 p-3  d-inline-block text-center"  style="height: 100px;">
+          
+          
+        </div>
+      </div>
+        
+    <!-- CONTENT HERE -->
+
+        <!-- Modal -->
+
+        <div id="loading" class="d-flex justify-content-center align-items-center invisible">
+        
+            <div class="spinner-border text-white" style="width: 3rem; height: 3rem;" role="status">
+               <span class="sr-only">Loading...</span>
+            </div>
+        
+        </div>
+
+        <script type="module" src="src/googleAuth.js"></script>
+        <script type="module" src="src/js/userLogged.js"></script>
+        <script type="module" src="src/js/logout.js"></script>
+        <script type="module" src="src/js/adminAccess.js"></script>
+        <script src="src/js/bootstrap.js"></script>
+        <script src="src/main.js"></script>
+  </body>
+
+</html>

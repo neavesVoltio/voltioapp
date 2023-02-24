@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+Template Name: NobleUI - HTML Bootstrap 5 Admin Dashboard Template
+Author: NobleUI
+Purchase: https://1.envato.market/nobleui_admin
+Website: https://www.nobleui.com
+Portfolio: https://themeforest.net/user/nobleui/portfolio
+Contact: nobleui123@gmail.com
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="description"
+      content="Responsive HTML Admin Dashboard Template based on Bootstrap 5"
+    />
+    <meta name="author" content="NobleUI" />
+    <meta
+      name="keywords"
+      content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <!-- End fonts -->
+  <link rel="stylesheet" href="../style.css">
+    <title>Voltio Dashboard</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- End fonts -->
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <div class="page-wrapper full-page bg-dark bg-gradient border-info">
+        <div
+          class="page-content d-flex align-items-center justify-content-center"
+        >
+          <div class="row w-100 mx-0 auth-page">
+            <div class="col-md-8 col-xl-6 mx-auto">
+              <div class="card bg-dark bg-gradient shadow border-radius border-info">
+                <div class="row">
+                  <div class="col-md-4 pe-md-0">
+                    <div class="auth-side-wrapper" style="background-image:url('../imgs/loginLogoVoltio.png')"></div>
+                  </div>
+                  <div class="col-md-8 ps-md-0">
+                    <div
+                      class="auth-form-wrapper px-4 py-5"
+                      style="--bs-bg-opacity: 0.5"
+                    >
+                      <a href="#" class="noble-ui-logo logo-light d-block mb-2"
+                        >Voltio<span>Dashboard</span></a
+                      >
+                      <h5 class="text-muted fw-normal mb-5 my-5text-light">
+                        Welcome back! Log in to your account.
+                      </h5>
+                      <form class="forms-sample  text-center my-5">
+                        <div id="my-signin2">
+                            <div style="height:50px;width:240px;background-color: #062c6c;" class="abcRioButton abcRioButtonBlue" fill="#EA4339">
+                                <div class="abcRioButtonContentWrapper">
+                                    <div class="abcRioButtonIcon" style="padding:15px">
+                                        <div style="width:18px;height:18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 48 48" class="abcRioButtonSvg"><g><path fill="#EA4339" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></g></svg></div></div><span style="font-size:16px;line-height:48px;" class="abcRioButtonContents"><span id="not_signed_injlq5rin713ik">Sign in with Google</span><span id="connectedjlq5rin713ik" style="display:none">Signed in with Google</span></span></div></div></div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- core:js -->
+    <!-- endinject -->
+
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+
+    <!-- inject:js -->
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+    <!-- endinject -->
+
+    <!-- Custom js for this page -->
+    <!-- End custom js for this page -->
+    <script>
+        function onSuccess(googleUser) {
+          console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+        }
+        function onFailure(error) {
+          console.log(error);
+        }
+        function renderButton() {
+          gapi.signin2.render('my-signin2', {
+            'scope': 'profile email',
+            'width': 240,
+            'height': 50,
+            'longtitle': true,
+            'theme': 'dark',
+            'onsuccess': onSuccess,
+            'onfailure': onFailure
+          });
+        }
+      </script>
+      <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+      <script type="module" src="../googleAuth.js"></script>
+      <script src="../main.js"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--
+Template Name: NobleUI - HTML Bootstrap 5 Admin Dashboard Template
+Author: NobleUI
+Purchase: https://1.envato.market/nobleui_admin
+Website: https://www.nobleui.com
+Portfolio: https://themeforest.net/user/nobleui/portfolio
+Contact: nobleui123@gmail.com
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Voltio dashboard">
+  <link rel="stylesheet" href="../style.css">
+
+	<title>Voltio Dashboard</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
+
+</head>
+<body>
+	<div class="main-wrapper bg-dark">
+
+
+		<!-- partial -->
+	
+    <div class="page-wrapper bg-dark">
+      <div class="page-content">
+          <!-- profile -->
+          <!-- profile -->
+        <div class="row" id="profile">
+          <div class="col-12 grid-margin">
+            <div class="card rounded bg-transparent border-info">
+                <div class="d-flex justify-content-between align-items-center position-absolute  px-3 px-md-5 mt-3">
+                  <div>
+                    <span class="h4 p-4 text-light" id="usernameTextAddUser">USERS</span>
+                  </div>
+                </div>
+              <div class="d-flex justify-content-center p-4 rounded-bottom shadow">
+              </div>
+            </div>
+          </div>
+        </div>
+                <div class="row profile-body">
+
+          <!-- middle wrapper start -->
+          <!-- middle wrapper end -->
+          <!-- right wrapper start -->
+          <div class="col-md-12 col-lg-12 middle-wrapper">
+            <div class="row">
+              <div class="col-md-12 grid-margin">
+                <div class="card rounded bg-dark border-info">
+                  <div class="card-header bg-dark">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <div class="ms-2">
+                          <div class="input-group mb-3">
+                            <span class="input-group-text bg-dark text-info border-info">Search users</span>
+                            <input type="text" id="searchUserInput" class="form-control bg-dark border-info text-light" placeholder="user email" aria-label="Lead Input" aria-describedby="searchUserInput">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <form>
+                      <div class="table-responsive">
+                        <table class="table table-hover table-sm table-bordered table-sortable text-center table-dark border-info">
+                          <thead>
+                            <tr>
+                            <th scope="col"></th>
+                            <th scope="col">NAME</th>
+                            <th scope="col">EMAIL</th>
+                            <th scope="col">PHONE</th>
+                            <th scope="col">STATUS</th>
+                            <th scope="col">VIEW</th>
+                            </tr>
+                          </thead>
+                        <tbody id="searchResults">
+
+                        </tbody>
+                        </table>
+                      </div>
+                        <template id="rowTemplate">
+                          <tr class= "result-box table-striped">
+                            <th class="iconTable p-2"></th>
+                            <th class="userNameTable p-2" scope="row"></th>
+                            <td class="userEmailTable text-left"></td>
+                            <td class="userPhoneTable text-left"></td>
+                            <td class="text-center">
+                              <div class="btn-group" role="group">
+                                <button type="button" class="btn user-status-button d-none btn-sm ">Inactive</button>
+            <button type="button" class="btn  before-user-status-button btn-sm" data-button-state="status">Active</button>
+                              </div>
+                            </td>
+                            <td class="text-center"><a name="top"></a><button type="button" class="btn btn-dark editUserButton"><i class="fa-solid fa-user-pen editUserButtonIcon text-light"></i></button></td>
+                          </tr>
+                        </template>
+                    </form>
+                  </div>
+                  <div class="card-footer bg-dark">
+                    <div class="d-flex post-actions">
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- right wrapper end -->
+        </div>
+			</div>
+
+			<!-- partial:../../partials/_footer.html -->
+			<footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small bg-dark text-light">
+				<p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a target="_blank">Voltio</a>.</p>
+			</footer>
+			<!-- partial -->
+	
+		</div>
+	</div>
+
+	<!-- Custom js for this page -->
+  <script src="../js/bootstrap.js"></script>
+	<!-- End custom js for this page -->
+
+</body>
+</html>
