@@ -11,7 +11,11 @@ let clearInputsElement = document.querySelectorAll('.clearInputs')
 
 onAuthStateChanged(auth, async(user) => {
     if(user){
-      
+          document.querySelector('#addNewLeadSection').style.display = 'none'
+          document.querySelector('#searchProjectSection').style.display = 'block'
+          document.querySelector('#profileViewSection').style.display = 'none'
+          document.getElementById('imageCustomerGallery').innerHTML = ''
+          document.getElementById('customerFilesUpload').value = ''
       const projectInfo = query(collection(db, 'leadData'), where('status', '==', 'lead'));
           const querySnapshoot = await getDocs(projectInfo)
           const allData = querySnapshoot.forEach( async(doc) => {
@@ -28,11 +32,7 @@ onAuthStateChanged(auth, async(user) => {
       searchLeadViewSection.forEach( (e) => {
         e.addEventListener('click', async (e) => {
           data = []  
-          document.querySelector('#addNewLeadSection').style.display = 'none'
-          document.querySelector('#searchProjectSection').style.display = 'block'
-          document.querySelector('#profileViewSection').style.display = 'none'
-          document.getElementById('imageCustomerGallery').innerHTML = ''
-          document.getElementById('customerFilesUpload').value = ''
+          
           const projectInfo = query(collection(db, 'leadData'), where('status', '==', 'lead'));
           const querySnapshoot = await getDocs(projectInfo)
           const allData = querySnapshoot.forEach( async(doc) => {
