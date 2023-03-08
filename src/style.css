@@ -3689,7 +3689,7 @@ textarea.is-invalid.typeahead.tt-hint, .select2-container--default .select2-sear
   position: absolute;
   z-index: 1000;
   display: none;
-  min-width: 10rem;
+  min-width: 15rem;
   padding: 0.5rem 0;
   margin: 0;
   font-size: 0.8125rem;
@@ -4046,7 +4046,7 @@ div.tox .btn-group-vertical > .active.tox-button,
   justify-content: flex-start;
 }
 .btn-toolbar .input-group {
-  width: auto;
+  width: 100%;
 }
 
 .btn-group > .btn:not(:first-child), .wizard > .actions .btn-group > a:not(:first-child), div.tox .btn-group > .tox-button:not(:first-child), .swal2-popup .swal2-actions .btn-group > button:not(:first-child), .fc .btn-group > .fc-button-primary:not(:first-child),

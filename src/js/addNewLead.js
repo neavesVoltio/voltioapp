@@ -7,6 +7,7 @@ let saveLeadButton = document.querySelector('#updateProfileButton')
 
 let leadData
 let addNewLeadViewSection =document.querySelectorAll('.addNewLeadViewSection')        
+let customerPhoneNumber = document.getElementById('customerPhoneNumber')
 
 addNewLeadViewSection.forEach((e) =>{
  e.addEventListener('click', (b) => {
@@ -16,6 +17,22 @@ addNewLeadViewSection.forEach((e) =>{
 
  })   
 })
+
+// customerPhoneNumber.addEventListener('onblur', (e) => {
+//     let value = e.target.value
+//     if(!value){customerPhoneNumber.value = value
+//     }
+//     let phoneNumber = value.replace(/[^\d]/g, '')
+//     let phoneNumberLength = phoneNumber.length
+//     if(phoneNumberLength < 4){ customerPhoneNumber.value = phoneNumber} else
+//     if(phoneNumberLength < 7) {
+//         customerPhoneNumber.value = `(${phoneNumber.slice(0,3)}) ${phoneNumber.slice(3)}`
+//     } customerPhoneNumber.value = `(${phoneNumber.slice(0,3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6,10)} `
+    
+     
+// })
+
+
 
 saveLeadButton.addEventListener('click', (e) =>{
 
@@ -153,3 +170,4 @@ async function setDataToProfileView(voltioId){
     }
         
 }
+

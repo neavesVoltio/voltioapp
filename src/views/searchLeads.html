@@ -36,7 +36,7 @@ License: For each use you must have a valid license purchased only from above li
       </section>
     <!-- tabs end -->
     <!-- sections -->
-      <section id="addNewLeadSection" style="display: block;">
+      <section id="addNewLeadSection" style="display: none;">
           <div class="page-content bg-transparent bg-gradient">
             <!-- profile -->
             <div class="row" id="profile">
@@ -166,7 +166,7 @@ License: For each use you must have a valid license purchased only from above li
                         </div>
                       </form>
                     </div>
-                    <div class="card-footer bg-dark">
+                    <div class="card-footer">
                       <div class="col-12">
                         <button type="button" class="btn btn-outline-info" id="updateProfileButton">Save</button>
                       </div>
@@ -190,7 +190,7 @@ License: For each use you must have a valid license purchased only from above li
         </footer>
         <!-- partial -->
       </section>
-      <section id="searchProjectSection" style="display: none;"> 
+      <section id="searchProjectSection" style="display: block;"> 
          
           <div class="page-content bg-transparent bg-gradient">
               <!-- profile -->
@@ -301,158 +301,439 @@ License: For each use you must have a valid license purchased only from above li
                   </div>
                 </div>
               </div>
+            <!-- progress bar -->
             <div class="container mb-4">
               <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 5%" id="progressBar">Missing steps</div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-info text-dark" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 5%" id="progressBar">Missing steps</div>
               </div>
                 
             </div>
-              <!-- profile -->
+              
             
             <div class="row profile-body">
-              <!-- middle wrapper start -->
-              <div class="col-md-12 col-lg-5 middle-wrapper">
-                <div class="row">
-                  <div class="col-md-12 grid-margin">
-                    <div class="card rounded bg-transparent border-info">
-                      <div class="card-header bg-dark">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                              <h5 id="titleOfEditLeadView">Projects</h5>
-                          </div>
-                            <button type="button" class="btn btn-outline-info" id="openProfileView">
-      View profile
-      </button>
-                        </div>
-                      </div>
-                      <div class="card-body ">
-                        <form>
-                          <div class="mb-3">
-                            <label for="leadVoltioId" class="form-label">Voltio Id</label>
-                            <input type="text" class="form-control border-0 text-end" id="leadVoltioId" aria-describedby="voltio id" readonly>
-                          </div>
-                          <div class="mb-3">
-                            <label for="leadName" class="form-label">NAME</label>
-                            <input type="text" class="form-control bg-dark opacity-75 text-white text-end " id="leadName" aria-describedby="about">
-                          </div>
-                          <div class="mb-3">
-                            <label for="leadEmail" class="form-label">EMAIL</label>
-                            <input type="email" class="form-control bg-dark opacity-75 text-white text-end" id="leadEmail" aria-describedby="email">
-                          </div>
-                          <div class="mb-3">
-                            <label for="leadPhone" class="form-label">PHONE</label>
-                            <input type="text" class="form-control bg-dark opacity-75 text-white text-end" id="leadPhone" aria-describedby="phone">
-                          </div>
-                          <div class="mb-3">
-                              <label for="leadLanguage" class="form-label">LANGUAGE</label>
-                              <select class="form-select bg-dark opacity-75 text-white text-end" aria-label="state" id="leadLanguage">
-                                <option>SPANISH</option>
-                                <option>ENGLISH</option>
-                              </select>
-                          </div>
-                          
-                              <div class="row">
-                                <div class="mb-3 ">
-                                  <label for="leadAddress" class="form-label mt-3 ">ADDRESS</label>
-                                  <input type="text" class="form-control bg-dark opacity-75 text-white text-end" id="leadAddress" aria-describedby="address">
-                                </div>
-                                <div class="mb-3">
-                                  <label for="leadCity" class="form-label">CITY</label>
-                                  <input type="text" class="form-control bg-dark opacity-75 text-white text-end" id="leadCity" aria-describedby="city">
-                                </div>
-                                <div class="mb-3">
-                                  <label for="stateDropdown" class="form-label">STATE</label>
-                                <select class="form-select bg-dark opacity-75 text-white text-end" aria-label="state" id="stateDropdown">
-                                  <option selected value="">Choose...</option>
-                                <option>AA</option>
-                                <option>AE</option>
-                                <option>AK</option>
-                                <option>AL</option>
-                                <option>AP</option>
-                                <option>AR</option>
-                                <option>AS</option>
-                                <option>AZ</option>
-                                <option>CA</option>
-                                <option>CO</option>
-                                <option>CT</option>
-                                <option>DC</option>
-                                <option>DE</option>
-                                <option>FL</option>
-                                <option>FM</option>
-                                <option>GA</option>
-                                <option>GU</option>
-                                <option>HI</option>
-                                <option>IA</option>
-                                <option>ID</option>
-                                <option>IL</option>
-                                <option>IN</option>
-                                <option>KS</option>
-                                <option>KY</option>
-                                <option>LA</option>
-                                <option>MA</option>
-                                <option>MD</option>
-                                <option>ME</option>
-                                <option>MH</option>
-                                <option>MI</option>
-                                <option>MN</option>
-                                <option>MO</option>
-                                <option>MP</option>
-                                <option>MS</option>
-                                <option>MT</option>
-                                <option>NC</option>
-                                <option>ND</option>
-                                <option>NE</option>
-                                <option>NH</option>
-                                <option>NJ</option>
-                                <option>NM</option>
-                                <option>NV</option>
-                                <option>NY</option>
-                                <option>OH</option>
-                                <option>OK</option>
-                                <option>OR</option>
-                                <option>PA</option>
-                                <option>PR</option>
-                                <option>PW</option>
-                                <option>RI</option>
-                                <option>SC</option>
-                                <option>SD</option>
-                                <option>TN</option>
-                                <option>TX</option>
-                                <option>UT</option>
-                                <option>VA</option>
-                                <option>VI</option>
-                                <option>VT</option>
-                                <option>WA</option>
-                                <option>WI</option>
-                                <option>WV</option>
-                                <option>WY</option>
-                                </select>  
-                                </div>
-                                <div class="mb-3">
-                                  <label for="leadZip" class="form-label">Zip</label>
-                                  <input type="text" class="form-control mb-3 bg-dark opacity-75 text-white text-end" id="leadZip" aria-describedby="state">
-                                </div>
+              <!-- customer info start -->
+              <div class="col-md-12 col-lg-12 middle-wrapper">
+                
+              </div>
+              <!-- customer info end -->
+              <!-- right wrapper start ACCORDEON SECTION-->
+              <div class="col-md-12 col-lg-12">
+                  <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item"> <!--PROFILE VIEW -->
+                      <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordionCustomerName" aria-expanded="false" aria-controls="accordionCustomerName">
+                          <strong>Customer Info</strong>
+                        </button>
+                      </h2>
+                      <div class="row accordion-collapse collapse" id="accordionCustomerName">
+                        <div class="accordion-body">
+                          <div class="col-md-12 grid-margin">
+                            <div class="card rounded bg-transparent">
+                              
+                              <div class="card-body ">
+                                <form>
+                                  <div class="mb-3">
+                                    <h2 id="titleOfEditLeadView">Projects</h2>
+                                  </div>
+                                  <div class="mb-3 form-floating input-group-lg">
+                                    <input type="text" class="form-control border-0 text-end bg-transparent" id="leadVoltioId" aria-describedby="voltio id" readonly>
+                                    <label for="leadVoltioId" class="form-label">Voltio Id</label>
+                                  </div>
+                                  <div class="mb-3 form-floating input-group-lg">
+                                    <input type="text" class="form-control bg-dark opacity-75 text-white text-end " id="leadName" aria-describedby="about">
+                                    <label for="leadName" class="form-label">NAME</label>
+                                  </div>
+                                  <div class="mb-3 form-floating input-group-lg">
+                                    <input type="email" class="form-control bg-dark opacity-75 text-white text-end" id="leadEmail" aria-describedby="email">
+                                    <label for="leadEmail" class="form-label">EMAIL</label>
+                                  </div>
+                                  <div class="mb-3 form-floating input-group-lg">
+                                    <input type="text" class="form-control bg-dark opacity-75 text-white text-end" id="leadPhone" aria-describedby="phone">
+                                    <label for="leadPhone" class="form-label">PHONE</label>
+                                  </div>
+                                  <div class="mb-3 form-floating input-group-lg">
+                                      <select class="form-select bg-dark opacity-75 text-white text-end" aria-label="state" id="leadLanguage">
+                                        <option>SPANISH</option>
+                                        <option>ENGLISH</option>
+                                      </select>
+                                      <label for="leadLanguage" class="form-label">LANGUAGE</label>
+                                  </div>
+                                  
+                                      <div class="row">
+                                        <div class="mb-3 form-floating input-group-lg">
+                                          <input type="text" class="form-control bg-dark opacity-75 text-white text-end" id="leadAddress" aria-describedby="address">
+                                          <label for="leadAddress" class="form-label mt-3 ">ADDRESS</label>
+                                        </div>
+                                        <div class="mb-3 form-floating input-group-lg">
+                                          <input type="text" class="form-control bg-dark opacity-75 text-white text-end" id="leadCity" aria-describedby="city">
+                                          <label for="leadCity" class="form-label">CITY</label>
+                                        </div>
+                                        <div class="mb-3 form-floating input-group-lg">
+                                          <select class="form-select bg-dark opacity-75 text-white text-end" aria-label="state" id="stateDropdown">
+                                          <option selected value="">Choose...</option>
+                                        <option>AA</option>
+                                        <option>AE</option>
+                                        <option>AK</option>
+                                        <option>AL</option>
+                                        <option>AP</option>
+                                        <option>AR</option>
+                                        <option>AS</option>
+                                        <option>AZ</option>
+                                        <option>CA</option>
+                                        <option>CO</option>
+                                        <option>CT</option>
+                                        <option>DC</option>
+                                        <option>DE</option>
+                                        <option>FL</option>
+                                        <option>FM</option>
+                                        <option>GA</option>
+                                        <option>GU</option>
+                                        <option>HI</option>
+                                        <option>IA</option>
+                                        <option>ID</option>
+                                        <option>IL</option>
+                                        <option>IN</option>
+                                        <option>KS</option>
+                                        <option>KY</option>
+                                        <option>LA</option>
+                                        <option>MA</option>
+                                        <option>MD</option>
+                                        <option>ME</option>
+                                        <option>MH</option>
+                                        <option>MI</option>
+                                        <option>MN</option>
+                                        <option>MO</option>
+                                        <option>MP</option>
+                                        <option>MS</option>
+                                        <option>MT</option>
+                                        <option>NC</option>
+                                        <option>ND</option>
+                                        <option>NE</option>
+                                        <option>NH</option>
+                                        <option>NJ</option>
+                                        <option>NM</option>
+                                        <option>NV</option>
+                                        <option>NY</option>
+                                        <option>OH</option>
+                                        <option>OK</option>
+                                        <option>OR</option>
+                                        <option>PA</option>
+                                        <option>PR</option>
+                                        <option>PW</option>
+                                        <option>RI</option>
+                                        <option>SC</option>
+                                        <option>SD</option>
+                                        <option>TN</option>
+                                        <option>TX</option>
+                                        <option>UT</option>
+                                        <option>VA</option>
+                                        <option>VI</option>
+                                        <option>VT</option>
+                                        <option>WA</option>
+                                        <option>WI</option>
+                                        <option>WV</option>
+                                        <option>WY</option>
+                                          </select>  
+                                          <label for="stateDropdown" class="form-label">STATE</label>
+                                        </div>
+                                        <div class="mb-3 form-floating input-group-lg">
+                                          <input type="text" class="form-control mb-3 bg-dark opacity-75 text-white text-end" id="leadZip" aria-describedby="state">
+                                          <label for="leadZip" class="form-label">Zip</label>
+                                        </div>
+                                      </div>
+                                  
+                                </form>
                               </div>
-                          
-                        </form>
-                      </div>
-                      <div class="card-footer bg-dark">
-                        <div class="container">
-                          <div class="row">
-                            <a class="btn btn-outline-info me-2 mb-2 text-white" id="editLeadButtonToServer">Save</a>
-                            <div class="alert alert-success invisible col-8 " id= "save-success-message" role="alert"></div>
+                              <div class="card-footer bg-transparent">
+                                <div class="container">
+                                  <div class="row">
+                                    <a class="btn btn-outline-info me-2 mb-2 text-white" id="editLeadButtonToServer">Save</a>
+                                    <div class="alert alert-success invisible col-8 " id= "save-success-message" role="alert"></div>
+                                  </div>
+                                </div>
+                                
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <!-- middle wrapper end -->
-              <!-- right wrapper start ACCORDEON SECTION-->
-              <div class="col-md-12 col-lg-7">
-                  <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item"> <!--PROPOSALS VIEW -->
+                      <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-proposals" aria-expanded="false" aria-controls="flush-collapseOne">
+                          <strong>Proposals</strong>
+                        </button>
+                      </h2>
+                      <div id="flush-proposals" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                          <h3 class="mb-3">Select a Home Improvement Project</h3>
+                          <form>
+                            <div class="mb-3 "> <!--HOME IMPROVEMENT MENU -->
+                              <div class="card mb-3" style="max-width: 540px;">
+                                <div class="row g-0">
+                                  <div class="col-12">
+                                    <img src="../imgs/solar.webp" class="img-fluid rounded-start" alt="...">
+                                  </div>
+                                  <div class="col-md-8">
+                                    <div class="card-body">
+                                      <h6 class="card-title">Produce Energy</h6>
+                                      <h3>Solar PV System</h3>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="mb-3"> <!--RATE SCHEDULED -->
+                              <label for="projectUsage" class="form-label">What is the rate scheduled</label>
+                              <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="projectAddOnSystem" id="projectAddOnSystem">
+                                <option selected value="0"></option>
+                                <option value="1">Rate R-1, Residential Service</option>
+                                <option value="0">Rate R-4, Residential Service Time of..</option>
+                                <option value="0">Rate R-1, Community Energy 100%..</option>
+                            </select>
+                            </div>
+                            <div class="mb-3"> <!--ENERGY CONSUMPTION UTILITY-->
+                              <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                  <h2 class="mb-4">Utility</h2>
+                                  <div class="form-floating mb-3">
+                                    <input type="number" class="form-control text-end bg-dark" id="utilityAverageMonthly" aria-describedby="utilityAverageMonthly" placeholder="kWh" readonly>
+                                    <label for="utilityAverageMonthly" class="form-label">Utility Average Monthly (kWh)</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="number" class="form-control text-end bg-dark" id="totalYearlyConsumption" aria-describedby="totalYearlyConsumption" placeholder="kWh" readonly>
+                                    <label for="totalYearlyConsumption" class="form-label">Total yearly consumption (kWh)</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="number" class="form-control text-end bg-dark" id="averageMonthlyPayment" aria-describedby="averageMonthlyPayment" placeholder="$" readonly>
+                                    <label for="averageMonthlyPayment" class="form-label">Average monthly payment ($)</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="number" class="form-control text-end bg-dark" id="totalYearlyPayment" aria-describedby="totalYearlyPayment" placeholder="$" readonly>
+                                    <label for="totalYearlyPayment" class="form-label">Total yearly Payment ($)</label>
+                                  </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                  <h2 class="mb-4">Utility Bill</h2>
+                                  <div class="mb-3">
+                                    <label for="customerFilesUpload" class="form-label">Upload Files</label>
+                                    <input class="form-control" name="upFileCustomer" type="file" id="customerFilesUpload" multiple> <!-- multiple -->
+                                  </div>
+                                  <div class="container mb-4">
+                                    <div class="row">
+                                    </div>
+                                  </div>
+                                  <div class="mb-3">
+                                    <button type="button" class="btn btn-outline-info me-2 mb-2 " id="uploadCustomerImageButton">Add File</button>
+                                    <button type="button" class="btn btn-outline-light me-2 mb-2 " id="viewCustomersImageButton">View uploaded Images</button>
+                                    <div class="messageCustomerFiles mb-3"></div>
+                                  </div>
+                                  <div class="messageCustomer mb-3"></div>
+                                  <div id="previewCustomerFiles" class="clearInputs"></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="mb-3"> <!--DESIGN-->
+                              <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                  <h2 class="mb-4">Design</h2>
+                                  <div class="form-floating mb-3">
+                                    <input type="number" class="form-control text-end bg-dark" id="utilityAverageMonthly" aria-describedby="utilityAverageMonthly" placeholder="kWh" readonly>
+                                    <label for="utilityAverageMonthly" class="form-label">Utility Average Monthly (kWh)</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="number" class="form-control text-end bg-dark" id="totalYearlyConsumption" aria-describedby="totalYearlyConsumption" placeholder="kWh" readonly>
+                                    <label for="totalYearlyConsumption" class="form-label">Total yearly consumption (kWh)</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="number" class="form-control text-end bg-dark" id="averageMonthlyPayment" aria-describedby="averageMonthlyPayment" placeholder="$" readonly>
+                                    <label for="averageMonthlyPayment" class="form-label">Average monthly payment ($)</label>
+                                  </div>
+                                  <div class="form-floating mb-3">
+                                    <input type="number" class="form-control text-end bg-dark" id="totalYearlyPayment" aria-describedby="totalYearlyPayment" placeholder="$" readonly>
+                                    <label for="totalYearlyPayment" class="form-label">Total yearly Payment ($)</label>
+                                  </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                  <h2 class="mb-4">Utility Bill</h2>
+                                  <div class="mb-3">
+                                    <label for="customerFilesUpload" class="form-label">Upload Files</label>
+                                    <input class="form-control" name="upFileCustomer" type="file" id="customerFilesUpload" multiple> <!-- multiple -->
+                                  </div>
+                                  <div class="container mb-4">
+                                    <div class="row">
+                                    </div>
+                                  </div>
+                                  <div class="mb-3">
+                                    <button type="button" class="btn btn-outline-info me-2 mb-2 " id="uploadCustomerImageButton">Add File</button>
+                                    <button type="button" class="btn btn-outline-light me-2 mb-2 " id="viewCustomersImageButton">View uploaded Images</button>
+                                    <div class="messageCustomerFiles mb-3"></div>
+                                  </div>
+                                  <div class="messageCustomer mb-3"></div>
+                                  <div id="previewCustomerFiles" class="clearInputs"></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                              <p class="mb-3">Brief Consumption Summary</p>
+                              <div class="row">
+                                <div class="col-6 text-center"><h2 class="text-success fw-bold">$204</h2><p class="fw-light">Average Monthly Bill</p> </div>
+                                <div class="col-6 text-center"><h2 class="text-success fw-bold">$0.25 kwh</h2><p class="fw-light">Average Electric Price</p></div>
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                              <p class="mb-3">Please select the solar panel location</p>
+                              <div class="btn-group p-2 d-flex flex-row-reverse" role="group">
+                                <input type="checkbox" class="btn-check rounded-pill p-2" id="singleStoryHome" autocomplete="off">
+                                <label class="btn btn-outline-secondary" for="singleStoryHome">
+                                  <img src="../ico/home.ico" class="img-thumbnail text-info bg-transparent border border-0" alt="single story home"> 
+                                  <p>Single Story Home</p>
+                                </label>
+                                <input type="checkbox" class="btn-check rounded-pill p-2" id="twoStoryHome" autocomplete="off">
+                                <label class="btn btn-outline-secondary" for="twoStoryHome">
+                                  <img src="../ico/house.ico" class="img-thumbnail text-info bg-transparent border border-0" alt="two story home"> 
+                                  <p>Two Story Home</p>
+                                </label>
+                              </div>
+                              <div class="btn-group p-2 d-flex flex-row-reverse" role="group">
+                                <input type="checkbox" class="btn-check rounded-pill p-2" id="threeStoryHome" autocomplete="off">
+                                <label class="btn btn-outline-secondary" for="threeStoryHome">
+                                  <img src="../ico/modern-house.ico" class="img-thumbnail text-info bg-transparent border border-0" alt="three story home"> 
+                                  <p>Three Story Home</p>
+                                </label>
+                                <input type="checkbox" class="btn-check rounded-pill p-2" id="groundMountSystem" autocomplete="off">
+                                <label class="btn btn-outline-secondary" for="groundMountSystem">
+                                  <img src="../ico/solar-panel.ico" class="img-thumbnail text-info bg-transparent border border-0" alt="solar-panel"> 
+                                  <p>Ground Mount System</p>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                              <p class="mb-3">What is the condition of roof?</p>
+                              <div class="btn-group p-2 d-flex flex-row-reverse" role="group">
+                                <input type="checkbox" class="btn-check rounded-pill p-2" id="roofConditionExcellent" autocomplete="off">
+                                <label class="btn btn-outline-secondary" for="roofConditionExcellent"><p>Excellent</p><h2>40+ Years</h2><p>remaining</p></label>
+                                <input type="checkbox" class="btn-check rounded-pill p-2" id="roofConditionGood" autocomplete="off">
+                                <label class="btn btn-outline-secondary" for="roofConditionGood"><p>Good</p><h2>20+ Years</h2><p>remaining</p></label>
+                                <input type="checkbox" class="btn-check rounded-pill p-2" id="roofConditionAverage" autocomplete="off">
+                                <label class="btn btn-outline-secondary" for="roofConditionAverage"><p>Average</p><h2>10+ Years</h2><p>remaining</p></label>
+                                <input type="checkbox" class="btn-check rounded-pill p-2" id="roofConditionRequestRoof" autocomplete="off">
+                                <label class="btn btn-outline-secondary" for="roofConditionRequestRoof"><p>Needs</p><h2>Roof Quote</h2><p></p></label>
+                                
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                              <p class="mb-3">What type of roofing material?</p>
+                              <div class="btn-group p-2 d-flex flex-row-reverse" role="group">
+                                <div class="row row-cols-2 row-cols-md-3 g-4">
+                                  <div class="btn col roof-button">
+                                    <div class="card h-100">
+                                      <img src="../imgs/asphalt.jpg" class="card-img" alt="..." style="height: 200px;">
+                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
+                                        <h2 class="card-title ">Asphalt</h2>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="btn col roof-button">
+                                    <div class="card h-100">
+                                      <img src="../imgs/wood-shingles.jpg" class="card-img" alt="..." style="height: 200px;">
+                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
+                                        <h2 class="card-title ">Wood shingles & shakes</h2>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="btn col roof-button">
+                                    <div class="card h-100">
+                                      <img src="../imgs/concrete-tile-roofing.jpg" class="card-img" alt="..." style="height: 200px;">
+                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
+                                        <h2 class="card-title ">Clay & concrete tile roofing</h2>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="btn col roof-button">
+                                    <div class="card h-100">
+                                      <img src="../imgs/Rubber.jpeg" class="card-img" alt="..." style="height: 200px;">
+                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
+                                        <h5 class="card-title ">Rubber roofing</h5>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="btn col roof-button">
+                                    <div class="card h-100">
+                                      <img src="../imgs/Composition-Shingles-1.jpg" class="card-img" alt="..." style="height: 200px;">
+                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
+                                        <h5 class="card-title ">Composite Roofing</h5>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="btn col roof-button">
+                                    <div class="card h-100">
+                                      <img src="../imgs/metal-roof-1.jpg" class="card-img" alt="..." style="height: 200px;">
+                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
+                                        <h5 class="card-title ">Metal roof</h5>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="btn col roof-button">
+                                    <div class="card h-100">
+                                      <img src="../imgs/flat-roof.jpg" class="card-img" alt="..." style="height: 200px;">
+                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
+                                        <h5 class="card-title ">Flat roofing
+                                        </h5>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="btn col roof-button">
+                                    <div class="card h-100">
+                                      <img src="../imgs/types-slate.jpg" class="card-img" alt="..." style="height: 200px;">
+                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
+                                        <h5 class="card-title ">Slate roofing
+                                        </h5>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                              <label for="projectElectricPanelBrand" class="form-label">What is the brand of main electric panel?</label>
+                              <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="projectElectricPanelBrand" id="projectElectricPanelBrand">
+                                <option selected value="0"></option>
+                                <option>Square D</option>
+                                <option>GE</option>
+                                <option>Bryant</option>
+                                <option>Westinghouse</option>
+                                <option>Cutler-Hammer</option>
+                                <option>Challenger</option>
+                                <option>Eaton</option>
+                                <option>Siemens</option>
+                                <option>Milbank</option>
+                            </select>
+                            </div>
+                            <div class="mb-3">
+                              <p class="mb-3">Identify if you braker feeds from top, middle or bottom. The amperage will be indicated next to the main breaker switch</p>
+                              <div class="btn-group p-2 d-flex flex-row-reverse" role="group">
+                                <input type="checkbox" class="btn-check rounded-pill p-2" id="breakerTopFeed" autocomplete="off">
+                                <label class="btn btn-outline-secondary" for="breakerTopFeed">
+                                  <img src="../ico/top breaker.ico" class="img-thumbnail text-info bg-transparent border border-0" alt="single story home">
+                                  <p>Top feed</p>
+                                </label>
+                                <input type="checkbox" class="btn-check rounded-pill p-2" id="breakerCenterFeed" autocomplete="off">
+                                <label class="btn btn-outline-secondary" for="breakerCenterFeed">
+                                  <img src="../ico/medium breaker.ico" class="img-thumbnail text-info bg-transparent border border-0" alt="single story home">
+                                  <p>Center feed</p>
+                                </label>
+                                <input type="checkbox" class="btn-check rounded-pill p-2" id="breakerBottomFeed" autocomplete="off">
+                                <label class="btn btn-outline-secondary" for="breakerBottomFeed">
+                                  <img src="../ico/bottom breaker.ico" class="img-thumbnail text-info bg-transparent border border-0" alt="single story home">
+                                  <p>Bottom feed</p>
+                                </label>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
                     <div class="accordion-item"> <!--UPLOAD VIEW -->
                       <h2 class="accordion-header" id="flush-headingOne">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -461,21 +742,7 @@ License: For each use you must have a valid license purchased only from above li
                       </h2>
                       <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                          <div class="mb-3">
-                          <label for="customerFilesUpload" class="form-label">Upload Files</label>
-                          <input class="form-control" name="upFileCustomer" type="file" id="customerFilesUpload" multiple> <!-- multiple -->
-                          </div>
-                          <div class="container mb-4">
-                          <div class="row">
-                          </div>
-                          </div>
-                          <div class="mb-3">
-                            <button type="button" class="btn btn-outline-info me-2 mb-2 " id="uploadCustomerImageButton">Add File</button>
-                            <button type="button" class="btn btn-outline-light me-2 mb-2 " id="viewCustomersImageButton">View uploaded Images</button>
-                            <div class="messageCustomerFiles mb-3"></div>
-                          </div>
-                          <div class="messageCustomer mb-3"></div>
-                          <div id="previewCustomerFiles" class="clearInputs"></div>
+                          
                         </div>
                       </div>
                     </div>
@@ -699,46 +966,136 @@ License: For each use you must have a valid license purchased only from above li
                       </h2>
                       <div id="flush-InfoAccordion" class="accordion-collapse collapse" aria-labelledby="flush-InfoAccordion" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
+
                           <form>
                             <div class="mb-3">
                               <label for="lastUpdate" class="form-label">LAST UPDATE</label>
                               <input type="date" class="form-control bg-dark opacity-75 shadow text-white  text-end" id="lastUpdate" aria-describedby="about">
                             </div>
                             <div class="mb-3">
-                              <label for="projectManager" class="form-label">PROJECT MANAGER</label>
-                              <input type="text" class="form-control bg-dark opacity-75 shadow text-white  text-end" id="projectManager" aria-describedby="projectManager">
+                              <label for="projectUsage" class="form-label">USAGE</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectUsage" aria-describedby="projectUsage">
                             </div>
                             <div class="mb-3">
-                              <label for="leadInstaller" class="form-label">INSTALLER</label>
-                              <select class="form-select bg-dark opacity-75 shadow text-white  text-end" aria-label="leadInstaller" id="leadInstaller">
-                                  <option selected></option>
+                              <label for="projectCmsMod" class="form-label" id="projectCmsModLabel">CMS MOD</label>
+                              <input type="range" class="form-range" min="-1" max="1" step="0.1" id="projectCmsMod" value=".9">
+                            </div>
+                            <div class="mb-3">
+                              <label for="projectAddOnSystem" class="form-label">IS THIS AN ADD ON SYSTEM?</label>
+                              <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="projectAddOnSystem" id="projectAddOnSystem">
+                                  <option selected value="0"></option>
+                                  <option value="1">Yes</option>
+                                  <option value="0">No</option>
                               </select>
                             </div>
                             <div class="mb-3">
-                              <label for="leadFinancing" class="form-label">FINANCING</label>
-                              <select class="form-select bg-dark opacity-75 shadow text-white  text-end" aria-label="leadFinancing" id="leadFinancing">
-                                  <option selected></option>
-                                  
-                              </select>
+                              <label for="projectUtilityCompany" class="form-label">UTILITY COMPANY</label>
+                              <input type="text" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectUtilityCompany" aria-describedby="projectUtilityCompany">
                             </div>
                             <div class="mb-3">
-                              <label for="contractDate" class="form-label">CONTRACT DATE</label>
-                              <input type="date" class="form-control bg-dark opacity-75 shadow text-white  text-end" id="contractDate" aria-describedby="contractDate">
+                              <label for="projectProposalNotes" class="form-label">PROPOSAL NOTES</label>
+                              <input type="text" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectProposalNotes" aria-describedby="projectProposalNotes">
                             </div>
                             <div class="mb-3">
-                              <label for="systemSize" class="form-label">SYSTEM SIZE</label>
-                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-end" id="systemSize" aria-describedby="systemSize">
+                              <label for="projectPanelsNumber" class="form-label">PANELS (+/-)</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectPanelsNumber" aria-describedby="projectPanelsNumber">
                             </div>
                             <div class="mb-3">
-                              <label for="contractAmount" class="form-label">CONTRACT AMOUNT</label>
-                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-end" id="contractAmount" aria-describedby="contractAmount">
+                              <label for="ProjectCustomerCashBack" class="form-label">CUSTOMER CASH BACK</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="ProjectCustomerCashBack" aria-describedby="ProjectCustomerCashBack">
                             </div>
                             <div class="mb-3">
-                              <label for="roofStatus" class="form-label">ROOF STATUS</label>
-                              <input type="text" class="form-control bg-dark opacity-75 shadow text-white  text-end" id="roofStatus" aria-describedby="roofStatus">
+                              <label for="contractDate" class="form-label">* add notes on Lead notes section</label>
                             </div>
-        
                           </form>
+                          <!--project info, admin access -->
+                          <form class="adminOnlyAccess">
+                            <div class="mb-3">
+                              <label for="proyectInstaller" class="form-label">INSTALLER</label>
+                              <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="proyectInstaller" id="proyectInstaller">
+                                  <option selected></option>
+                                  <option>MPS</option>
+                                  <option>TEMPO</option>
+                                  <option>SWIFT</option>
+                              </select>
+                            </div>
+                            <div class="mb-3">
+                              <label for="proyectFinancing" class="form-label">FINANCING</label>
+                              <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="proyectFinancing" id="proyectFinancing">
+                                  <option selected></option>
+                                  <option>GOODLEAP</option>
+                              </select>
+                            </div>
+                            <div class="mb-3">
+                              <label for="projectSTIPS" class="form-label">STIPS</label>
+                              <input type="text" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectSTIPS" aria-describedby="projectSTIPS">
+                            </div>
+                            <div class="mb-3">
+                              <label for="projectMPU" class="form-label">MPU</label>
+                              <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="projectMPU" id="projectMPU">
+                                  <option selected></option>
+                                  <option>YES</option>
+                                  <option>NO</option>
+                              </select>
+                            </div>
+                            <div class="mb-3">
+                              <label for="projectRoofCost" class="form-label">ROOF COST</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectRoofCost" aria-describedby="projectRoofCost" value='0'>
+                            </div>
+                            <div class="row">
+                            <div class="mb-3 col-3">
+                              <label for="projectPanelSize" class="form-label">PANEL SIZE</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectPanelSize" aria-describedby="projectPanelSize" value=".395" readonly>
+                            </div>
+                            <div class="mb-3 col-3">
+                              <label for="projectPanelKwhYr" class="form-label">PANEL KWH YR</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectPanelKwhYr" aria-describedby="projectPanelKwhYr" value="610" readonly>
+                            </div>
+                            <div class="mb-3 col-3">
+                              <label for="projectAdminFee" class="form-label">A FEE</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectAdminFee" aria-describedby="projectAdminFee" value="1500" readonly>
+                            </div>
+                            <div class="mb-3 col-3">
+                              <label for="projectEpcFee" class="form-label">EPC FEE</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectEpcFee" aria-describedby="projectEpcFee" value="1500" readonly>
+                            </div>
+                            <div class="mb-3 col-3">
+                              <label for="projectMPUPrice" class="form-label">MPU</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectMPUPrice" aria-describedby="projectMPUPrice" value="3000" readonly>
+                            </div>
+                            <div class="mb-3 col-3">
+                              <label for="projectRedline" class="form-label">REDLINE</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectRedline" aria-describedby="projectRedline" value="2.3" readonly>
+                            </div>
+                            <div class="mb-3 col-3">
+                              <label for="projectSetEPpw" class="form-label">SET E PPW</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectSetEPpw" aria-describedby="projectSetEPpw" value="1.1" readonly>
+                            </div>
+                            <div class="mb-3 col-3">
+                              <label for="projectMgrCmsPpw" class="form-label">MGR CMS PPW</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectMgrCmsPpw" aria-describedby="projectMgrCmsPpw" value=".3" readonly>
+                            </div>
+                            <div class="mb-3 col-3">
+                              <label for="projectNPpw" class="form-label">NPPW</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectNPpw" aria-describedby="projectNPpw" value="1.3" readonly>
+                            </div>
+                            <div class="mb-3 col-3">
+                              <label for="projectDfeeCmsP" class="form-label">DFEE CMS%</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectDfeeCmsP" aria-describedby="projectDfeeCmsP" value="0" readonly>
+                            </div>
+                            <div class="mb-3 col-3">
+                              <label for="projectDfeeCms" class="form-label">DFEE CMS</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectDfeeCms" aria-describedby="projectDfeeCms" value="0" readonly>
+                            </div>
+                            <div class="mb-3 col-3">
+                              <label for="projectLoanDfee" class="form-label">LOAN DFEE</label>
+                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectLoanDfee" aria-describedby="projectLoanDfee" value=".3" readonly>
+                            </div>
+                          </div>
+                          </form>
+                          <div class="mb-3 col-3">
+                            <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#addNewTaskModal" id="getCalculationButton">Get calculation</button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -933,7 +1290,35 @@ License: For each use you must have a valid license purchased only from above li
               <!-- right wrapper end -->
             </div>
           </div>
-      
+          <!-- Modal -->
+          <div class="modal fade" id="addNewTaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                  <h5 class="modal-title" id=" ">Proposal</h5>
+                </div>
+                <div class="modal-body">
+                  <div class="card rounded bg-dark bg-gradient border-info text-light mb-4">
+                    <div class="card-body">
+                      <p id="systemPriceText"></p>
+                      <p id="systemSizeText"></p>
+                      <p id="finalVoltioComisionText"></p>
+                      <p id="epcPayoutText"></p>
+                      <p id="offsetText"></p>
+                      <p id="panelNumberText"></p>
+                      <p id="genKwH"></p>
+                      <p id="KwhKw"></p>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" id="addNewTaskModalOpenButton">Close</button>
+                  <button type="button" class="btn btn-outline-primary" id="saveTaskModal" data-bs-dismiss="modal">Save calculator</button>
+                </div>
+              </div>
+            </div>
+          </div>
           <!-- partial:../../partials/_footer.html -->
           <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small bg-dark text-light">
             <p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a target="_blank">Voltio</a>.</p>
@@ -949,12 +1334,13 @@ License: For each use you must have a valid license purchased only from above li
 
 	<!-- Custom js for this page -->
   <script src="../resources/sweetAlert.js"></script>
-  <script type="module" src="../js/searchLead.js"></script>
   <script src="../js/bootstrap.js"></script>
+  <script type="module" src="../js/searchLead.js"></script>
   <script type="module" src="../js/uploadImages.js"></script>
   <script type="module" src="../js/projectNotes.js"></script>
   <script type="module" src="../js/statusSection.js"></script>
   <script type="module" src="../js/addNewLead.js"></script>
+  <script type="module" src="../js/calculator.js"></script>
 	<!-- End custom js for this page -->
 
 </body>

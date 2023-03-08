@@ -66,7 +66,7 @@ async function saveStatusToServer(){
         Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'Note created',
+            title: 'updated!',
             showConfirmButton: false,
             timer: 1500
         })

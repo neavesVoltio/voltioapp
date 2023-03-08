@@ -25,8 +25,35 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
           <li class="nav-item nav-category  text-white p-2">Main</li>
           <li class="nav-item  p-2">
             <a class="nav-link dashboardView"  data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="dashboard" onclick="load_view('dashboard')">
-              <span class="material-symbols-outlined text-white dashboardView p-2">dashboard</span>
-              <span class="link-title dashboardView text-white">Dashboard view</span>
+              <span class="material-symbols-outlined text-white dashboardView p-2">home</span>
+              <span class="link-title dashboardView text-white">Home</span>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="leadsMenuSection">
+          <li class="nav-item p-2">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="searchLeads" onclick="load_view('searchLeads')">
+              <span class="material-symbols-outlined text-white p-2">mediation</span>
+              <span class="link-title text-white" id="searchLeadsView">Leads</span>
+              <i class="link-arrow text-white" data-feather="chevron-down"></i>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="projectsMenuSection">
+          <li class="nav-item p-2">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers" onclick="load_view('projects')">
+              <span class="material-symbols-outlined text-white p-2">solar_power</span>
+              <span class="link-title text-white" id="openCustomerView">Projects</span>
+              <i class="link-arrow text-white" data-feather="chevron-down"></i>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="messagesMenuSection">
+          <li class="nav-item p-2">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="messages" onclick="load_view('messages')">
+              <span class="material-symbols-outlined text-white p-2">chat</span>
+              <span class="link-title text-white" id="messagesView">Messages</span>
+              <i class="link-arrow text-white" data-feather="chevron-down"></i>
             </a>
           </li>
         </div>
@@ -44,7 +71,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
           <li class="nav-item p-2">
             <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="users" onclick="load_view('users')">
               <span class="material-symbols-outlined text-white p-2">person</span>
-              <span class="link-title text-white" id="addUserView">Users</span>
+              <span class="link-title text-white" id="addUserView">Team</span>
               <i class="link-arrow text-white" data-feather="chevron-down"></i>
             </a>
           </li>
@@ -56,31 +83,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
             </a>
           </li>
         </div>
-        <div class="container" id="leadsMenuSection">
-          <li class="nav-item nav-category text-white p-2">Leads</li>
-          <li class="nav-item p-2">
-            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="searchLeads" onclick="load_view('searchLeads')">
-              <span class="material-symbols-outlined text-white p-2">person_search</span>
-              <span class="link-title text-white" id="searchLeadsView">Leads</span>
-              <i class="link-arrow text-white" data-feather="chevron-down"></i>
-            </a>
-          </li>
-        </div>
-        <div class="container" id="projectsMenuSection">
-          <li class="nav-item nav-category text-white p-2">Projects</li>
-          <li class="nav-item p-2">
-            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers" onclick="load_view('projects')">
-              <span class="material-symbols-outlined text-white p-2">engineering</span>
-              <span class="link-title text-white" id="openCustomerView">Projects</span>
-              <i class="link-arrow text-white" data-feather="chevron-down"></i>
-            </a>
-          </li>
-        </div>
         <div class="container" id="suppliersMenuSection">
           <li class="nav-item nav-category text-white p-2">EPC</li>
           <li class="nav-item p-2">
             <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="suppliers" onclick="load_view('epc')">
-              <span class="material-symbols-outlined text-white p-2">roofing</span>
+              <span class="material-symbols-outlined text-white p-2">engineering</span>
               <span class="link-title text-white" id="addNewSupplierView">EPC</span>
               <i class="link-arrow text-white" data-feather="chevron-down"></i>
             </a>
@@ -131,32 +138,15 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
         <div class="container" id="menuDashboard">
           <li class="nav-item mt-2 bg-dark">
             <a class="nav-link dashboardView text-white" id="dashboardView" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="dashboard" onclick="load_view('dashboard')">
-              <span class="link-title dashboardView text-white">Dashboard </span>
-            </a>
-          </li>
-        </div>
-        <div class="container" id="menuStage">
-          <li class="nav-item mt-2 bg-dark">
-            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="users" onclick="load_view('stages')">
-              <span class="link-title text-white" id="openStageView">Stages</span>
-            </a>
-          </li>
-        </div>
-        <div class="container" id="menuUsers">
-          <li class="nav-item mt-2 bg-dark">
-            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="users" onclick="load_view('users')">
-              <span class="link-title text-white" id="addUserView">Users</span>
-            </a>
-          </li>
-          <li class="nav-item mt-2 bg-dark">
-            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="users" onclick="load_view('profile')">
-              <span class="link-title text-white" id="addProfileView">Profile</span>
+              <span class="material-symbols-outlined text-white dashboardView p-2">home</span>
+              <span class="link-title dashboardView text-white">Home </span>
             </a>
           </li>
         </div>
         <div class="container" id="menuLeadsSearc">
           <li class="nav-item mt-2 bg-dark">
             <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="leads" onclick="load_view('searchLeads')">
+              <span class="material-symbols-outlined text-white p-2">mediation</span>
               <span class="link-title text-white" id="searchLeadsView">Leads</span>
             </a>
           </li>
@@ -164,13 +154,45 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
         <div class="container" id="menuProjects">
           <li class="nav-item mt-2 bg-dark">
             <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers" onclick="load_view('projects')">
+              <span class="material-symbols-outlined text-white p-2">solar_power</span>
               <span class="link-title text-white" id="openCustomerView">Projects</span>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="menuMessages">
+          <li class="nav-item mt-2 bg-dark">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="messages" onclick="load_view('messages')">
+              <span class="material-symbols-outlined text-white p-2">chat</span>
+              <span class="link-title text-white" id="openMessagesView">Messages</span>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="menuStage">
+          <li class="nav-item mt-2 bg-dark">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="users" onclick="load_view('stages')">
+              <span class="material-symbols-outlined text-white p-2">timeline</span>
+              <span class="link-title text-white" id="openStageView">Stages</span>
+            </a>
+          </li>
+        </div>
+        <div class="container" id="menuUsers">
+          <li class="nav-item mt-2 bg-dark">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="users" onclick="load_view('users')">
+              <span class="material-symbols-outlined text-white p-2">person</span>
+              <span class="link-title text-white" id="addUserView">Team</span>
+            </a>
+          </li>
+          <li class="nav-item mt-2 bg-dark">
+            <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="users" onclick="load_view('profile')">
+              <span class="material-symbols-outlined text-white p-2">settings_account_box</span>
+              <span class="link-title text-white" id="addProfileView">Profile</span>
             </a>
           </li>
         </div>
         <div class="container rolRep" id="menuSuppliers">
           <li class="nav-item mt-2 bg-dark">
             <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="leads" onclick="load_view('epc')">
+              <span class="material-symbols-outlined text-white p-2">engineering</span>
               <span class="link-title text-white" id="addNewSupplierView">EPC</span>
             </a>
           </li>
@@ -178,6 +200,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
         <div class="container" id="menuResources">
           <li class="nav-item bg-dark">
             <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers" onclick="load_view('resources')">
+              <span class="material-symbols-outlined text-white p-2">file_download</span>
               <span class="link-title text-white" id="openResourcesView">Resources</span>
             </a>
           </li>
@@ -185,6 +208,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
         <div class="container" id="menuCalculator">
           <li class="nav-item bg-dark">
             <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers">
+              <span class="material-symbols-outlined text-white p-2">calculate</span>
               <span class="link-title text-white" id="openCalculatorView">Calculator</span>
             </a>
           </li>
@@ -192,6 +216,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css
         <div class="container" id="menuCommissions">
           <li class="nav-item bg-dark">
             <a class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="customers">
+              <span class="material-symbols-outlined text-white">request_quote</span>
               <span class="link-title text-white" id="openCommissionsView">Commissions</span>
             </a>
           </li>

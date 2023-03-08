@@ -2,15 +2,29 @@ import { getFirestore, doc, getDoc, collection, getDocs, query, where, deleteDoc
 import { app, auth } from '../firebase/config.js'
 import { onAuthStateChanged, updateProfile } from '../firebase/firebaseAuth.js';
 
-
 const db = getFirestore(app) 
 let data = []  
 let inputBox = document.getElementById('searchLeadInput')
 let voltioId 
 let searchLeadViewSection = document.querySelectorAll('.searchLeadViewSection')
 let clearInputsElement = document.querySelectorAll('.clearInputs')
+
 onAuthStateChanged(auth, async(user) => {
     if(user){
+      
+      const projectInfo = query(collection(db, 'leadData'), where('status', '==', 'lead'));
+          const querySnapshoot = await getDocs(projectInfo)
+          const allData = querySnapshoot.forEach( async(doc) => {
+              data.push([
+                  doc.data().voltioIdKey,
+                  doc.data().customerName,
+                  doc.data().customerPhoneNumber,
+                  doc.data().status,
+              ])
+          })
+          
+          searchLeadByInput()
+      console.log('searchleads js');
       searchLeadViewSection.forEach( (e) => {
         e.addEventListener('click', async (e) => {
           data = []  
@@ -315,4 +329,12 @@ async function getComments(){
   }
   
 }
+
+let projectCmsModInput = document.getElementById('projectCmsMod')
+let projectCmsModLabel = document.getElementById('projectCmsModLabel')
+
+projectCmsModInput.addEventListener('change', (e) => {
+  projectCmsModLabel.innerHTML = 'CMS MOD ' + projectCmsModInput.value + '%'
+})
+
   
