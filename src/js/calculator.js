@@ -11,6 +11,15 @@ let offsetText = document.getElementById('offsetText')
 let panelNumberText = document.getElementById('panelNumberText')
 let genKwH = document.getElementById('genKwH')
 let KwhKw = document.getElementById('KwhKw')
+let projectMPU = document.getElementById('projectMPU')
+let projectUsage = document.getElementById('projectUsage')
+let utilityAverageMonthly = document.getElementById('utilityAverageMonthly')
+let totalYearlyPayment = document.getElementById('totalYearlyPayment')
+let averageMonthlyPayment = document.getElementById('averageMonthlyPayment')
+let targetCommission = document.getElementById('targetCommission')
+let projectCmsMod = document.getElementById('projectCmsMod')
+let projectCost = document.getElementById('projectCost')
+
 let A = document.getElementById('projectUsage') // 7500)
 let B // SYSTEM PRICE, NO SE UTILIZA EN OTRAS FORMULAS
 let C
@@ -46,7 +55,7 @@ let AF
 let AG
 let AH
 let AI
-let AJ = document.getElementById('projectMPU') // 'YES'
+let AJ = projectMPU // 'YES'
 let AK = document.getElementById('projectAddOnSystem') //'YES'
 let AL
 let AM
@@ -142,15 +151,6 @@ let DX
 let DY
 let DZ
 let sumOfAdders = 0
-
-let getCalculationButton = document.getElementById('getCalculationButton')
-
-getCalculationButton.addEventListener('click', (e) => {
-    console.log(e);
-
-    calculations()
-
-})
 
 function calculations() {
     console.log(A.value);
@@ -259,23 +259,45 @@ function calculations() {
     DX = CG+DK+CR+CL
     console.log('DX=' + DX)
     
-    systemPriceText.innerHTML = 'System Price: ' + B.toLocaleString('en-US', {
+    systemPriceText.innerHTML = B.toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD',
     });
-    systemSizeText.innerHTML = 'System Size: ' + C.toFixed(2)
-    finalVoltioComisionText.innerHTML = 'Final Voltio cms: '+D.toLocaleString('en-US', {
+    systemSizeText.innerHTML = C.toFixed(2)
+    finalVoltioComisionText.innerHTML = D.toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD',
     });
-    epcPayoutText.innerHTML = 'EPC Payout: ' + E.toLocaleString('en-US', {
+    epcPayoutText.innerHTML = E.toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD',
     });
-    offsetText.innerHTML = 'Offset: ' + BB.toFixed(2) * 100 + '%'
-    panelNumberText.innerHTML = 'Panel #: ' + BC
-    genKwH.innerHTML = 'Gen Kwh: ' + BD.toFixed(2)
-    KwhKw.innerHTML =  'Kwh/Kw: ' + BE.toFixed(2)
+    offsetText.innerHTML = BB.toFixed(2) * 100 + '%'
+    panelNumberText.innerHTML = + BC
+    genKwH.innerHTML = BD.toFixed(2) + ' kWh'
+    KwhKw.innerHTML =  BE.toFixed(2) + ' kWh'
+    targetCommission.innerHTML = DH.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+    projectCost.innerHTML = B.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
   
   }
 
+  projectUsage.addEventListener('blur', (e) => {
+    console.log(projectUsage.value);
+    utilityAverageMonthly.value = (projectUsage.value / 12 ).toFixed(0)
+    calculations()
+  })
+
+  totalYearlyPayment.addEventListener('blur', (e) => {
+    averageMonthlyPayment.value = (totalYearlyPayment.value / 12).toFixed(0)
+  })
+  
+  projectCmsMod.addEventListener('change', (e) => {
+    calculations()
+  })
+  

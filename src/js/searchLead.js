@@ -8,38 +8,40 @@ let inputBox = document.getElementById('searchLeadInput')
 let voltioId 
 let searchLeadViewSection = document.querySelectorAll('.searchLeadViewSection')
 let clearInputsElement = document.querySelectorAll('.clearInputs')
+let customerNameOnTop = document.getElementById('customerNameOnTop')
 
 onAuthStateChanged(auth, async(user) => {
     if(user){
-          document.querySelector('#addNewLeadSection').style.display = 'none'
-          document.querySelector('#searchProjectSection').style.display = 'block'
-          document.querySelector('#profileViewSection').style.display = 'none'
-          document.getElementById('imageCustomerGallery').innerHTML = ''
-          document.getElementById('customerFilesUpload').value = ''
+      
       const projectInfo = query(collection(db, 'leadData'), where('status', '==', 'lead'));
           const querySnapshoot = await getDocs(projectInfo)
           const allData = querySnapshoot.forEach( async(doc) => {
               data.push([
                   doc.data().voltioIdKey,
                   doc.data().customerName,
-                  doc.data().customerPhoneNumber,
+                  doc.data().progress,
                   doc.data().status,
               ])
           })
           
           searchLeadByInput()
-      console.log('searchleads js');
-      searchLeadViewSection.forEach( (e) => {
+
+      searchLeadViewSection.forEach( (e) => { 
+        // se ejecuta despues de dar click al boton .searchLeadViewSection para que refresque la info en caso de algun cambio
         e.addEventListener('click', async (e) => {
           data = []  
-          
+          document.querySelector('#addNewLeadSection').style.display = 'none'
+          document.querySelector('#searchProjectSection').style.display = 'block'
+          document.querySelector('#profileViewSection').style.display = 'none'
+          document.getElementById('imageCustomerGallery').innerHTML = ''
+          document.getElementById('customerFilesUpload').value = ''
           const projectInfo = query(collection(db, 'leadData'), where('status', '==', 'lead'));
           const querySnapshoot = await getDocs(projectInfo)
           const allData = querySnapshoot.forEach( async(doc) => {
               data.push([
                   doc.data().voltioIdKey,
                   doc.data().customerName,
-                  doc.data().customerPhoneNumber,
+                  doc.data().progress,
                   doc.data().status,
               ])
           })
@@ -166,10 +168,10 @@ async function setDataToProfileView(voltioId){
     document.getElementById('searchProjectSection').style.display = 'none'
     document.getElementById('profileViewSection').style.display = 'block'
     let progressBar = document.getElementById('progressBar')
-
     const projectInfo = query(collection(db, 'leadData'), where('voltioIdKey', '==', voltioId));
         const querySnapshoot = await getDocs(projectInfo)
         const allData = querySnapshoot.forEach( async(doc) => {
+            customerNameOnTop.innerHTML = doc.data().customerName.toUpperCase()
             document.getElementById('leadVoltioId').value = doc.data().voltioIdKey.toUpperCase()
             document.getElementById('leadName').value = doc.data().customerName.toUpperCase()
             document.getElementById('leadPhone').value = doc.data().customerPhoneNumber
@@ -234,7 +236,6 @@ async function setDataToProfileView(voltioId){
       ['Final Documents', '95%'],
       ['Job completed', '100%']]
       let cons = progressValues.map( r => r[0])
-      console.log(cons);
       const posIndex = cons.indexOf(docSnap.data().progress)
       console.log(posIndex);
       const value = progressValues[posIndex][1]
@@ -337,4 +338,14 @@ projectCmsModInput.addEventListener('change', (e) => {
   projectCmsModLabel.innerHTML = 'CMS MOD ' + projectCmsModInput.value + '%'
 })
 
+let projectMPU = document.getElementById('projectMPU')
+projectMPU.addEventListener('change', () => {
+  console.log('mpu change');
+  if(projectMPU.value === 'YES'){
+    document.getElementById('projectMPUPrice').value = 3000
+  } else {
+    document.getElementById('projectMPUPrice').value = 0
+  }
   
+  
+})

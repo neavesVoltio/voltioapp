@@ -1,21 +1,13 @@
 <!DOCTYPE html>
-<!--
-Template Name: NobleUI - HTML Bootstrap 5 Admin Dashboard Template
-Author: NobleUI
-Purchase: https://1.envato.market/nobleui_admin
-Website: https://www.nobleui.com
-Portfolio: https://themeforest.net/user/nobleui/portfolio
-Contact: nobleui123@gmail.com
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
--->
+
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="description" content="Voltio dashboard">
-
-
+  <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../resources/sweetAlert.css">
 	<title>Voltio Dashboard</title>
 
   <!-- Fonts -->
@@ -23,163 +15,161 @@ License: For each use you must have a valid license purchased only from above li
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <!-- End fonts -->
-  <link rel="stylesheet" href="../style.css">
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 48
+    }
+    </style>
 </head>
 <body>
-	<div class="main-wrapper">
+	<div class="main-wrapper bg-dark">
 
 
 		<!-- partial -->
 	
-    <div class="page-wrapper">
-      <div class="page-content bg-dark ">
-          <!-- profile -->
-          <!-- profile -->
-        <div class="row" id="profile">
-          <div class="col-12 grid-margin">
-            <div class="card rounded bg-dark border-info">
-                <div class="d-flex justify-content-between align-items-center position-absolute bg-dark px-3 px-md-5 mt-3">
-                  <div>
-                    <span class="h4 p-4 text-light" id="usernameTextAddUser">EPC DETAILS</span>
-                  </div>
-                </div>
-              <div class="d-flex justify-content-center p-4 rounded-bottom shadow">
-              </div>
-            </div>
-          </div>
-        </div>
-                <div class="row profile-body">
-          <!-- left wrapper start 
-          <div class="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
-            <div class="card rounded">
-              <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                  <h6 class="card-title mb-0">About</h6>
-                  <div class="dropdown">
-                    <button class="btn p-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
-                    </button>
-                  </div>
-                </div>
-                <p id="aboutProfileText"></p>
-                <div class="mt-3">
-                  <label class="tx-11 fw-bolder mb-0 text-uppercase">Joined:</label>
-                  <p class="text-muted" id="joinedLabel"></p>
-                </div>
-                <div class="mt-3">
-                  <label class="tx-11 fw-bolder mb-0 text-uppercase">Lives:</label>
-                  <p class="text-muted" id="livesLabel"></p>
-                </div>
-                <div class="mt-3">
-                  <label class="tx-11 fw-bolder mb-0 text-uppercase">Email:</label>
-                  <p class="text-muted" id="emailLabel"></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          -->
-          <!-- left wrapper end -->
-          <!-- middle wrapper start -->
-          <div class="col-md-12 col-xl-6 middle-wrapper">
-            <div class="row">
-              <div class="col-md-12 grid-margin">
-                <div class="card rounded bg-dark border-info">
-                  <div class="card-header bg-dark">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <div class="d-flex align-items-center">
-                        <div class="ms-2">
-                          <p class="text-light">Add EPC</p>
-                        </div>
-                      </div>
+    <div class="page-wrapper bg-dark">
+      <div class="page-content">
+          <section id="addInstallerSection">
+            <div class="page-content bg-transparent">
+              <div class="row">
+                <div class="col-12 col-md-6 grid-margin">
+                  <!-- Installer info-->
+                  <div class="card rounded bg-transparent border-info mb-2">
+                    <div class="card-header bg-transparent shadow">
+                      <H5 id="addInstallerTitle">Add Installer..</H5>
                     </div>
-                  </div>
-                  <div class="card-body bg-dark">
-                    <form>
-                      <div class="mb-3">
-                        <label for="epcName" class="form-label text-light">EPC NAME</label>
-                        <input type="text" class="form-control bg-dark border-info text-light" id="epcName" aria-describedby="epc name">
-                      </div>
-                      <div class="mb-3">
-                              <label for="stateDropdown" class="form-label text-light">LOCATION</label>
-                            <select class="form-select  bg-dark border-info text-light text-start" aria-label="stateDropdown" id="stateDropdown">
-<option></option>
-                            </select>  
-                            </div>
-                      <div class="mb-3">
-                        <label for="epcRedline" class="form-label text-light">REDLINE</label>
-                        <input type="number" class="form-control bg-dark border-info text-light" id="epcRedline" aria-describedby="redline">
-                      </div>
-                      <div class="mb-3">
-                        <label for="epcMPU" class="form-label text-light">MPU $</label>
-                        <input type="number" class="form-control bg-dark border-info text-light" id="epcMPU" aria-describedby="epcMPU">
-                      </div>
-                      
-                      <div class="container">
-                        <div class="row">
-                          <a class="btn btn-outline-info me-2 mb-2 text-white" id="addEpcButtonToServer">Submit</a>
-                          <div class="alert alert-success invisible col-8 " id= "save-success-message" role="alert">
-</div>
+                    <div class="card-body">
+                      <form id="addInstallerForm">
+                        <div class="mb-3">
+                          <label for="epcName" class="form-label text-light">INSTALLER NAME</label>
+                          <input type="text" class="form-control bg-dark border-info text-light" id="epcName" aria-describedby="epc name">
                         </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="card-footer bg-dark">
-                    <div class="d-flex post-actions">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- middle wrapper end -->
-          <!-- right wrapper start -->
-          <div class="col-md-12 col-xl-6">
-            <div class="col-md-12 grid-margin">
-                <div class="card rounded bg-dark border-info">
-                  <div class="card-header bg-dark">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <div class="d-flex align-items-center">
-                        <i class="fa-solid fa-parachute-box"></i>												
-                        <div class="ms-2">
-                          <p class="text-light">EPC</p>
+                        <div class="mb-3">
+                          <label for="epcRedline" class="form-label text-light">REDLINE</label>
+                          <input type="number" class="form-control bg-dark border-info text-light" id="epcRedline" aria-describedby="redline">
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <form>
-                      <div class="table-responsive">
-                        <table class="table table-hover table-sm table-bordered table-sortable text-center table-dark">
-                          <thead>
-                            <tr>
-                              <td scope="col">EPC NAME</td>
-                              <td>LOCATION</td>
-                              <td>REDLINE</td>
-                              <td>MPU $</td>
-                              <td>EDIT</td>
-                            </tr>
-                          </thead>
-                        <tbody id="searchResults">
-                        </tbody>
-                        </table>
-                      </div>
-                        <template id="rowTemplate">
-                          <tr class= "result-box table-striped">
-                            <th class="listEpcName p-2" scope="row"></th>
-                            <td class="listEpcLocation"></td>
-                            <td class="listEpcRedline"></td>
-                            <td class="listEpcMpu"></td>
+                        <div class="mb-3">
+                          <label for="epcMPU" class="form-label text-light">MPU $</label>
+                          <input type="number" class="form-control bg-dark border-info text-light" id="epcMPU" aria-describedby="epcMPU">
+                        </div>
+                        <div class="mb-3" id="statusSelectContainer">
 
-                            <td><button type="button" class="btn btn-dark btn-sm epcEditButton" ><span class="material-symbols-outlined epcEditButtonIcon">electric_bolt</span></button></td>
-                          </tr>
-                        </template>
-                    </form>
+                        </div>
+                        <div class="row container mx-auto">
+                          <a class="btn btn-outline-info me-2 mb-2 text-white" id="addEpcButtonToServer">Submit</a>
+                        </div>
+                      </form>
+                    </div>
                   </div>
+                  <!-- Adders section-->
+                  <div class="accordion accordion-flush bg-transparent" id="addersAccordeon" >
+                    <div class="accordion-item">
+                      <div class="card rounded bg-transparent border-info mb-2">
+                        <h2 class="accordion-header" id="headingOne">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            ADDERS
+                          </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapsed show" aria-labelledby="headingOne" data-bs-parent="#addersAccordeon">
+                          <div class="card-body bg-dark">
+                            <div id="adderRowContainer">
+                              <div class="row container mx-auto">
+                                <a class="btn btn-outline-info me-2 mb-2 text-white" id="saveAddersButton" style="display: none;">SAVE ADDERS</a>
+                              </div>
+                              <div class="row adderRow">
+                                <div class="table-responsive">
+                                  <table class="table align-middle shadow-sm table-dark border-info">
+                                    <thead >
+                                      <tr >
+                                        <th scope="col" class="bg-dark text-light border-info">Enter Adds No DFEE</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tbody>
+                                      <tr>
+                                          <th scope="row" id="addsNoDFEEAddress" class="bg-dark">Adds</th>
+                                          <th scope="row" id="addsNoDFEEAmount" class="bg-dark">Amount:</th>
+                                      </tr>
+                                    </tbody>
+                                    <tbody id="addersContainers">
+                                    </tbody>
+                                      <tr>
+                                          <td class="bg-dark"><a class="btn btn-outline-info me-2 mb-2 text-white" id="addAdderButtonNs">Add Adder</a></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>  
+                              </div>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Location section-->
+                  <div class="accordion accordion-flush bg-transparent" id="locationAccordeon" >
+                    <div class="accordion-item">
+                      <div class="card rounded bg-transparent border-info mb-2">
+                        <h2 class="accordion-header" id="headingOne">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            LOCATION
+                          </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapsed show" aria-labelledby="headingOne" data-bs-parent="#locationAccordeon">
+                          <div class="card-body bg-dark">
+                            <div id="locationrowContainer">
+                              <div class="row container mx-auto">
+                                <a class="btn btn-outline-info me-2 mb-2 text-white" id="saveLocationButton" style="display: none;">SAVE LOCATION</a>
+                              </div>
+                              <div class="row locationRow">
+                                <div class="table-responsive">
+                                  <table class="table align-middle shadow-sm table-dark border-info">
+                                    <thead >
+                                      <tr >
+                                        <th scope="col" class="bg-dark text-light border-info">Select Location</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tbody>
+                                      <tr>
+                                          <th scope="row" id="addsNoDFEEAddress" class="bg-dark">State</th>
+                                          <th scope="row" id="addsNoDFEEAmount" class="bg-dark">Region</th>
+                                      </tr>
+                                    </tbody>
+                                    <tbody id="locationContainers">
+                                    </tbody>
+                                      <tr>
+                                          <td class="bg-dark"><a class="btn btn-outline-info me-2 mb-2 text-white" id="addLocationButtonNs">Add Location</a></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>  
+                              </div>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End installer location-->
+                </div>
+                <div class="col-12 col-md-6 grid grid-margin mx-auto overflow-hidden text-center">
+                    <div class="row  " id="installerCardsContainer">
+                    
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <!-- right wrapper end -->
-        </div>
+          </section>
+          <section id="viewInstallerListSection">
+
+          </section>
 			</div>
 
 			<!-- partial:../../partials/_footer.html -->
@@ -192,6 +182,9 @@ License: For each use you must have a valid license purchased only from above li
 	</div>
 
 	<!-- Custom js for this page -->
+  <script src="../js/bootstrap.js"></script>
+  <script type="module" src="../js/installerSection.js"></script>
+  <script src="../resources/sweetAlert.js"></script>
 	<!-- End custom js for this page -->
 
 </body>

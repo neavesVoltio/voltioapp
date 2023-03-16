@@ -53,6 +53,18 @@ async function saveStatusToServer(){
         let creditStatus = document.getElementById('creditStatus').value
         let ss = document.getElementById('ss').value
         let docs = document.getElementById('docs').value
+      
+    // se debe agregar el status a la bd leadData
+      const projectInfoData = query(collection(db, 'leadData'), where('voltioIdKey', '==', voltioId));
+      const querySnapshootData = await getDocs(projectInfoData)
+      const docIdData = querySnapshootData.forEach( async(docs) => {
+        console.log(docs.id);
+         await updateDoc(doc(db, "leadData", docs.id), {
+             projectStatus: status,
+             progress: progress
+           })
+      })
+
     await setDoc(doc(db, "leadStatus", voltioId), {
         proposalStatus: proposalStatus,
         projectType: projectType,
@@ -118,14 +130,15 @@ async function saveStatusToServer(){
       const value = progressValues[posIndex][1]
       console.log(value);
       progressBar.style.width = value
+      
     }).catch((error) => {
-        Swal.fire({
-            position: 'top-end',
-            icon: 'warning',
-            title: 'An error has occurred, please try again. ' + error,
-            showConfirmButton: false,
-            timer: 1500
-          })
+        // Swal.fire({
+        //     position: 'top-end',
+        //     icon: 'warning',
+        //     title: 'An error has occurred, please try again. ' + error,
+        //     showConfirmButton: false,
+        //     timer: 1500
+        //   })
           return
     })   
 }

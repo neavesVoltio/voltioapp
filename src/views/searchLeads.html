@@ -303,9 +303,10 @@ License: For each use you must have a valid license purchased only from above li
               </div>
             <!-- progress bar -->
             <div class="container mb-4">
-              <div class="progress">
+              <div class="progress mb-3">
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-info text-dark" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 5%" id="progressBar">Missing steps</div>
               </div>
+              <h4 id="customerNameOnTop"></h4>
                 
             </div>
               
@@ -484,34 +485,39 @@ License: For each use you must have a valid license purchased only from above li
                               </div>
                             </div>
                             <div class="mb-3"> <!--RATE SCHEDULED -->
-                              <label for="projectUsage" class="form-label">What is the rate scheduled</label>
+                              <label for="projectAddOnSystem" class="form-label">What is the rate scheduled</label>
                               <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="projectAddOnSystem" id="projectAddOnSystem">
                                 <option selected value="0"></option>
                                 <option value="1">Rate R-1, Residential Service</option>
                                 <option value="0">Rate R-4, Residential Service Time of..</option>
                                 <option value="0">Rate R-1, Community Energy 100%..</option>
-                            </select>
+                              </select>
                             </div>
                             <div class="mb-3"> <!--ENERGY CONSUMPTION UTILITY-->
                               <div class="row">
                                 <div class="col-md-12 col-lg-6">
                                   <h2 class="mb-4">Utility</h2>
-                                  <div class="form-floating mb-3">
-                                    <input type="number" class="form-control text-end bg-dark" id="utilityAverageMonthly" aria-describedby="utilityAverageMonthly" placeholder="kWh" readonly>
-                                    <label for="utilityAverageMonthly" class="form-label">Utility Average Monthly (kWh)</label>
+                                  <div class="row">
+                                    <div class="form-floating mb-3 col-md-12 col-lg-6 ">
+                                      <input type="number" value=0 class="form-control text-end bg-dark text-center fs-4" id="projectUsage" aria-describedby="projectUsage" placeholder="kWh">
+                                      <label for="projectUsage" class="form-label fs-6">Total yearly consumption (kWh)</label>
+                                    </div>
+                                    <div class="form-floating mb-3 col-md-12 col-lg-6">
+                                      <input type="number" value=0 class="form-control text-end bg-dark text-center fs-4" id="utilityAverageMonthly" aria-describedby="utilityAverageMonthly" placeholder="kWh" readonly disabled>
+                                      <label for="utilityAverageMonthly" class="form-label fs-6">Utility Average Monthly (kWh)</label>
+                                    </div>
                                   </div>
-                                  <div class="form-floating mb-3">
-                                    <input type="number" class="form-control text-end bg-dark" id="totalYearlyConsumption" aria-describedby="totalYearlyConsumption" placeholder="kWh" readonly>
-                                    <label for="totalYearlyConsumption" class="form-label">Total yearly consumption (kWh)</label>
+                                  <div class="row">
+                                    <div class="form-floating mb-3 col-md-12 col-lg-6">
+                                      <input type="number" value=0 class="form-control text-end bg-dark text-center fs-4" id="totalYearlyPayment" aria-describedby="totalYearlyPayment" placeholder="$">
+                                      <label for="totalYearlyPayment" class="form-label fs-6">Total yearly Payment ($)</label>
+                                    </div>
+                                    <div class="form-floating mb-3 col-md-12 col-lg-6">
+                                      <input type="number" value=0 class="form-control text-end bg-dark text-center fs-4" id="averageMonthlyPayment" aria-describedby="averageMonthlyPayment" placeholder="$" readonly disabled >
+                                      <label for="averageMonthlyPayment" class="form-label fs-6">Average monthly payment ($)</label>
+                                    </div>
                                   </div>
-                                  <div class="form-floating mb-3">
-                                    <input type="number" class="form-control text-end bg-dark" id="averageMonthlyPayment" aria-describedby="averageMonthlyPayment" placeholder="$" readonly>
-                                    <label for="averageMonthlyPayment" class="form-label">Average monthly payment ($)</label>
-                                  </div>
-                                  <div class="form-floating mb-3">
-                                    <input type="number" class="form-control text-end bg-dark" id="totalYearlyPayment" aria-describedby="totalYearlyPayment" placeholder="$" readonly>
-                                    <label for="totalYearlyPayment" class="form-label">Total yearly Payment ($)</label>
-                                  </div>
+                                  
                                 </div>
                                 <div class="col-md-12 col-lg-6">
                                   <h2 class="mb-4">Utility Bill</h2>
@@ -537,25 +543,72 @@ License: For each use you must have a valid license purchased only from above li
                               <div class="row">
                                 <div class="col-md-12 col-lg-6">
                                   <h2 class="mb-4">Design</h2>
-                                  <div class="form-floating mb-3">
-                                    <input type="number" class="form-control text-end bg-dark" id="utilityAverageMonthly" aria-describedby="utilityAverageMonthly" placeholder="kWh" readonly>
-                                    <label for="utilityAverageMonthly" class="form-label">Utility Average Monthly (kWh)</label>
+                                  <div class="row"> <!--area and installer-->
+                                    <div class="mb-3 col-md-12 col-lg-6">
+                                      <label for="designArea" class="form-label">AREA</label>
+                                      <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="designArea" id="designArea">
+                                        <option>SAN JOSE REGION</option>
+                                        <option>FRESNO REGION</option>
+                                        <option>SALINAS REGION</option>
+                                        <option>SAN BERNARDINO REGION</option>
+                                        <option>SAN DIEGO REGION</option>
+                                    </select>
+                                    </div>
+                                    <div class="mb-3 col-md-12 col-lg-6">
+                                      <label for="proyectInstaller" class="form-label">INSTALLER</label>
+                                      <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="proyectInstaller" id="proyectInstaller">
+                                          <option selected></option>
+                                          <option>MPS</option>
+                                          <option>TEMPO</option>
+                                          <option>SWIFT</option>
+                                      </select>
+                                    </div>
+                                  </div> 
+                                  <div class="row"> <!--panels-->
+                                    <div class="mb-3 col-md-12 col-lg-6">
+                                      <label for="projectPanelsNumber" class="form-label">PANELS (+/-)</label>
+                                      <input type="number" value=0 class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectPanelsNumber" aria-describedby="projectPanelsNumber">
+                                    </div>
                                   </div>
-                                  <div class="form-floating mb-3">
-                                    <input type="number" class="form-control text-end bg-dark" id="totalYearlyConsumption" aria-describedby="totalYearlyConsumption" placeholder="kWh" readonly>
-                                    <label for="totalYearlyConsumption" class="form-label">Total yearly consumption (kWh)</label>
-                                  </div>
-                                  <div class="form-floating mb-3">
-                                    <input type="number" class="form-control text-end bg-dark" id="averageMonthlyPayment" aria-describedby="averageMonthlyPayment" placeholder="$" readonly>
-                                    <label for="averageMonthlyPayment" class="form-label">Average monthly payment ($)</label>
-                                  </div>
-                                  <div class="form-floating mb-3">
-                                    <input type="number" class="form-control text-end bg-dark" id="totalYearlyPayment" aria-describedby="totalYearlyPayment" placeholder="$" readonly>
-                                    <label for="totalYearlyPayment" class="form-label">Total yearly Payment ($)</label>
+                                  <div class="container mx-auto "> <!-- cards -->
+                                    <div class="row text-center mx-auto grid"> <!--cards siste size and price-->
+                                      <div class="card mb-2 bg-transparent col-md-12 col-lg-6 shadow-none border border-0" >
+                                        <div class="card-body bg-dark shadow-sm">
+                                          <h5 class="card-title">System Size</h5>
+                                          <h1 id="systemSizeText"></h1>
+                                        </div>
+                                      </div>
+                                      <div class="card mb-2 bg-transparent col-md-12 col-lg-6 shadow-none border border-0" >
+                                        <div class="card-body bg-dark shadow-sm">
+                                          <h5 class="card-title">System Price</h5>
+                                          
+                                          <h1 id="systemPriceText"></h1>
+                                        </div>
+                                      </div>
+                                      <div class="card mb-2 bg-transparent col-md-12 col-lg-6 shadow-none border border-0" >
+                                        <div class="card-body bg-dark shadow-sm">
+                                          <h5 class="card-title">Monthly production</h5>
+                                          
+                                          <h1 id="KwhKw"></h1>
+                                        </div>
+                                      </div>
+                                      <div class="card mb-2 bg-transparent col-md-12 col-lg-6 shadow-none border border-0" >
+                                        <div class="card-body bg-dark shadow-sm">
+                                          <h5 class="card-title">Annual production</h5>
+                                          <h1 id="genKwH"></h1>
+                                        </div>
+                                      </div>
+                                      <div class="card mb-2 bg-transparent col-md-12 col-lg-6 shadow-none border border-0" >
+                                        <div class="card-body bg-dark shadow-sm">
+                                          <h5 class="card-title">Offset</h5>
+                                          <h1 id="offsetText"></h1>
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
-                                <div class="col-md-12 col-lg-6">
-                                  <h2 class="mb-4">Utility Bill</h2>
+                                <div class="col-md-12 col-lg-6 adminOnlyAccess">
+                                  <h2 class="mb-4">Design Photo</h2>
                                   <div class="mb-3">
                                     <label for="customerFilesUpload" class="form-label">Upload Files</label>
                                     <input class="form-control" name="upFileCustomer" type="file" id="customerFilesUpload" multiple> <!-- multiple -->
@@ -574,14 +627,48 @@ License: For each use you must have a valid license purchased only from above li
                                 </div>
                               </div>
                             </div>
-                            <div class="mb-3">
-                              <p class="mb-3">Brief Consumption Summary</p>
+                            <div class="mb-3"> <!--ADD ONS-->
                               <div class="row">
-                                <div class="col-6 text-center"><h2 class="text-success fw-bold">$204</h2><p class="fw-light">Average Monthly Bill</p> </div>
-                                <div class="col-6 text-center"><h2 class="text-success fw-bold">$0.25 kwh</h2><p class="fw-light">Average Electric Price</p></div>
+                                <h2 class="mb-4">Pricing</h2>
+                                <div class="row">
+                                  <div class="mb-3 col-md-12 col-lg-6">
+                                    <label for="projectAddOnSystem" class="form-label">IS THIS AN ADD ON SYSTEM?</label>
+                                    <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="projectAddOnSystem" id="projectAddOnSystem">
+                                        <option selected value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                  </div>
+                                  <div class="mb-3 col-md-12 col-lg-6">
+                                    <label for="ProjectCustomerCashBack" class="form-label">CUSTOMER CASH BACK</label>
+                                    <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="ProjectCustomerCashBack" aria-describedby="ProjectCustomerCashBack" value=0>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <label for="projectCmsMod" class="form-label" id="projectCmsModLabel">CMS MOD</label>
+                                  <input type="range" class="form-range" min="-1" max="1" step="0.1" id="projectCmsMod" value=".9">
+                                </div>
+                                <div class="container mx-auto mb-3"> <!-- cards -->
+                                  <div class="row text-center mx-auto grid"> <!--cards siste size and price-->
+                                    <div class="card mb-2 bg-transparent col-md-12 col-lg-6 shadow-none border border-0" >
+                                      <div class="card-body bg-dark shadow-sm">
+                                        <h5 class="card-title">Target Commission</h5>
+                                        <h1 id="targetCommission"></h1>
+                                      </div>
+                                    </div>
+                                    <div class="card mb-2 bg-transparent col-md-12 col-lg-6 shadow-none border border-0" >
+                                      <div class="card-body bg-dark shadow-sm">
+                                        <h5 class="card-title">Project Cost</h5>
+                                        
+                                        <h1 id="projectCost"></h1>
+                                      </div>
+                                    </div>
+                                    
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                            <div class="mb-3">
+                            
+                            <div class="mb-3"> <!--SOLAR PANEL LOCATION (IMAGES)-->
                               <p class="mb-3">Please select the solar panel location</p>
                               <div class="btn-group p-2 d-flex flex-row-reverse" role="group">
                                 <input type="checkbox" class="btn-check rounded-pill p-2" id="singleStoryHome" autocomplete="off">
@@ -608,7 +695,7 @@ License: For each use you must have a valid license purchased only from above li
                                 </label>
                               </div>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3"> <!--ROOF CONDITION-->
                               <p class="mb-3">What is the condition of roof?</p>
                               <div class="btn-group p-2 d-flex flex-row-reverse" role="group">
                                 <input type="checkbox" class="btn-check rounded-pill p-2" id="roofConditionExcellent" autocomplete="off">
@@ -622,7 +709,7 @@ License: For each use you must have a valid license purchased only from above li
                                 
                               </div>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3"> <!--ROOF TYPE-->
                               <p class="mb-3">What type of roofing material?</p>
                               <div class="btn-group p-2 d-flex flex-row-reverse" role="group">
                                 <div class="row row-cols-2 row-cols-md-3 g-4">
@@ -695,7 +782,7 @@ License: For each use you must have a valid license purchased only from above li
                                   </div>
                                 </div>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3"> <!--ELECTRIC PANEL BRAND-->
                               <label for="projectElectricPanelBrand" class="form-label">What is the brand of main electric panel?</label>
                               <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="projectElectricPanelBrand" id="projectElectricPanelBrand">
                                 <option selected value="0"></option>
@@ -710,7 +797,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <option>Milbank</option>
                             </select>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3"> <!--BRAKER FEEDS LOCATION-->
                               <p class="mb-3">Identify if you braker feeds from top, middle or bottom. The amperage will be indicated next to the main breaker switch</p>
                               <div class="btn-group p-2 d-flex flex-row-reverse" role="group">
                                 <input type="checkbox" class="btn-check rounded-pill p-2" id="breakerTopFeed" autocomplete="off">
@@ -973,22 +1060,6 @@ License: For each use you must have a valid license purchased only from above li
                               <input type="date" class="form-control bg-dark opacity-75 shadow text-white  text-end" id="lastUpdate" aria-describedby="about">
                             </div>
                             <div class="mb-3">
-                              <label for="projectUsage" class="form-label">USAGE</label>
-                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectUsage" aria-describedby="projectUsage">
-                            </div>
-                            <div class="mb-3">
-                              <label for="projectCmsMod" class="form-label" id="projectCmsModLabel">CMS MOD</label>
-                              <input type="range" class="form-range" min="-1" max="1" step="0.1" id="projectCmsMod" value=".9">
-                            </div>
-                            <div class="mb-3">
-                              <label for="projectAddOnSystem" class="form-label">IS THIS AN ADD ON SYSTEM?</label>
-                              <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="projectAddOnSystem" id="projectAddOnSystem">
-                                  <option selected value="0"></option>
-                                  <option value="1">Yes</option>
-                                  <option value="0">No</option>
-                              </select>
-                            </div>
-                            <div class="mb-3">
                               <label for="projectUtilityCompany" class="form-label">UTILITY COMPANY</label>
                               <input type="text" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectUtilityCompany" aria-describedby="projectUtilityCompany">
                             </div>
@@ -996,29 +1067,14 @@ License: For each use you must have a valid license purchased only from above li
                               <label for="projectProposalNotes" class="form-label">PROPOSAL NOTES</label>
                               <input type="text" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectProposalNotes" aria-describedby="projectProposalNotes">
                             </div>
-                            <div class="mb-3">
-                              <label for="projectPanelsNumber" class="form-label">PANELS (+/-)</label>
-                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="projectPanelsNumber" aria-describedby="projectPanelsNumber">
-                            </div>
-                            <div class="mb-3">
-                              <label for="ProjectCustomerCashBack" class="form-label">CUSTOMER CASH BACK</label>
-                              <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="ProjectCustomerCashBack" aria-describedby="ProjectCustomerCashBack">
-                            </div>
+                            
                             <div class="mb-3">
                               <label for="contractDate" class="form-label">* add notes on Lead notes section</label>
                             </div>
                           </form>
                           <!--project info, admin access -->
                           <form class="adminOnlyAccess">
-                            <div class="mb-3">
-                              <label for="proyectInstaller" class="form-label">INSTALLER</label>
-                              <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="proyectInstaller" id="proyectInstaller">
-                                  <option selected></option>
-                                  <option>MPS</option>
-                                  <option>TEMPO</option>
-                                  <option>SWIFT</option>
-                              </select>
-                            </div>
+                            
                             <div class="mb-3">
                               <label for="proyectFinancing" class="form-label">FINANCING</label>
                               <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="proyectFinancing" id="proyectFinancing">
@@ -1093,9 +1149,7 @@ License: For each use you must have a valid license purchased only from above li
                             </div>
                           </div>
                           </form>
-                          <div class="mb-3 col-3">
-                            <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#addNewTaskModal" id="getCalculationButton">Get calculation</button>
-                          </div>
+                          
                         </div>
                       </div>
                     </div>
@@ -1300,14 +1354,9 @@ License: For each use you must have a valid license purchased only from above li
                 <div class="modal-body">
                   <div class="card rounded bg-dark bg-gradient border-info text-light mb-4">
                     <div class="card-body">
-                      <p id="systemPriceText"></p>
-                      <p id="systemSizeText"></p>
                       <p id="finalVoltioComisionText"></p>
                       <p id="epcPayoutText"></p>
-                      <p id="offsetText"></p>
                       <p id="panelNumberText"></p>
-                      <p id="genKwH"></p>
-                      <p id="KwhKw"></p>
                       
                     </div>
                   </div>
@@ -1321,7 +1370,7 @@ License: For each use you must have a valid license purchased only from above li
           </div>
           <!-- partial:../../partials/_footer.html -->
           <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small bg-dark text-light">
-            <p class="text-muted mb-1 mb-md-0">Copyright © 2023 <a target="_blank">Voltio</a>.</p>
+            <p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a target="_blank">Voltio</a>.</p>
           </footer>
           <!-- partial -->
       
