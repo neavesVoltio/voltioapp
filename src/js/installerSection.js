@@ -1,4 +1,4 @@
-import { getFirestore, doc, getDoc, collection, getDocs, query, where, deleteDoc, orderBy, updateDoc, setDoc, addDoc  } from '../firebase/firebaseJs.js'
+import { getFirestore, doc, getDoc, collection, getDocs, query, where, deleteDoc, orderBy, updateDoc, setDoc, addDoc, arrayUnion  } from '../firebase/firebaseJs.js'
 import { app, auth } from '../firebase/config.js'
 import { onAuthStateChanged, updateProfile } from '../firebase/firebaseAuth.js';
 
@@ -9,6 +9,7 @@ let epcName = document.getElementById('epcName')
 let epcRedline = document.getElementById('epcRedline')
 let epcMPU = document.getElementById('epcMPU')
 let addEpcButtonToServer = document.getElementById('addEpcButtonToServer')
+let installerGlobalName
 // Verify if somebody is logged
 onAuthStateChanged(auth, async(user) => {
     if(user){
@@ -28,6 +29,7 @@ onAuthStateChanged(auth, async(user) => {
 						} else {
 								// if all fields are completed, use setDoc to add or update installer on firestore
 								// We are going to use installer name as main key, to avoid duplicated values
+								installerGlobalName = epcName.value
 								await setDoc(doc(db, 'installerList', epcName.value),{
 										installerName: epcName.value,
 										installerRedline: parseFloat(epcRedline.value),
@@ -139,6 +141,7 @@ onAuthStateChanged(auth, async(user) => {
 								btn.addEventListener('click', (el) => {
 										// get data from dataset
 										document.getElementById('statusSelectContainer').innerHTML = '';
+										installerGlobalName = el.target.dataset.installer 
 										let installer = el.target.dataset.installer 
 										let redline = el.target.dataset.redline 
 										let mpu = el.target.dataset.mpu 
@@ -186,6 +189,7 @@ onAuthStateChanged(auth, async(user) => {
 										addersAccordeon.style.display = 'block'
 										locationAccordeon.style.display = 'block'
 										getAddersByInstaller (installer)
+										deleteRow(e)
 								})
 								
 						})
@@ -206,7 +210,9 @@ onAuthStateChanged(auth, async(user) => {
 					deleteAddersRow.forEach(function(item) {
 						item.addEventListener('click', function (e) {
 							console.log('click');
+						console.log(e.target.closest(".stateNameDropdown").value);	
 							e.target.closest(".table-row").remove();
+							
 						});
 					});
 				})
@@ -273,7 +279,7 @@ onAuthStateChanged(auth, async(user) => {
 					if (docSnap.exists()) {
 						// get adders list by current installer
 						let addersList = docSnap.data().adders
-						let locationData = docSnap.data().locationData
+						
 						// this for create list of installers
 						for (let i = 0; i < addersList.length; i++) {
 							const adderNameData = addersList[i].adderNameData;
@@ -282,14 +288,8 @@ onAuthStateChanged(auth, async(user) => {
 						
 						}
 						
-						for (let i = 0; i < locationData.length; i++) {
-							const state = locationData[i].state;							
-							const location = locationData[i].locationName;							
-							addNewLocationRow(state, location)
-						}
-
-
-
+						// agregar esta funcion despues de obtener los datos 
+						getInstallerCoverage()
 				// remove adders rows by click -
 					let deleteAddersRow = document.querySelectorAll('.deleteRow');
 					deleteAddersRow.forEach(function(item) {
@@ -304,86 +304,68 @@ onAuthStateChanged(auth, async(user) => {
 						console.log("No such document!");
 					}	
 				}
-	
-				// add location button
 
-				let addLocationButtonNs = document.getElementById('addLocationButtonNs')
-
-				addLocationButtonNs.addEventListener('click', (e) =>{
-					addNewLocationRow()
-					// remove adders rows by click -
-					let deleteLocationRow = document.querySelectorAll('.deleteRow');
-					deleteLocationRow.forEach(function(item) {
-						item.addEventListener('click', function (e) {
-							console.log('click');
-							e.target.closest(".table-row").remove();
-						});
-					});
-				})
-
-				function addNewLocationRow(state, location){
+				function addNewLocationRow(state){
+					let stateArray = [state]
+					
 					let mainContainer = document.getElementById("locationContainers")
 					let addersTitleContainer = document.createElement("tr");
 					
 					 let adderTableRow = document.createElement("tr");
 					 let adderNameTableData = document.createElement("td");
 					 let valueTableData = document.createElement("td");
-					 let stateInput = document.createElement("select");
-					 let locationNameInput = document.createElement("input");
+					 let locationNameInput = document.createElement("select");
 					 let deleteButton = document.createElement('a');
+					 let regions = !state ? [ ["CALIFORNIA", " SAN JOSE"],
+					 				["CALIFORNIA", " FRESNO"],
+									["CALIFORNIA", " SALINAS"],
+									["CALIFORNIA", " SAN BERNARDINO"],
+									["CALIFORNIA", " SAN DIEGO"],
+									["NEVADA", " NEVADA"]] : stateArray
 					 
-					 let states = ['NV','CA']
-					 let regions = []	
 					 deleteButton.className = 'btn btn-danger border-0 text-danger bg-transparent fb-4 deleteRow'
 					 deleteButton.textContent = '-'	
 					 valueTableData.className = "bg-transparent text-light border-info"
-					 stateInput.className = "form-select bg-dark shadow text-light border-info text-start"
 					 adderTableRow.className = "bg-transparent text-light border-info table-row"
 					 adderNameTableData.className = "bg-transparent text-light border-info"
-					 //stateInput.type = "text"
-					 stateInput.name = "state"
-					 stateInput.value = !state ? '' : state
-				
-					 locationNameInput.className = "form-control bg-transparent text-light border-info"
-					 locationNameInput.type = "text"
-					 locationNameInput.name = "locationName"
-					 locationNameInput.value = !location ? '' : location
+					 locationNameInput.className = "form-select bg-dark shadow text-light border-info text-start stateNameDropdown"
+					 locationNameInput.name = "state"
+					 locationNameInput.vale = !state ? '' : state
 				
 					 mainContainer.append(adderTableRow)
 					 adderTableRow.appendChild(adderNameTableData)
 					 adderTableRow.appendChild(valueTableData)
 					 adderTableRow.appendChild(deleteButton)
-					 valueTableData.appendChild(stateInput)
 					 adderNameTableData.appendChild(locationNameInput)
-					 states.forEach(function(item) {
-						let stateOption = document.createElement('option');
-						stateInput.append(stateOption)
-						stateOption.innerHTML = item
-					 });
 
-					 
+					 regions.forEach(function(item) {
+						let stateOption = document.createElement('option');
+						locationNameInput.append(stateOption)
+						stateOption.innerHTML = !state ? item : state
+					 });
 					 
 				}
 
 	async function saveLocations(addersData){
-					var locationName = document.getElementsByName('locationName')
+					//var locationName = document.getElementsByName('locationName')
 					var state = document.getElementsByName('state')
 					let locationData = []
 			
-					for(var i=0;i<locationName.length;i++){
+					for(var i=0;i<state.length;i++){
 						let rowData = {}
-						rowData.locationName = locationName[i].value
+						//rowData.locationName = locationName[i].value
 						rowData.state = state[i].value
-						locationData.push(rowData)
+						locationData.push(state[i].value)
+						// locationData.push(rowData)
 					}
-
+					
 					await setDoc(doc(db, 'installerList', epcName.value),{
 						installerName: epcName.value,
 						installerRedline: parseFloat(epcRedline.value),
 						epcMPU: parseFloat(epcMPU.value), 
 						status: installerStatus,
 						adders: addersData,
-						locationData: locationData
+						// locationData: locationData
 						
 					// if success then will send a sweet aler, run getInstaller function to update cards
 					// and clear all field to prepare for a new entry    
@@ -395,20 +377,77 @@ onAuthStateChanged(auth, async(user) => {
 									showConfirmButton: false,
 									timer: 1500
 								})
+										
+							locationData.forEach( async function(item) {
+								const docRef = doc(db, 'coverageArea', item)
+								const docSnap = await getDoc(docRef)
+								if(docSnap.exists()) {
+									
+									let installerByRegion = docSnap.data().installer
+									console.log(installerByRegion);
+										await updateDoc(doc(db, 'coverageArea', item),{
+											installer: arrayUnion(installerGlobalName),
+										}).then( () => {
+											epcName.value = ''
+											epcRedline.value = ''
+											epcMPU.value = ''
+											// change title and clear status option after edit installer
+											document.getElementById('addInstallerTitle').innerHTML = 'Add Installer..'
+											document.getElementById('statusSelectContainer').innerHTML = ''
+											document.getElementById('addersContainers').innerHTML = ''
+											document.getElementById('locationContainers').innerHTML = ''
+											locationData = []
+											addersData = []
+										})
+								} else {
+									console.log('no existe');
+									await setDoc(doc(db, 'coverageArea', item),{
+										installer: [installerGlobalName],
+									})
+								}
+							});	
 							
-							epcName.value = ''
-							epcRedline.value = ''
-							epcMPU.value = ''
-							// change title and clear status option after edit installer
-							document.getElementById('addInstallerTitle').innerHTML = 'Add Installer..'
-							document.getElementById('statusSelectContainer').innerHTML = ''
-							document.getElementById('addersContainers').innerHTML = ''
-							document.getElementById('locationContainers').innerHTML = ''
-							locationData = []
-							addersData = []
+							
 					})
 				}
 				
+	async function getInstallerCoverage(){
+			console.log(installerGlobalName);
+			const q = query(collection(db, "coverageArea"), where("installer", "array-contains", installerGlobalName));
+			let state
+			const querySnapshot = await getDocs(q);
+			querySnapshot.forEach((doc) => {
+			// doc.data() is never undefined for query doc snapshots
+			console.log(doc.id, " => ", doc.data());
+				state = doc.id
+				addNewLocationRow(state)
+			}); 
+			
+			addLocationButtonNs.addEventListener('click', (e) =>{
+				deleteRow (e)
+			})
+			
+		}		
+
+	function deleteRow (e) {
+		// remove adders rows by click -
+		let deleteLocationRow = document.querySelectorAll('.deleteRow');
+		deleteLocationRow.forEach(function(item) {
+			item.addEventListener('click', function (e) {
+				console.log('click');
+				e.target.closest(".table-row").remove();
+			});
+		});
+	}
+
+	// add location button
+
+	let addLocationButtonNs = document.getElementById('addLocationButtonNs')
+
+	addLocationButtonNs.addEventListener('click', (e) =>{
+		addNewLocationRow()
+		deleteRow (e)
+	})
 
     } else{
         console.log('no user logged');

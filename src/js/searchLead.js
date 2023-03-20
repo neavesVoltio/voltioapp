@@ -1,4 +1,4 @@
-import { getFirestore, doc, getDoc, collection, getDocs, query, where, deleteDoc, orderBy, updateDoc, setDoc, addDoc  } from '../firebase/firebaseJs.js'
+import { getFirestore, doc, getDoc, collection, getDocs, query, where, deleteDoc, orderBy, updateDoc, setDoc, addDoc, collectionGroup  } from '../firebase/firebaseJs.js'
 import { app, auth } from '../firebase/config.js'
 import { onAuthStateChanged, updateProfile } from '../firebase/firebaseAuth.js';
 
@@ -9,6 +9,9 @@ let voltioId
 let searchLeadViewSection = document.querySelectorAll('.searchLeadViewSection')
 let clearInputsElement = document.querySelectorAll('.clearInputs')
 let customerNameOnTop = document.getElementById('customerNameOnTop')
+let designArea = document.getElementById('designArea');
+let installer
+let proyectInstaller = document.getElementById('proyectInstaller');
 
 onAuthStateChanged(auth, async(user) => {
     if(user){
@@ -339,6 +342,7 @@ projectCmsModInput.addEventListener('change', (e) => {
 })
 
 let projectMPU = document.getElementById('projectMPU')
+
 projectMPU.addEventListener('change', () => {
   console.log('mpu change');
   if(projectMPU.value === 'YES'){
@@ -349,3 +353,128 @@ projectMPU.addEventListener('change', () => {
   
   
 })
+
+designArea.addEventListener('change', async function (e) {
+  console.log('change design area');
+  let region = e.target.value
+  const docRef = doc(db, "coverageArea", region);
+  const docSnap = await getDoc(docRef);
+  let proyectInstaller = document.getElementById('proyectInstaller');
+  proyectInstaller.innerHTML = ''
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    let installers = docSnap.data().installer
+    let emptyOption = document.createElement('option');
+    emptyOption.innerHTML = ''
+    proyectInstaller.append(emptyOption)
+    installers.forEach(function(item) {
+      let option = document.createElement('option');
+      option.innerHTML = item
+      proyectInstaller.append(option)
+    });
+
+
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+});
+
+let addAdderButtonNs = document.getElementById('addAdderButtonNs');
+
+addAdderButtonNs.addEventListener('click', function (e) {
+  getAddersByInstaller()
+    // remove adders rows by click -
+  let deleteAddersRow = document.querySelectorAll('.deleteRow');
+  deleteAddersRow.forEach(function(item) {
+    item.addEventListener('click', function (e) {
+      e.target.closest(".table-row").remove();
+    });
+  });
+});
+
+proyectInstaller.addEventListener('change', function (e) {
+  installer = e.target.value
+  console.log(installer);
+  getAddersByInstaller()
+});
+
+async function getAddersByInstaller(){
+  const docRef = doc(db, "installerList", installer);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    let addersArray = []
+    let addersList = docSnap.data().adders
+    addersList.forEach(function(item) {
+      console.log(item);
+      let adderNameData = item.adderNameData
+      let qtyData = item.qtyData
+      addersArray.push([adderNameData, qtyData])
+    })
+      console.log(addersArray);
+      addNewAdderRow(addersArray)
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+}
+
+// function to create new adder row
+function addNewAdderRow(adderNameData, qtyData){
+  let mainContainer = document.getElementById("addersContainers")
+  let addersTitleContainer = document.createElement("tr");
+  
+   let adderTableRow = document.createElement("tr");
+   let adderNameTableData = document.createElement("td");
+   let valueTableData = document.createElement("td");
+   let valueInput = document.createElement("input");
+   let valueInputAdderName = document.createElement("select");
+   let deleteButton = document.createElement('a');
+   let emptyOption = document.createElement('option');
+   
+   deleteButton.className = 'btn btn-danger border-0 text-danger bg-transparent fb-4 deleteRow'
+   deleteButton.textContent = '-'	
+   valueTableData.className = "bg-transparent text-light border-info"
+   valueInput.className = "form-control bg-transparent text-light border-info sumOfAdders"
+   adderTableRow.className = "bg-transparent text-light border-info table-row"
+   adderNameTableData.className = "bg-transparent text-light border-info"
+   valueInput.type = "number"
+   valueInput.name = "qty"
+   valueInput.value = !qtyData ? 0 : qtyData
+   emptyOption.innerHTML = ''
+   valueInputAdderName.className = "form-select bg-dark shadow text-light border-info text-start stateNameDropdown"
+   valueInputAdderName.name = "adderName"
+   valueInputAdderName.value = !adderNameData ? '' : adderNameData
+
+   mainContainer.append(adderTableRow)
+   adderTableRow.appendChild(adderNameTableData)
+   adderTableRow.appendChild(valueTableData)
+   adderTableRow.appendChild(deleteButton)
+   valueTableData.appendChild(valueInput)
+   adderNameTableData.appendChild(valueInputAdderName)
+   valueInputAdderName.append(emptyOption)
+
+   adderNameData.forEach(function(item) {
+    let option = document.createElement('option');
+    valueInputAdderName.append(option)    
+    option.innerHTML = item[0] 
+    option.value = parseFloat(item[1])
+    option.name = 'qty'
+   });
+
+
+    let sumOfAdders
+    let stateNameDropdown = document.querySelectorAll('.stateNameDropdown');
+    stateNameDropdown.forEach(function(item) {
+      item.addEventListener('change', function (e) {
+        console.log('change');
+        console.log(e.target.value);
+        sumOfAdders.push(e.target.value)
+      });
+  });
+    
+}
+
+
+
