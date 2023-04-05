@@ -1,207 +1,25 @@
-rolAdmin
-repAccess
+projectUsage
+totalYearlyPayment
+designArea
+proyectInstaller
+projectPanelsNumber
+projectAddOnSystem
+ProjectCustomerCashBack
+addersData
+solarPanelLocation
+roofCondition
+roofingMaterial
+projectElectricPanelBrand
 
-updateProfileButton
+Sig pasos:
 
-addNewLeadViewSection
-searchLeadViewSection
+al actualizar el installer se deb tomar sus valores de redline y 
 
-
-<!DOCTYPE html>
-<!--
-Template Name: NobleUI - HTML Bootstrap 5 Admin Dashboard Template
-Author: NobleUI
-Purchase: https://1.envato.market/nobleui_admin
-Website: https://www.nobleui.com
-Portfolio: https://themeforest.net/user/nobleui/portfolio
-Contact: nobleui123@gmail.com
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
--->
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="Voltio dashboard">
-
-
-	<title>Voltio Dashboard</title>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-  <!-- End fonts -->
-  <link rel="stylesheet" href="../style.css">
-</head>
-<body>
-	<div class="main-wrapper">
-
-
-		<!-- partial -->
-	
-    <div class="page-wrapper">
-      <div class="page-content bg-dark ">
-          <!-- profile -->
-          <!-- profile -->
-        <div class="row" id="profile">
-          <div class="col-12 grid-margin">
-            <div class="card rounded bg-dark border-info">
-                <div class="d-flex justify-content-between align-items-center position-absolute bg-dark px-3 px-md-5 mt-3">
-                  <div>
-                    <span class="h4 p-4 text-light" id="usernameTextAddUser">EPC DETAILS</span>
-                  </div>
-                </div>
-              <div class="d-flex justify-content-center p-4 rounded-bottom shadow">
-              </div>
-            </div>
-          </div>
-        </div>
-                <div class="row profile-body">
-          <!-- left wrapper start 
-          <div class="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
-            <div class="card rounded">
-              <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                  <h6 class="card-title mb-0">About</h6>
-                  <div class="dropdown">
-                    <button class="btn p-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
-                    </button>
-                  </div>
-                </div>
-                <p id="aboutProfileText"></p>
-                <div class="mt-3">
-                  <label class="tx-11 fw-bolder mb-0 text-uppercase">Joined:</label>
-                  <p class="text-muted" id="joinedLabel"></p>
-                </div>
-                <div class="mt-3">
-                  <label class="tx-11 fw-bolder mb-0 text-uppercase">Lives:</label>
-                  <p class="text-muted" id="livesLabel"></p>
-                </div>
-                <div class="mt-3">
-                  <label class="tx-11 fw-bolder mb-0 text-uppercase">Email:</label>
-                  <p class="text-muted" id="emailLabel"></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          -->
-          <!-- left wrapper end -->
-          <!-- middle wrapper start -->
-          <div class="col-md-12 col-xl-6 middle-wrapper">
-            <div class="row">
-              <div class="col-md-12 grid-margin">
-                <div class="card rounded bg-dark border-info">
-                  <div class="card-header bg-dark">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <div class="d-flex align-items-center">
-                        <div class="ms-2">
-                          <p class="text-light">Add EPC</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-body bg-dark">
-                    <form>
-                      <div class="mb-3">
-                        <label for="epcName" class="form-label text-light">EPC NAME</label>
-                        <input type="text" class="form-control bg-dark border-info text-light" id="epcName" aria-describedby="epc name">
-                      </div>
-                      <div class="mb-3">
-                              <label for="stateDropdown" class="form-label text-light">LOCATION</label>
-                            <select class="form-select  bg-dark border-info text-light text-start" aria-label="stateDropdown" id="stateDropdown">
-                                <option></option>
-                            </select>  
-                            </div>
-                      <div class="mb-3">
-                        <label for="epcRedline" class="form-label text-light">REDLINE</label>
-                        <input type="number" class="form-control bg-dark border-info text-light" id="epcRedline" aria-describedby="redline">
-                      </div>
-                      <div class="mb-3">
-                        <label for="epcMPU" class="form-label text-light">MPU $</label>
-                        <input type="number" class="form-control bg-dark border-info text-light" id="epcMPU" aria-describedby="epcMPU">
-                      </div>
-                      
-                      <div class="container">
-                        <div class="row">
-                          <a class="btn btn-outline-info me-2 mb-2 text-white" id="addEpcButtonToServer">Submit</a>
-                          <div class="alert alert-success invisible col-8 " id= "save-success-message" role="alert">
-</div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="card-footer bg-dark">
-                    <div class="d-flex post-actions">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- middle wrapper end -->
-          <!-- right wrapper start -->
-          <div class="col-md-12 col-xl-6">
-            <div class="col-md-12 grid-margin">
-                <div class="card rounded bg-dark border-info">
-                  <div class="card-header bg-dark">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <div class="d-flex align-items-center">
-                        <i class="fa-solid fa-parachute-box"></i>												
-                        <div class="ms-2">
-                          <p class="text-light">EPC</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <form>
-                      <div class="table-responsive">
-                        <table class="table table-hover table-sm table-bordered table-sortable text-center table-dark">
-                          <thead>
-                            <tr>
-                              <td scope="col">EPC NAME</td>
-                              <td>LOCATION</td>
-                              <td>REDLINE</td>
-                              <td>MPU $</td>
-                              <td>EDIT</td>
-                            </tr>
-                          </thead>
-                        <tbody id="searchResults">
-                        </tbody>
-                        </table>
-                      </div>
-                        <template id="rowTemplate">
-                          <tr class= "result-box table-striped">
-                            <th class="listEpcName p-2" scope="row"></th>
-                            <td class="listEpcLocation"></td>
-                            <td class="listEpcRedline"></td>
-                            <td class="listEpcMpu"></td>
-
-                            <td><button type="button" class="btn btn-dark btn-sm epcEditButton" ><span class="material-symbols-outlined epcEditButtonIcon">electric_bolt</span></button></td>
-                          </tr>
-                        </template>
-                    </form>
-                  </div>
-              </div>
-            </div>
-          </div>
-          <!-- right wrapper end -->
-        </div>
-			</div>
-
-			<!-- partial:../../partials/_footer.html -->
-			<footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small bg-dark text-light">
-				<p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a target="_blank">Voltio</a>.</p>
-			</footer>
-			<!-- partial -->
-	
-		</div>
-	</div>
-
-	<!-- Custom js for this page -->
-	<!-- End custom js for this page -->
-
-</body>
-</html>
+1. Habilitar el boton para que guarde la calculadora y que se pueda elegir la principal y las secundarias.
+2. Habilitar la sección para subir fotos a Drive y poder traerlas al abrir el proyecto.
+6. Agregar la sección para editar los prestamos por instaladora
+8. Leer los datos de firebase y guardarlos en un objet
+*/ 7. Guardar calculadora en firebase
+*/ 3. Quitar los cuadros no necesarios */
+*/ 4. Cambiar el menu para que salga como pestañas y así se separen las secciones */
+*/ 5. Hacer el formato del menú de leads y proyectos con los filtros necesarios. */

@@ -3,7 +3,11 @@
 // que se quede commission fija a voltio y a el manager
 // al momento de cambiar el precio en e.ppw
 // por ejemplo estabamos con el plan de reducir en la cantidades programadas asi como esta el google sheets pero hoy hicimos el cambio de nuevo donde no se le reduce a el manager ni a voltio
-let systemPriceText = document.getElementById('systemPriceText')
+
+
+
+export function calculations(tot) {
+  let systemPriceText = document.getElementById('systemPriceText')
 let systemSizeText = document.getElementById('systemSizeText')
 let finalVoltioComisionText = document.getElementById('finalVoltioComisionText')
 let epcPayoutText = document.getElementById('epcPayoutText')
@@ -19,6 +23,8 @@ let averageMonthlyPayment = document.getElementById('averageMonthlyPayment')
 let targetCommission = document.getElementById('targetCommission')
 let projectCmsMod = document.getElementById('projectCmsMod')
 let projectCost = document.getElementById('projectCost')
+let totalAdders = document.getElementById('totalAdders').value
+let projectCustomerCashBack = document.getElementById('ProjectCustomerCashBack').value
 
 let A = document.getElementById('projectUsage') // 7500)
 let B // SYSTEM PRICE, NO SE UTILIZA EN OTRAS FORMULAS
@@ -84,7 +90,7 @@ let BI = document.getElementById('projectMPUPrice') //3000
 let BJ = document.getElementById('projectRoofCost') //1000
 let BK
 let BL
-let BM = document.getElementById('ProjectCustomerCashBack') //3000
+let BM =  projectCustomerCashBack === '' ? 0 : projectCustomerCashBack
 let BN
 let BO
 let BP
@@ -150,10 +156,12 @@ let DW
 let DX
 let DY
 let DZ
-let sumOfAdders = 0
 
-function calculations() {
+    let sumOfAdders = !tot ? 0 : tot
+
     console.log(A.value);
+    console.log('redline: ' + CI.value);
+    console.log('mpu: ' + BI.value);
     BC = Math.floor((parseFloat(A.value)/parseFloat(AZ.value)) + parseFloat(BA.value))
     console.log('BC=' + BC)
     C = parseFloat(BC*parseFloat(AY.value)) //.toFixed(2)
@@ -195,9 +203,12 @@ function calculations() {
     BL = C < 4 ? 1000 : 0
     BK = AK.value === '1' ? 1000 : 0
     console.log('AK= ' + AK.value);
-    console.log(BK);
-    console.log(BL);
-    CE = parseFloat(BG.value)+parseFloat(BH.value)+parseFloat(BI.value)+parseFloat(BJ.value)+parseFloat(BK)+parseFloat(BL)+parseFloat(BM.value)+ sumOfAdders
+    console.log('BK (Add On sistem: ' + BK);
+    console.log('BM, CASH BACK: ' + BM);
+    let sumForCE = parseFloat(BG.value)+parseFloat(BH.value)+parseFloat(BI.value)+parseFloat(BJ.value)+parseFloat(BK)+parseFloat(BL)+parseFloat(BM)+ sumOfAdders
+    console.log('sum of adders: ' + sumOfAdders);
+    console.log('sum of tot: ' + tot);
+    CE = !projectUsage.value || projectUsage.value <= 0 ? 0 : sumForCE
     console.log('CE=' + CE)
     E = CO+DH+CE+parseFloat(DS.value)
     console.log('E=' + E)
@@ -275,7 +286,7 @@ function calculations() {
     offsetText.innerHTML = BB.toFixed(2) * 100 + '%'
     panelNumberText.innerHTML = + BC
     genKwH.innerHTML = BD.toFixed(2) + ' kWh'
-    KwhKw.innerHTML =  BE.toFixed(2) + ' kWh'
+    KwhKw.innerHTML = isNaN( BE.toFixed(2)) ? 0 + ' kWh' : BE.toFixed(2) + ' kWh'
     targetCommission.innerHTML = DH.toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -288,12 +299,23 @@ function calculations() {
   }
 
   projectUsage.addEventListener('blur', (e) => {
-    console.log(projectUsage.value);
-    utilityAverageMonthly.value = (projectUsage.value / 12 ).toFixed(0)
-    calculations()
+    console.log('project usage: ' + projectUsage.value);
+    if(projectUsage.value === ''){
+      console.log('no project usage');
+      return
+    } else {
+      utilityAverageMonthly.value = (projectUsage.value / 12 ).toFixed(0)
+      calculations()
+    }
+    
   })
 
   totalYearlyPayment.addEventListener('blur', (e) => {
+    if(averageMonthlyPayment.value === ''){
+      console.log('no average value');
+      return
+    }
+
     averageMonthlyPayment.value = (totalYearlyPayment.value / 12).toFixed(0)
   })
   

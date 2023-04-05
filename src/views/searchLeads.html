@@ -52,6 +52,7 @@ License: For each use you must have a valid license purchased only from above li
             <div class="row profile-body">
             <!-- middle wrapper start -->
             <div class="col-md-12 col-xl-12 middle-wrapper bg-transparent">
+              <!-- add new lead -->
               <div class="row">
                 <div class="col-md-12 grid-margin">
                   <div class="card rounded bg-dark border-info">
@@ -164,6 +165,19 @@ License: For each use you must have a valid license purchased only from above li
                             <label for="profileBirth" class="form-label">Date of Birth</label>
                             <input type="date" class="form-control border-info" id="profileBirth">
                         </div>
+                        <div class="col-md-6">
+                          <label for="profileCloser" class="form-label">Closer</label>
+                          <select class="form-select bg-dark border-info" id="profileCloser">
+                            <option></option>
+                          </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="profileSetter" class="form-label">Setter</label>
+                        <select class="form-select bg-dark border-info" id="profileSetter">
+                          <option></option>
+                          
+                        </select>
+                    </div>
                       </form>
                     </div>
                     <div class="card-footer">
@@ -199,6 +213,7 @@ License: For each use you must have a valid license purchased only from above li
                   <div class="card rounded bg-dark border-info">
                     <div class="d-flex justify-content-between p-4 rounded-bottom shadow">
                           <button class="btn btn-outline-info h4 p-4 addNewLeadViewSection">ADD NEW LEAD</button>
+                          <button class="btn btn-outline-info h4 p-4" id="viewProjectsButton">VIEW PROJECTS</button>
                     </div>
                   </div>
                 </div>
@@ -228,11 +243,14 @@ License: For each use you must have a valid license purchased only from above li
                             <table class="table table-hover table-sm table-bordered table-sortable text-center table-dark bg-transparent border-info">
                               <thead>
                                 <tr>
+                                <th scope="col" class="text-info">ID</th>
                                 <th scope="col" class="text-info">NAME</th>
-                                <th scope="col" class="text-info">STATUS</th>
+                                <th scope="col" class="text-info">PROGRESS</th>
                                 <th scope="col" class="text-info">STAGE</th>
-                                <th scope="col" id="createProject" class="text-info">CREATE PROJECT</th>
-                                <th scope="col" class="text-info">VIEW</th>
+                                <th scope="col" class="text-info">CLOSER</th>
+                                <th scope="col" class="text-info">SETTER</th>
+                                <th scope="col" class="text-info">SYSTEM SIZE</th>
+                                <th scope="col" class="text-info">CREATED DATE</th>
                                 </tr>
                               </thead>
                             <tbody id="searchResults">
@@ -242,31 +260,27 @@ License: For each use you must have a valid license purchased only from above li
                           </div>
                             <template id="rowTemplate">
                               <tr class= "result-box table-striped bg-transparent">
-                                <th class="leadName p-2" scope="row"></th>
-                                <td class="leadEmail text-left"></td>
-                                <td class="leadPhone text-left"></td>
+                                <td class="leadId text-left"></td>
+                                <th class="leadName p-2" scope="row">
+                                  <button type="button" class="btn editLeadButton"></button>
+                                </th>
+                                <td class="leadProgress text-left"></td>
+                                <td class="leadStage text-left"></td>
+                                <td class="leadCloser text-left"></td>
+                                <td class="leadSetter text-left"></td>
+                                <td class="leadSistemSize text-left"></td>
+                                <td class="leadCreatedDate text-left"></td>
+                                <!--
                                 <td class="craeateProjectButton text-center">
                                   <div class="btn-group" role="group">
                                     <button type="button" class="btn status-button d-none btn-sm btn-outline-success">Set as Project</button>
                                     <button type="button" class="btn btn-outline-danger before-status-button btn-sm" data-button-state="status">Lead</button>
                                   </div>
                                 </td>
-                                <td class="text-center">
-                                  <button type="button" class="btn btn-outline-dark editLeadButton"> 
-                                    <span class="material-symbols-outlined editLeadButtonIcon">electric_bolt</span>
-                                  </button>
-                                </td> 
+                                -->
                               </tr>
                             </template>
                         </form>
-                      </div>
-                      <div class="card-footer bg-dark">
-                        <div class="d-flex post-actions">
-                            <a href="javascript:;" class="d-flex align-items-center text-muted">
-                            <i class="icon-md" data-feather="share"></i>
-                            <p class="d-none d-md-block ms-2">Share</p>
-                          </a>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -326,7 +340,7 @@ License: For each use you must have a valid license purchased only from above li
                           <strong>Customer Info</strong>
                         </button>
                       </h2>
-                      <div class="row accordion-collapse collapse" id="accordionCustomerName">
+                      <div class="row accordion-collapse collapse" id="accordionCustomerName">  <!-- Customer Name-->
                         <div class="accordion-body">
                           <div class="col-md-12 grid-margin">
                             <div class="card rounded bg-transparent">
@@ -459,7 +473,7 @@ License: For each use you must have a valid license purchased only from above li
                         </div>
                       </div>
                     </div>
-                    <div class="accordion-item"> <!--PROPOSALS VIEW -->
+                    <div class="accordion-item" id="proposalViewsAccordionItem"> <!--PROPOSALS VIEW -->
                       <h2 class="accordion-header" id="flush-headingOne">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-proposals" aria-expanded="false" aria-controls="flush-collapseOne">
                           <strong>Proposals</strong>
@@ -467,33 +481,22 @@ License: For each use you must have a valid license purchased only from above li
                       </h2>
                       <div id="flush-proposals" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                          <h3 class="mb-3">Select a Home Improvement Project</h3>
+                          <ul class="nav nav-pills nav-fill mb-3 nav-justified shadow border-info" id="navProposalsMenu">
+                            <li class="nav-item border-info">
+                              <a class="nav-link active" aria-current="page" id="navTabUtility">UTILITY</a>
+                            </li>
+                            <li class="nav-item border-info">
+                              <a class="nav-link p-2" id="navTabDesign">DESIGN</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link p-2" id="navTabPricing">PRICING</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link p-2" id="navTabDetails">DETAILS</a>
+                            </li>
+                          </ul>
                           <form>
-                            <div class="mb-3 "> <!--HOME IMPROVEMENT MENU -->
-                              <div class="card mb-3" style="max-width: 540px;">
-                                <div class="row g-0">
-                                  <div class="col-12">
-                                    <img src="../imgs/solar.webp" class="img-fluid rounded-start" alt="...">
-                                  </div>
-                                  <div class="col-md-8">
-                                    <div class="card-body">
-                                      <h6 class="card-title">Produce Energy</h6>
-                                      <h3>Solar PV System</h3>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="mb-3"> <!--RATE SCHEDULED -->
-                              <label for="projectAddOnSystem" class="form-label">What is the rate scheduled</label>
-                              <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="projectAddOnSystem" id="projectAddOnSystem">
-                                <option selected value="0"></option>
-                                <option value="1">Rate R-1, Residential Service</option>
-                                <option value="0">Rate R-4, Residential Service Time of..</option>
-                                <option value="0">Rate R-1, Community Energy 100%..</option>
-                              </select>
-                            </div>
-                            <div class="mb-3"> <!--ENERGY CONSUMPTION UTILITY-->
+                            <div class="mb-3" id="navTabUtilityContainer"> <!--ENERGY CONSUMPTION UTILITY-->
                               <div class="row">
                                 <div class="col-md-12 col-lg-6">
                                   <h2 class="mb-4">Utility</h2>
@@ -539,7 +542,7 @@ License: For each use you must have a valid license purchased only from above li
                                 </div>
                               </div>
                             </div>
-                            <div class="mb-3"> <!--DESIGN-->
+                            <div class="mb-3" id="navTabDesignContainer" style="display: none;"> <!--DESIGN-->
                               <div class="row">
                                 <div class="col-md-12 col-lg-6">
                                   <h2 class="mb-4">Design</h2>
@@ -580,13 +583,6 @@ License: For each use you must have a valid license purchased only from above li
                                       </div>
                                       <div class="card mb-2 bg-transparent col-md-12 col-lg-6 shadow-none border border-0" >
                                         <div class="card-body bg-dark shadow-sm">
-                                          <h5 class="card-title">System Price</h5>
-                                          
-                                          <h3 id="systemPriceText"></h3>
-                                        </div>
-                                      </div>
-                                      <div class="card mb-2 bg-transparent col-md-12 col-lg-6 shadow-none border border-0" >
-                                        <div class="card-body bg-dark shadow-sm">
                                           <h5 class="card-title">Monthly production</h5>
                                           
                                           <h3 id="KwhKw"></h3>
@@ -602,6 +598,13 @@ License: For each use you must have a valid license purchased only from above li
                                         <div class="card-body bg-dark shadow-sm">
                                           <h5 class="card-title">Offset</h5>
                                           <h3 id="offsetText"></h3>
+                                        </div>
+                                      </div>
+                                      <div class="card mb-2 bg-transparent col-md-12 col-lg-6 shadow-none border border-0" style="display: none;">
+                                        <div class="card-body bg-dark shadow-sm">
+                                          <h5 class="card-title">System Price</h5>
+                                          
+                                          <h3 id="systemPriceText"></h3>
                                         </div>
                                       </div>
                                     </div>
@@ -627,20 +630,20 @@ License: For each use you must have a valid license purchased only from above li
                                 </div>
                               </div>
                             </div>
-                            <div class="mb-3"> <!--ADD ONS-->
+                            <div class="mb-3" id="navTabPricingContainer" style="display: none;"> <!--ADD ONS-->
                               <div class="row">
                                 <h2 class="mb-4">Pricing</h2>
                                 <div class="row mb-4"> <!--QUESTIONS ADD ON AND CASH BACK-->
                                   <div class="mb-3 col-md-12 col-lg-6">
                                     <label for="projectAddOnSystem" class="form-label">IS THIS AN ADD ON SYSTEM?</label>
                                     <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="projectAddOnSystem" id="projectAddOnSystem">
-                                        <option selected value="1">Yes</option>
-                                        <option value="0">No</option>
+                                        <option selected value="Yes">Yes</option>
+                                        <option value="No">No</option>
                                     </select>
                                   </div>
                                   <div class="mb-3 col-md-12 col-lg-6">
                                     <label for="ProjectCustomerCashBack" class="form-label">CUSTOMER CASH BACK</label>
-                                    <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="ProjectCustomerCashBack" aria-describedby="ProjectCustomerCashBack" value=0>
+                                    <input type="number" class="form-control bg-dark opacity-75 shadow text-white  text-start" id="ProjectCustomerCashBack" aria-describedby="ProjectCustomerCashBack" >
                                   </div>
                                 </div>
                                 
@@ -664,16 +667,16 @@ License: For each use you must have a valid license purchased only from above li
                                                 <tbody>
                                                   <tr>
                                                       <th scope="row" id="addsNoDFEEAddress" class="bg-transparent">Adds</th>
-                                                      <th scope="row" id="addsNoDFEEAmount" class="bg-transparent">Amount:</th>
+                                                      <th scope="row" id="totalAdders" class="bg-transparent">Adds</th>
                                                   </tr>
                                                 </tbody>
                                                 <tbody id="addersContainers">
                                                 </tbody>
-                                                  <tr>
-                                                      <td class="bg-transparent"><a class="btn btn-outline-info me-2 mb-2 text-white" id="addAdderButtonNs">Add Adder</a></td>
-                                                  </tr>
                                                 </tbody>
                                               </table>
+                                              <div class="m-2 p-2" id="addersBadgeContainer">
+                                                
+                                              </div>
                                             </div>  
                                           </div>
                                           
@@ -705,156 +708,80 @@ License: For each use you must have a valid license purchased only from above li
                                 </div>
                               </div>
                             </div>
-                            
-                            <div class="mb-3"> <!--SOLAR PANEL LOCATION (IMAGES)-->
-                              <p class="mb-3">Please select the solar panel location</p>
-                              <div class="btn-group p-2 d-flex flex-row-reverse" role="group">
-                                <input type="checkbox" class="btn-check rounded-pill p-2" id="singleStoryHome" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="singleStoryHome">
-                                  <img src="../ico/home.ico" class="img-thumbnail text-info bg-transparent border border-0" alt="single story home"> 
-                                  <p>Single Story Home</p>
-                                </label>
-                                <input type="checkbox" class="btn-check rounded-pill p-2" id="twoStoryHome" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="twoStoryHome">
-                                  <img src="../ico/house.ico" class="img-thumbnail text-info bg-transparent border border-0" alt="two story home"> 
-                                  <p>Two Story Home</p>
-                                </label>
+                            <div id="navTabDetailsContainer" style="display: none;">
+                              <div class="mb-3"> <!--SOLAR PANEL LOCATION (IMAGES)-->
+                                <p class="mb-3">Please select the solar panel location</p>
+                                <div class="container text-center">
+                                    <img src="../ico/home.ico" class="img-thumbnail rounded mx-auto text-info bg-transparent border border shadow p-2 mb-2 panelLocationClass" alt="single story home" id="singleStoryHome"> 
+                          
+                                    <img src="../ico/house.ico" class="img-thumbnail rounded mx-auto text-info bg-transparent border border shadow p-2 mb-2 panelLocationClass" alt="two story home" id="twoStoryHome"> 
+                          
+                                    <img src="../ico/modern-house.ico" class="img-thumbnail rounded mx-auto text-info bg-transparent border border shadow p-2 mb-2 panelLocationClass"  alt="three story home" id="threeStoryHome"> 
+                          
+                                    <img src="../ico/solar-panel.ico" class="img-thumbnail rounded mx-auto text-info bg-transparent border border shadow p-2 mb-2 panelLocationClass" alt="solar-panel" id="groundMountSystem"> 
+                                </div>
                               </div>
-                              <div class="btn-group p-2 d-flex flex-row-reverse" role="group">
-                                <input type="checkbox" class="btn-check rounded-pill p-2" id="threeStoryHome" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="threeStoryHome">
-                                  <img src="../ico/modern-house.ico" class="img-thumbnail text-info bg-transparent border border-0" alt="three story home"> 
-                                  <p>Three Story Home</p>
-                                </label>
-                                <input type="checkbox" class="btn-check rounded-pill p-2" id="groundMountSystem" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="groundMountSystem">
-                                  <img src="../ico/solar-panel.ico" class="img-thumbnail text-info bg-transparent border border-0" alt="solar-panel"> 
-                                  <p>Ground Mount System</p>
-                                </label>
+                              <div class="mb-3"> <!--ROOF CONDITION-->
+                                <p class="mb-3"></p>
+                                <label for="roofCondition" class="form-label">What is the condition of roof?</label>
+                                <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="roofCondition" id="roofCondition">
+                                  <option selected></option>
+                                  <option>Excellent, 40+ years remaining</option>
+                                  <option>Good, 20+ years remaining</option>
+                                  <option>Average, 10+ years remaining</option>
+                                  <option>Needs roof quote</option>
+                                </select>
                               </div>
-                            </div>
-                            <div class="mb-3"> <!--ROOF CONDITION-->
-                              <p class="mb-3">What is the condition of roof?</p>
-                              <div class="btn-group p-2 d-flex flex-row-reverse" role="group">
-                                <input type="checkbox" class="btn-check rounded-pill p-2" id="roofConditionExcellent" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="roofConditionExcellent"><p>Excellent</p><h2>40+ Years</h2><p>remaining</p></label>
-                                <input type="checkbox" class="btn-check rounded-pill p-2" id="roofConditionGood" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="roofConditionGood"><p>Good</p><h2>20+ Years</h2><p>remaining</p></label>
-                                <input type="checkbox" class="btn-check rounded-pill p-2" id="roofConditionAverage" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="roofConditionAverage"><p>Average</p><h2>10+ Years</h2><p>remaining</p></label>
-                                <input type="checkbox" class="btn-check rounded-pill p-2" id="roofConditionRequestRoof" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="roofConditionRequestRoof"><p>Needs</p><h2>Roof Quote</h2><p></p></label>
-                                
+                              <div class="mb-3"> <!--ROOF TYPE-->
+                                <label for="roofingMaterial" class="form-label">What type of roofing material?</label>
+                                <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="roofingMaterial" id="roofingMaterial">
+                                  <option selected value="0"></option>
+                                  <option>Asphalt</option>
+                                  <option>Wood shingles & shakes</option>
+                                  <option>Clay & concrete tile roofing</option>
+                                  <option>Rubber roofing</option>
+                                  <option>Composite Roofing</option>
+                                  <option>Metal roof</option>
+                                  <option>Slate roofing</option>
+                                  <option>Flat roofing</option>
+                                </select>
                               </div>
-                            </div>
-                            <div class="mb-3"> <!--ROOF TYPE-->
-                              <p class="mb-3">What type of roofing material?</p>
-                              <div class="btn-group p-2 d-flex flex-row-reverse" role="group">
-                                <div class="row row-cols-2 row-cols-md-3 g-4">
-                                  <div class="btn col roof-button">
-                                    <div class="card h-100">
-                                      <img src="../imgs/asphalt.jpg" class="card-img" alt="..." style="height: 200px;">
-                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
-                                        <h2 class="card-title ">Asphalt</h2>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="btn col roof-button">
-                                    <div class="card h-100">
-                                      <img src="../imgs/wood-shingles.jpg" class="card-img" alt="..." style="height: 200px;">
-                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
-                                        <h2 class="card-title ">Wood shingles & shakes</h2>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="btn col roof-button">
-                                    <div class="card h-100">
-                                      <img src="../imgs/concrete-tile-roofing.jpg" class="card-img" alt="..." style="height: 200px;">
-                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
-                                        <h2 class="card-title ">Clay & concrete tile roofing</h2>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="btn col roof-button">
-                                    <div class="card h-100">
-                                      <img src="../imgs/Rubber.jpeg" class="card-img" alt="..." style="height: 200px;">
-                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
-                                        <h5 class="card-title ">Rubber roofing</h5>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="btn col roof-button">
-                                    <div class="card h-100">
-                                      <img src="../imgs/Composition-Shingles-1.jpg" class="card-img" alt="..." style="height: 200px;">
-                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
-                                        <h5 class="card-title ">Composite Roofing</h5>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="btn col roof-button">
-                                    <div class="card h-100">
-                                      <img src="../imgs/metal-roof-1.jpg" class="card-img" alt="..." style="height: 200px;">
-                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
-                                        <h5 class="card-title ">Metal roof</h5>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="btn col roof-button">
-                                    <div class="card h-100">
-                                      <img src="../imgs/flat-roof.jpg" class="card-img" alt="..." style="height: 200px;">
-                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
-                                        <h5 class="card-title ">Flat roofing
-                                        </h5>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="btn col roof-button">
-                                    <div class="card h-100">
-                                      <img src="../imgs/types-slate.jpg" class="card-img" alt="..." style="height: 200px;">
-                                      <div class="card-img-overlay bg-dark text-white bg-opacity-75">
-                                        <h5 class="card-title ">Slate roofing
-                                        </h5>
-                                      </div>
-                                    </div>
-                                  </div>
+                              <div class="mb-3"> <!--ELECTRIC PANEL BRAND-->
+                                <label for="projectElectricPanelBrand" class="form-label">What is the brand of main electric panel?</label>
+                                <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="projectElectricPanelBrand" id="projectElectricPanelBrand">
+                                  <option selected value="0"></option>
+                                  <option>Square D</option>
+                                  <option>GE</option>
+                                  <option>Bryant</option>
+                                  <option>Westinghouse</option>
+                                  <option>Cutler-Hammer</option>
+                                  <option>Challenger</option>
+                                  <option>Eaton</option>
+                                  <option>Siemens</option>
+                                  <option>Milbank</option>
+                              </select>
+                              </div>
+                              <div class="mb-5 d-none"> <!--BRAKER FEEDS LOCATION-->
+                                <p class="mb-3">Identify if you braker feeds from top, middle or bottom. The amperage will be indicated next to the main breaker switch</p>
+                                <div class="p-2 d-flex flex-row-reverse">
+                                  <a><img src="../ico/top breaker.ico" class="img-thumbnail text-info bg-transparent border border-0 mx-auto shadow p-2 mb-2" alt="single story home">
+                                  <p>Top feed</p></a>
+                                  <a><img src="../ico/medium breaker.ico" class="img-thumbnail text-info bg-transparent border border-0 mx-auto shadow p-2 mb-2" alt="single story home">
+                                  <p>Center feed</p></a>
+                                  <a><img src="../ico/bottom breaker.ico" class="img-thumbnail text-info bg-transparent border border-0 mx-auto shadow p-2 mb-2" alt="single story home">
+                                  <p>Bottom feed</p></a>
+                                </div>
+                              </div>
+                              <div class="mb-3"> <!--SAVE BUTTONS-->
+                                <div class="container-fluid d-block mx-auto text-center">
+                                  <div class="grid gap-6">
+                                    <a class="btn btn-outline-primary btn-lg g-col-6 p-2 col-4" role="button" id="saveCurrentProjectButton">SAVE CURRENT PROJECT</a>
+                                    <a class="btn btn-outline-info btn-lg g-col-6 p-2 col-4" role="button" id="saveAsNewProjectButton">SAVE AS NEW</a>
                                   </div>
                                 </div>
-                            </div>
-                            <div class="mb-3"> <!--ELECTRIC PANEL BRAND-->
-                              <label for="projectElectricPanelBrand" class="form-label">What is the brand of main electric panel?</label>
-                              <select class="form-select bg-dark opacity-75 shadow text-white  text-start" aria-label="projectElectricPanelBrand" id="projectElectricPanelBrand">
-                                <option selected value="0"></option>
-                                <option>Square D</option>
-                                <option>GE</option>
-                                <option>Bryant</option>
-                                <option>Westinghouse</option>
-                                <option>Cutler-Hammer</option>
-                                <option>Challenger</option>
-                                <option>Eaton</option>
-                                <option>Siemens</option>
-                                <option>Milbank</option>
-                            </select>
-                            </div>
-                            <div class="mb-3"> <!--BRAKER FEEDS LOCATION-->
-                              <p class="mb-3">Identify if you braker feeds from top, middle or bottom. The amperage will be indicated next to the main breaker switch</p>
-                              <div class="btn-group p-2 d-flex flex-row-reverse" role="group">
-                                <input type="checkbox" class="btn-check rounded-pill p-2" id="breakerTopFeed" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="breakerTopFeed">
-                                  <img src="../ico/top breaker.ico" class="img-thumbnail text-info bg-transparent border border-0" alt="single story home">
-                                  <p>Top feed</p>
-                                </label>
-                                <input type="checkbox" class="btn-check rounded-pill p-2" id="breakerCenterFeed" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="breakerCenterFeed">
-                                  <img src="../ico/medium breaker.ico" class="img-thumbnail text-info bg-transparent border border-0" alt="single story home">
-                                  <p>Center feed</p>
-                                </label>
-                                <input type="checkbox" class="btn-check rounded-pill p-2" id="breakerBottomFeed" autocomplete="off">
-                                <label class="btn btn-outline-secondary" for="breakerBottomFeed">
-                                  <img src="../ico/bottom breaker.ico" class="img-thumbnail text-info bg-transparent border border-0" alt="single story home">
-                                  <p>Bottom feed</p>
-                                </label>
                               </div>
                             </div>
+                            
                           </form>
                         </div>
                       </div>
@@ -1305,83 +1232,11 @@ License: For each use you must have a valid license purchased only from above li
                         </div>
                       </div>
                     </div>
-                    <div class="accordion-item">  <!--ELECTRICITY USAGE -->
-                      <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-ElectricityUsage" aria-expanded="false" aria-controls="flush-collapseThree">
-                          <strong>Electricity usage</strong>
-                        </button>
-                      </h2>
-                      <div id="flush-ElectricityUsage" class="accordion-collapse collapse" aria-labelledby="flush-ElectricityUsage" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                              <div class="card rounded">
-                      <div class="card-header">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <div class="d-flex align-items-center">
-                            <i class="fa-solid fa-user"></i>												
-                            <div class="ms-2">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="card-body">
-                        <form>
-                          <div class="mb-3">
-                            <label for="typeOfUsage" class="form-label">FINANCING</label>
-                            <select class="form-select  text-end" aria-label="typeOfUsage" id="typeOfUsage">
-                                <option selected></option>
-                                <option>Yearly Kwh Usage</option>                            
-                                <option>Yearly Cost Usage</option>                            
-                                <option>Monthy cost average</option>                            
-                                <option>Monthy Kwh Usage</option>                            
-                                <option>Home square feet</option>                            
-                            </select>
-                          </div>
-                          <div class="input-group mb-3">
-                            <span class="input-group-text" for="amountOfUsage">$</span>
-                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="amountOfUsage">
-                            <span class="input-group-text" for="amountOfUsage" >.00</span>
-                          </div>
-                          <div class="mb-3">
-                            <label for="notesAdders" class="form-label">Notes</label>
-                            <input type="text" class="form-control  text-end" id="notesAdders" aria-describedby="notesAdders">
-                          </div>
-                          <div class="mb-3">
-                          <label for="billImages" class="form-label">Upload Bill Images</label>
-                          <input class="form-control" name="billImages" type="file" id="billImages" multiple> <!-- multiple -->
-                          </div>
-                          <div class="container mb-4">
-                          <div class="row">
-                          </div>
-                          </div>
-                          <div class="mb-3">
-                            <button type="button" class="btn btn-secondary me-2 mb-2 " id="uploadBillImagesButton">Add File</button>
-                            <button type="button" class="btn btn-dark me-2 mb-2 " id="viewBillImagesButton">View uploaded Images</button>
-                            <div class="messageBillUsageFiles mb-3"></div>
-                          </div>
-                          <div class="container mb-4">
-                              <div class="row"id="previewBillImages"></div>
-                          </div>
-                          <div class="message mb-3"></div>
-                          <div class="row">
-                            <div class="container mb-4" id="imageViewer">
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                      <div class="card-footer">
-                        <div class="d-flex post-actions">
-      
-                        </div>
-                      </div>
-                    </div>
-      
-                        </div>
-                      </div>
-                    </div>
+                    
                 </div>
               <!-- right wrapper end -->
+              </div>
             </div>
-          </div>
           <!-- Modal -->
           <div class="modal fade" id="addNewTaskModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

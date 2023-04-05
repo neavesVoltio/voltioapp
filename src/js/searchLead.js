@@ -1,33 +1,135 @@
 import { getFirestore, doc, getDoc, collection, getDocs, query, where, deleteDoc, orderBy, updateDoc, setDoc, addDoc, collectionGroup  } from '../firebase/firebaseJs.js'
 import { app, auth } from '../firebase/config.js'
 import { onAuthStateChanged, updateProfile } from '../firebase/firebaseAuth.js';
+import { calculations } from '../js/calculator.js'
 
 const db = getFirestore(app) 
-let data = []  
-let inputBox = document.getElementById('searchLeadInput')
 let voltioId 
+let installer
+let sumOfAdders
+let solarPanelLocation
+let roofConditionData
+let data = []  
+let addersData = []
+let projectRedline
+let mpu
+let inputBox = document.getElementById('searchLeadInput')
 let searchLeadViewSection = document.querySelectorAll('.searchLeadViewSection')
 let clearInputsElement = document.querySelectorAll('.clearInputs')
 let customerNameOnTop = document.getElementById('customerNameOnTop')
+let panelLocationClass = document.querySelectorAll('.panelLocationClass');
+
+let projectUsage = document.getElementById('projectUsage');
+let totalYearlyPayment = document.getElementById('totalYearlyPayment');
 let designArea = document.getElementById('designArea');
-let installer
 let proyectInstaller = document.getElementById('proyectInstaller');
+let projectPanelsNumber = document.getElementById('projectPanelsNumber');
+let projectAddOnSystem = document.getElementById('projectAddOnSystem');
+let ProjectCustomerCashBack = document.getElementById('ProjectCustomerCashBack');
+let projectCmsModInput = document.getElementById('projectCmsMod')
+let roofCondition = document.getElementById('roofCondition');
+
+let projectCmsModLabel = document.getElementById('projectCmsModLabel')
+let projectMPU = document.getElementById('projectMPU')
+let saveCurrentProjectButton =document.getElementById('saveCurrentProjectButton');
+
+let viewProjectsButton = document.getElementById('viewProjectsButton');
+let navTabUtility = document.getElementById('navTabUtility');
+let navTabDesign = document.getElementById('navTabDesign');
+let navTabPricing = document.getElementById('navTabPricing');
+let navTabDetails = document.getElementById('navTabDetails');
+
+let navTabUtilityContainer = document.getElementById('navTabUtilityContainer');
+let navTabDesignContainer = document.getElementById('navTabDesignContainer');
+let navTabPricingContainer = document.getElementById('navTabPricingContainer');
+let navTabDetailsContainer = document.getElementById('navTabDetailsContainer');
+viewProjectsButton.dataset.status = 'Project'
+let navProposalsMenu = document.getElementById('navProposalsMenu');
+let proposalViewsAccordionItem = document.getElementById('proposalViewsAccordionItem');
+
+navProposalsMenu.addEventListener('click', function (e) {
+  console.log(e.target.id);
+  if(e.target.id === 'navTabUtility'){
+    navTabUtilityContainer.style.display = 'block'
+    navTabDesignContainer.style.display = 'none'
+    navTabPricingContainer.style.display = 'none'
+    navTabDetailsContainer.style.display = 'none'
+    navTabUtility.classList.add('active')
+    navTabDesign.classList.remove('active')
+    navTabPricing.classList.remove('active')
+    navTabDetails.classList.remove('active')
+  }
+  if(e.target.id === 'navTabDesign'){
+    navTabUtilityContainer.style.display = 'none'
+    navTabDesignContainer.style.display = 'block'
+    navTabPricingContainer.style.display = 'none'
+    navTabDetailsContainer.style.display = 'none'
+    navTabUtility.classList.remove('active')
+    navTabDesign.classList.add('active')
+    navTabPricing.classList.remove('active')
+    navTabDetails.classList.remove('active')
+  }
+  if(e.target.id === 'navTabPricing'){
+    navTabUtilityContainer.style.display = 'none'
+    navTabDesignContainer.style.display = 'none'
+    navTabPricingContainer.style.display = 'block'
+    navTabDetailsContainer.style.display = 'none'
+    navTabUtility.classList.remove('active')
+    navTabDesign.classList.remove('active')
+    navTabPricing.classList.add('active')
+    navTabDetails.classList.remove('active')
+  }
+  if(e.target.id === 'navTabDetails'){
+    navTabUtilityContainer.style.display = 'none'
+    navTabDesignContainer.style.display = 'none'
+    navTabPricingContainer.style.display = 'none'
+    navTabDetailsContainer.style.display = 'block'
+    navTabUtility.classList.remove('active')
+    navTabDesign.classList.remove('active')
+    navTabPricing.classList.remove('active')
+    navTabDetails.classList.add('active')
+  }
+});
 
 onAuthStateChanged(auth, async(user) => {
     if(user){
-      
-      const projectInfo = query(collection(db, 'leadData'), where('status', '==', 'lead'));
+
+      viewProjectsButton.addEventListener('click', (e) => {
+        if(viewProjectsButton.dataset.status === 'Project'){
+          getLeadOrProjectData('Project')
+          viewProjectsButton.dataset.status = 'lead'
+          viewProjectsButton.innerHTML = 'VIEW LEADS'
+          inputBox.value = ''
+        } else {
+          viewProjectsButton.dataset.status = 'Project'
+          getLeadOrProjectData('lead')
+          viewProjectsButton.innerHTML = 'VIEW PROJECTS'
+          inputBox.value = ''
+        }
+        
+      })
+
+      getLeadOrProjectData('lead')
+
+      async function getLeadOrProjectData(status){
+        data = [] 
+          const projectInfo = query(collection(db, 'leadData'), where('status', '==', status));
           const querySnapshoot = await getDocs(projectInfo)
+
+
           const allData = querySnapshoot.forEach( async(doc) => {
               data.push([
                   doc.data().voltioIdKey,
                   doc.data().customerName,
                   doc.data().progress,
                   doc.data().status,
+                  doc.data().projectStatus,
+                  
               ])
           })
-          
+          console.log(data);  
           searchLeadByInput()
+      }
 
       searchLeadViewSection.forEach( (e) => { 
         // se ejecuta despues de dar click al boton .searchLeadViewSection para que refresque la info en caso de algun cambio
@@ -42,10 +144,11 @@ onAuthStateChanged(auth, async(user) => {
           const querySnapshoot = await getDocs(projectInfo)
           const allData = querySnapshoot.forEach( async(doc) => {
               data.push([
-                  doc.data().voltioIdKey,
-                  doc.data().customerName,
-                  doc.data().progress,
-                  doc.data().status,
+                doc.data().voltioIdKey,
+                doc.data().customerName,
+                doc.data().progress,
+                doc.data().status,
+                doc.data().projectStatus,
               ])
           })
           
@@ -54,13 +157,11 @@ onAuthStateChanged(auth, async(user) => {
         })
 
       })
-      
         
     } else {
         console.log('no user logged');
     }
 })
-
 
 inputBox.addEventListener('input', () => {
   searchLeadByInput()})
@@ -83,59 +184,31 @@ inputBox.addEventListener('input', () => {
     let template = templateBox.content
   
     searchResultsBox.innerHTML = ""
-  
+    console.log(resultsArray);
     resultsArray.forEach(function(r){
       let tr = template.cloneNode(true)
-      let leadName = tr.querySelector(".leadName");
-      let leadEmail = tr.querySelector(".leadEmail");
-      let leadPhone = tr.querySelector(".leadPhone");
-      var editButton = tr.querySelector(".editLeadButton");
-      var editButtonIcon = tr.querySelector(".editLeadButtonIcon");
-      var statusButton = tr.querySelector(".status-button");
-      var beforeStatusButton = tr.querySelector(".before-status-button")
-  
-      leadName.textContent = r[1]
-      leadEmail.textContent = r[2]
-      leadPhone.textContent = r[18]
+      let leadId = tr.querySelector(".leadId");
+      let leadProgress = tr.querySelector(".leadProgress");
+      let leadStage = tr.querySelector(".leadStage");
+      let editButton = tr.querySelector(".editLeadButton"); // BUTTON THAT CONTAINS CUSTOMER NAME
+      let leadSetter = tr.querySelector('leadSetter');
+      let leadSistemSize = tr.querySelector('leadSistemSize');
+      let leadCreatedDate = tr.querySelector('leadCreatedDate');
+      
+      leadId.textContent = r[0]
+      editButton.textContent = r[1]
+      leadProgress.textContent = r[2]
+      leadStage.textContent = r[4]
       
       editButton.dataset.leadVoltioId = r[0]; 
-      editButtonIcon.dataset.leadVoltioId = r[0]; 
-      statusButton.dataset.voltioId = r[0]
-      statusButton.setAttribute("data-bs-toggle", "modal");
-      statusButton.setAttribute("data-bs-target", "#leadProfile");
-  
-      beforeStatusButton.classList.add("btn-outline-success")
-      beforeStatusButton.textContent = r[3]
-  
+      
       searchResultsBox.appendChild(tr)
       
     })
 
-  let beforeStatusButtonChange = document.querySelectorAll('.before-status-button')
-  let statusButtonChange = document.querySelectorAll('.status-button')
-  let viewProfileButton = document.querySelectorAll('.editLeadButton')
+    let viewProfileButton = document.querySelectorAll('.editLeadButton')
 
-  beforeStatusButtonChange.forEach( btn => {
-    btn.addEventListener('click', async(btn) =>{
-        if(btn.target.dataset.buttonState === "status"){
-          btn.target.previousElementSibling.classList.remove("d-none");
-          btn.target.textContent = "Cancel";
-          btn.target.dataset.buttonState = "cancel";
-        } else {
-          if(btn.target.classList[3] === "btn-outline-danger"){
-            btn.target.previousElementSibling.classList.add("d-none");
-            btn.target.textContent = "Customer";
-            btn.target.dataset.buttonState = "status";
-          } else{
-            btn.target.previousElementSibling.classList.add("d-none");
-            btn.target.textContent = "Lead";
-            btn.target.dataset.buttonState = "status";
-          }
-          
-        }
-      })
-  })
-
+  /* USAR ESTA FUNCION AL CAMBIAR EL ESTATUS A PROJECTO 
   statusButtonChange.forEach( btn => {
     btn.addEventListener('click', async (e) => {
       // document.getElementById("app").innerHTML='<object type="text/html" data="../views/leadProfile.html" width="100%" height="100%" ></object>';
@@ -153,7 +226,7 @@ inputBox.addEventListener('input', () => {
       e.target.closest(".result-box").remove();
     })
   })
-
+*/
   viewProfileButton.forEach( btn => {
     btn.addEventListener('click', async (e) => {
         voltioId = e.target.dataset.leadVoltioId
@@ -163,6 +236,10 @@ inputBox.addEventListener('input', () => {
 
   
 }
+
+projectAddOnSystem.addEventListener('change', function (e) {
+  calculations()
+});
 
 let docId
 
@@ -245,6 +322,7 @@ async function setDataToProfileView(voltioId){
       console.log(value);
       progressBar.style.width = value
       getComments()
+      getDataFromProjectDetails()
     } else {
       // doc.data() will be undefined in this case
      console.log("No such document!");
@@ -252,6 +330,9 @@ async function setDataToProfileView(voltioId){
         
 }
 
+projectPanelsNumber.addEventListener('blur', function (e) {
+  calculations()
+});
 
 let editLeadButtonToServer = document.getElementById('editLeadButtonToServer')
 
@@ -334,14 +415,9 @@ async function getComments(){
   
 }
 
-let projectCmsModInput = document.getElementById('projectCmsMod')
-let projectCmsModLabel = document.getElementById('projectCmsModLabel')
-
 projectCmsModInput.addEventListener('change', (e) => {
   projectCmsModLabel.innerHTML = 'CMS MOD ' + projectCmsModInput.value + '%'
 })
-
-let projectMPU = document.getElementById('projectMPU')
 
 projectMPU.addEventListener('change', () => {
   console.log('mpu change');
@@ -355,48 +431,13 @@ projectMPU.addEventListener('change', () => {
 })
 
 designArea.addEventListener('change', async function (e) {
-  console.log('change design area');
-  let region = e.target.value
-  const docRef = doc(db, "coverageArea", region);
-  const docSnap = await getDoc(docRef);
-  let proyectInstaller = document.getElementById('proyectInstaller');
-  proyectInstaller.innerHTML = ''
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-    let installers = docSnap.data().installer
-    let emptyOption = document.createElement('option');
-    emptyOption.innerHTML = ''
-    proyectInstaller.append(emptyOption)
-    installers.forEach(function(item) {
-      let option = document.createElement('option');
-      option.innerHTML = item
-      proyectInstaller.append(option)
-    });
-
-
-  } else {
-    // doc.data() will be undefined in this case
-    console.log("No such document!");
-  }
-});
-
-let addAdderButtonNs = document.getElementById('addAdderButtonNs');
-
-addAdderButtonNs.addEventListener('click', function (e) {
-  getAddersByInstaller()
-    // remove adders rows by click -
-  let deleteAddersRow = document.querySelectorAll('.deleteRow');
-  deleteAddersRow.forEach(function(item) {
-    item.addEventListener('click', function (e) {
-      e.target.closest(".table-row").remove();
-    });
-  });
+  designAreaOnChange()
 });
 
 proyectInstaller.addEventListener('change', function (e) {
   installer = e.target.value
-  console.log(installer);
   getAddersByInstaller()
+  
 });
 
 async function getAddersByInstaller(){
@@ -404,6 +445,8 @@ async function getAddersByInstaller(){
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
+    projectRedline = docSnap.data().installerRedline
+    mpu = docSnap.data().epcMPU
     let addersArray = []
     let addersList = docSnap.data().adders
     addersList.forEach(function(item) {
@@ -414,6 +457,7 @@ async function getAddersByInstaller(){
     })
       console.log(addersArray);
       addNewAdderRow(addersArray)
+      setRedlineAndMPU()
   } else {
     // doc.data() will be undefined in this case
     console.log("No such document!");
@@ -423,6 +467,7 @@ async function getAddersByInstaller(){
 // function to create new adder row
 function addNewAdderRow(adderNameData, qtyData){
   let mainContainer = document.getElementById("addersContainers")
+  mainContainer.innerHTML = ''
   let addersTitleContainer = document.createElement("tr");
   
    let adderTableRow = document.createElement("tr");
@@ -430,11 +475,8 @@ function addNewAdderRow(adderNameData, qtyData){
    let valueTableData = document.createElement("td");
    let valueInput = document.createElement("input");
    let valueInputAdderName = document.createElement("select");
-   let deleteButton = document.createElement('a');
    let emptyOption = document.createElement('option');
    
-   deleteButton.className = 'btn btn-danger border-0 text-danger bg-transparent fb-4 deleteRow'
-   deleteButton.textContent = '-'	
    valueTableData.className = "bg-transparent text-light border-info"
    valueInput.className = "form-control bg-transparent text-light border-info sumOfAdders"
    adderTableRow.className = "bg-transparent text-light border-info table-row"
@@ -450,8 +492,8 @@ function addNewAdderRow(adderNameData, qtyData){
    mainContainer.append(adderTableRow)
    adderTableRow.appendChild(adderNameTableData)
    adderTableRow.appendChild(valueTableData)
-   adderTableRow.appendChild(deleteButton)
-   valueTableData.appendChild(valueInput)
+   // adderTableRow.appendChild(deleteButton)
+   // valueTableData.appendChild(valueInput)
    adderNameTableData.appendChild(valueInputAdderName)
    valueInputAdderName.append(emptyOption)
 
@@ -459,22 +501,273 @@ function addNewAdderRow(adderNameData, qtyData){
     let option = document.createElement('option');
     valueInputAdderName.append(option)    
     option.innerHTML = item[0] 
-    option.value = parseFloat(item[1])
-    option.name = 'qty'
+    option.label = item[0] 
+    option.value = parseFloat(item[1])+','+item[0]
+    
    });
 
-
-    let sumOfAdders
     let stateNameDropdown = document.querySelectorAll('.stateNameDropdown');
     stateNameDropdown.forEach(function(item) {
       item.addEventListener('change', function (e) {
         console.log('change');
-        console.log(e.target.value);
-        sumOfAdders.push(e.target.value)
+        console.log();
+        let value = e.target.value
+        let name = value.split(',')
+        let newName = name[1]
+        let newValue = name[0]
+        if(!newName){
+          return
+        } else {
+          createAdderButton(newName, newValue)
+          
+        }
+       
       });
-  });
+    });
     
 }
 
+function sumOfAddersfunction(){
+  var arr = document.querySelectorAll('.qtyButton');
+  var tot=0;
+  arr.forEach(function(item) {
+    console.log(item.dataset.value);
+    tot += parseInt(item.dataset.value);
+  });
+
+  sumOfAdders = tot
+  let totalAdders = document.getElementById('totalAdders');
+  totalAdders.value = sumOfAdders
+  totalAdders.innerHTML = sumOfAdders.toLocaleString('en-US', {style: 'currency', currency: 'USD',})
+  console.log('total: '+ sumOfAdders);
+  calculations(tot) 
+}
+
+function createAdderButton(newName, newValue){
+  
+  let addersBadgeContainer = document.getElementById('addersBadgeContainer');
+  let btnAdderContainer = document.createElement('btn');
+  btnAdderContainer.className = 'btn btn-outline-info position-relative qtyButton p-2 m-2'
+  btnAdderContainer.type = 'button'
+  btnAdderContainer.innerHTML = newName
+  btnAdderContainer.dataset.value = parseFloat(newValue)
+  btnAdderContainer.dataset.name = newName
+  addersBadgeContainer.append(btnAdderContainer)
+  sumOfAddersfunction()
+  removeButton()
+  
+}
+
+function removeButton(){
+  let buttonAdderName = document.querySelectorAll('.qtyButton');
+  buttonAdderName.forEach(function(item) {
+    item.addEventListener('click', function (e) {
+      e.target.remove();
+      sumOfAddersfunction()
+    });
+    
+  });
+}
+
+ProjectCustomerCashBack.addEventListener('blur', function (e) {
+  sumOfAddersfunction()
+  console.log(document.getElementById('ProjectCustomerCashBack').value);
+});
+
+panelLocationClass.forEach(function(item) {
+  item.addEventListener('click', function (e) {
+    // body
+    console.log(item);
+    panelLocationClass.forEach((e)=>{ e.classList.remove('border-info')})
+    e.target.classList.toggle('border-info')
+    solarPanelLocation = e.target.id
+    
+  });
+});
+
+function setRedlineAndMPU(){
+  document.getElementById('projectRedline').value = projectRedline
+  document.getElementById('projectMPUPrice').value = mpu
+  console.log('redline: ' + projectRedline);
+  console.log('mpu: ' + mpu);
+  calculations()
+}
+
+// SAVE PROJECT
+function getAddersDataToSaveOnDataBase(){
+  let addersDataButtons = document.querySelectorAll('.qtyButton');
+  addersDataButtons.forEach(function(item) {
+    let newValue = item.dataset.value
+    let newName = item.dataset.name
+    addersData.push([newName, newValue])
+    
+  });
+  
+}
+
+proposalViewsAccordionItem.addEventListener('blur', function (e) {
+  if(e.target.id = projectUsage.id){console.log('projectUsage xxxxxxxxxx');}
+});
+
+saveCurrentProjectButton.addEventListener('click', async function (e) {
+  console.log(projectUsage.value)
+  console.log(totalYearlyPayment.value)
+  console.log(designArea.value)
+  console.log(proyectInstaller.value)
+  console.log(projectPanelsNumber.value)
+  console.log(projectAddOnSystem.value)
+  console.log(ProjectCustomerCashBack.value)
+  console.log(projectCmsModInput.value);
+  console.log(solarPanelLocation)
+  console.log(roofCondition.value)
+  console.log(roofingMaterial.value)
+  console.log(projectElectricPanelBrand.value)
+  getAddersDataToSaveOnDataBase()
+  console.log(addersData);
+  let addersDataBd = [] 
+  addersData.forEach(function(item) {
+    let rowData = {}
+    rowData.qtyData = parseFloat(item[0])
+    rowData.adderNameData = item[1]
+    addersDataBd.push(rowData)
+  });
+  await setDoc(doc(db, "projectDetails", voltioId), {
+    projectUsage: projectUsage.value,
+    totalYearlyPayment: totalYearlyPayment.value,
+    designArea: designArea.value,
+    proyectInstaller: proyectInstaller.value,
+    projectPanelsNumber: projectPanelsNumber.value,
+    projectAddOnSystem: projectAddOnSystem.value,
+    ProjectCustomerCashBack: ProjectCustomerCashBack.value,
+    projectCmsModInput: projectCmsModInput.value,
+    solarPanelLocation: solarPanelLocation,
+    roofCondition: roofCondition.value,
+    roofingMaterial: roofingMaterial.value,
+    projectElectricPanelBrand: projectElectricPanelBrand.value,
+    addersData: addersDataBd,
+  });
+
+});
+
+let formControl = document.querySelectorAll('.form-control');
+formControl.forEach(function(item) {
+  console.log(item.id);
+  item.addEventListener('focus', function (e) {
+    console.log(e.target);
+    e.target.classList.add('border-info')
+  });
+  item.addEventListener('blur', function (e) {
+    console.log(e.target);
+    e.target.classList.remove('border-info')
+  });
+});
+
+function getDataFromProjectDetails(){
+  const docsRef = collection(db, 'projectDetails');
+  const docRef = doc(docsRef, voltioId);
+
+  getDoc(docRef)
+    .then((doc) => {
+      if (doc.exists()) {
+        const data = doc.data();
+        const dataArray = Object.keys(data).map((key) => data[key]);
+        setProjectDetailsToForm(data)
+      } else {
+        console.log("No existe ningún documento con ese ID");
+      }
+    })
+    .catch((error) => {
+      console.log("Error al obtener el documento:", error);
+    });
+}
+
+function setProjectDetailsToForm(data){
+  console.log(data);
+  projectUsage.value = data.projectUsage
+  totalYearlyPayment.value = data.totalYearlyPayment
+  designArea.value = data.designArea
+  
+  projectPanelsNumber.value = data.projectPanelsNumber
+  projectAddOnSystem.value = data.projectAddOnSystem
+  ProjectCustomerCashBack.value = data.ProjectCustomerCashBack
+  projectCmsModInput.value = data.projectCmsModInput
+  solarPanelLocation = data.solarPanelLocation
+  roofCondition.value = data.roofCondition
+  roofingMaterial.value = data.roofingMaterial
+  projectElectricPanelBrand.value = data.projectElectricPanelBrand
+  //designAreaOnChange(data.designArea)
+  designAreaOnChangeWithPromise(data.designArea, data.proyectInstaller)
+  // proyectInstaller.value = data.proyectInstaller
+  // addersDataBd = addersData
+}
+
+async function designAreaOnChangeWithPromise(designArea, installer) {
+  return new Promise((resolve) => {
+    designAreaOnChange(designArea, installer);
+    resolve();
+  }).then(() => {
+    console.log(installer);
+    proyectInstaller
+    .innerHTML = installer;
+    console.log(proyectInstaller);
+    calculations()
+  });
+}
+
+async function designAreaOnChange(region){
+  console.log('change design area');
+  const docRef = doc(db, "coverageArea", region);
+  const docSnap = await getDoc(docRef);
+  let proyectInstaller = document.getElementById('proyectInstaller');
+  proyectInstaller.innerHTML = ''
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    let installers = docSnap.data().installer
+    let emptyOption = document.createElement('option');
+    emptyOption.innerHTML = ''
+    proyectInstaller.append(emptyOption)
+    installers.forEach(function(item) {
+      let option = document.createElement('option');
+      option.innerHTML = item
+      option.value = item
+      proyectInstaller.append(option)
+    });
 
 
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+}
+
+function subirImagenACarpetaDrive(imagen, carpetaId, accessToken) {
+  var archivo = imagen.files[0];
+  var metadata = {
+    'name': archivo.name,
+    'parents': [carpetaId]
+  };
+  var formData = new FormData();
+  formData.append('metadata', new Blob([JSON.stringify(metadata)], {type: 'application/json'}));
+  formData.append('file', archivo);
+  
+  fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + accessToken
+    },
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Archivo subido: ' + data.name);
+  })
+  .catch(error => {
+    console.error('Error al subir el archivo: ' + error);
+  });
+}
+
+/*testing git hub*/
+/*
+<button type="button" class="btn btn-primary position-relative"> ........................................................ btnAdderName
+</button>
+*/

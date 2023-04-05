@@ -4191,13 +4191,24 @@ div.tox .btn-group-vertical > .btn-group:not(:first-child) > .tox-button,
 
 .nav-pills .nav-link {
   background: none;
-  border: 0;
-  border-radius: 0.25rem;
+  border: 1;
+  color: #ffffff63;
+  background-color: #073961;
+  user-select: none;
+  border-color: #979797;
+  box-shadow: #000865;
 }
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #6571ff;
+  background-color: #083777;
+  border-color: #979797;
+  user-select: none;
+}
+
+.nav-pills .nav-link:hover {
+  background-color: #083777;
+  cursor: pointer;
 }
 
 .nav-fill > .nav-link,
