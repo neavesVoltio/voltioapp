@@ -1,0 +1,131 @@
+<script type="module" src="../js/newCalc.js"></script>
+<link rel="stylesheet" href="../style.css">
+<div class="container">
+    <form class="needs-validation" novalidate>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="loanName">Loan Name</label>
+          <input type="text" class="form-control" id="loanName" required>
+          <div class="invalid-feedback">
+            Please provide a loan name.
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="redline">Redline</label>
+          <input type="text" class="form-control" id="redline" required>
+          <div class="invalid-feedback">
+            Please provide a redline.
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="contractor">Contractor</label>
+          <input type="text" class="form-control" id="contractor" required>
+          <div class="invalid-feedback">
+            Please provide a contractor.
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="term">Term</label>
+          <input type="text" class="form-control" id="term" required>
+          <div class="invalid-feedback">
+            Please provide a term.
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="apr">APR%</label>
+          <input type="text" class="form-control" id="apr" required>
+          <div class="invalid-feedback">
+            Please provide an APR%.
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="monthly">Monthly</label>
+          <input type="text" class="form-control" id="monthly" required>
+          <div class="invalid-feedback">
+            Please provide a monthly value.
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="noITC">No ITC</label>
+          <input type="text" class="form-control" id="noITC" required>
+          <div class="invalid-feedback">
+            Please provide a no ITC value.
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="promo">Promo</label>
+          <input type="text" class="form-control" id="promo" required>
+          <div class="invalid-feedback">
+            Please provide a promo value.
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="dealerFee">Dealer Fee</label>
+          <input type="text" class="form-control" id="dealerFee" required>
+          <div class="invalid-feedback">
+            Please provide a dealer fee value.
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="panelSize">Panel Size</label>
+          <input type="text" class="form-control" id="panelSize" required>
+          <div class="invalid-feedback">
+            Please provide a panel size.
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="panelKwhYr">Panel kwh Yr</label>
+            <input type="text" class="form-control" id="panelKwhYr" required>
+            <div class="invalid-feedback">
+              Please provide a panel size.
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="panelKwhYr">Panel kwh Yr</label>
+            <input type="text" class="form-control" id="panelKwhYr" required>
+            <div class="invalid-feedback">
+              Please provide a panel size.
+            </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+        
+  
+  
+  <script>
+    let loans = [];
+    function saveLoan() {
+  let loan = {
+    loanName: document.getElementById("loanName").value,
+    redline: document.getElementById("redline").value,
+    contractor: document.getElementById("contractor").value,
+    term: document.getElementById("term").value,
+    apr: document.getElementById("apr").value,
+    monthly: document.getElementById("monthly").value,
+    noITC: document.getElementById("noITC").value,
+    promo: document.getElementById("promo").value,
+    dealerFee: document.getElementById("dealerFee").value,
+    panelSize: document.getElementById("panelSize").value,
+    panelKwhYr: document.getElementById("panelKwhYr").value,
+    module: document.getElementById("module").value
+  };
+
+  loans.push(loan);
+
+  console.log(loans);
+}
+  </script>
