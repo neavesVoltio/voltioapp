@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Voltio dashboard">
+  <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../resources/sweetAlert.css">
+	<title>Voltio Dashboard</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 48
+    }
+    </style>
+</head>
+<body>
+	<div class="main-wrapper bg-dark">
+
+
+		<!-- partial -->
+	
+    <div class="page-wrapper bg-dark">
+      <div class="page-content">
+          <section id="addFinancialSection">
+            <div class="page-content bg-transparent">
+              <div class="row">
+                <div class="col-12 col-md-6 grid-margin">
+                  <!-- Financial info-->
+                  <div class="card rounded bg-transparent border-info mb-2">
+                    <div class="card-header bg-transparent shadow">
+                      <H5 id="addFinancialTitle">Add Financial..</H5>
+                    </div>
+                    <div class="card-body">
+                      <form id="addFinancialForm">
+                        <div class="mb-3">
+                          <label for="loanName" class="form-label text-light">LOAN</label>
+                          <input type="text" class="form-control bg-dark border-info text-light" id="loanName" aria-describedby="loanName">
+                        </div>
+                        <div class="mb-3">
+                          <label for="loanRedline" class="form-label text-light">REDLINE</label>
+                          <input type="number" class="form-control bg-dark border-info text-light" id="loanRedline" aria-describedby="loanRedline">
+                        </div>
+                        <div class="mb-3">
+                          <label for="loanTerm" class="form-label text-light">TERM</label>
+                          <input type="number" class="form-control bg-dark border-info text-light" id="loanTerm" aria-describedby="loanTerm">
+                        </div>
+                        <div class="mb-3">
+                          <label for="loanApr" class="form-label text-light">APR</label>
+                          <input type="number" class="form-control bg-dark border-info text-light" id="loanApr" aria-describedby="loanApr">
+                        </div>
+                        <div class="mb-3">
+                          <label for="loanMonthly" class="form-label text-light">Monthly</label>
+                          <input type="number" class="form-control bg-dark border-info text-light" id="loanMonthly" aria-describedby="loanMonthly">
+                        </div>
+                        <div class="mb-3">
+                          <label for="loanNoItc" class="form-label text-light">No ITC</label>
+                          <input type="number" class="form-control bg-dark border-info text-light" id="loanNoItc" aria-describedby="loanNoItc">
+                        </div>
+                        <div class="mb-3">
+                          <label for="loanDealerFee" class="form-label text-light">Dealer Fee</label>
+                          <input type="number" class="form-control bg-dark border-info text-light" id="loanDealerFee" aria-describedby="loanDealerFee">
+                        </div>
+                        <div class="row container mx-auto">
+                          <a class="btn btn-outline-info me-2 mb-2 text-white" id="addLoabButtonToServer">Submit</a>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 grid grid-margin mx-auto overflow-hidden text-center">
+                  <div class="row  " id="loanCardsContainer">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="viewLoanListSection">
+
+          </section>
+			</div>
+
+			<!-- partial:../../partials/_footer.html -->
+			<footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small bg-dark text-light">
+				<p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a target="_blank">Voltio</a>.</p>
+			</footer>
+			<!-- partial -->
+	
+		</div>
+	</div>
+
+	<!-- Custom js for this page -->
+  <script src="../js/bootstrap.js"></script>
+  <script type="module" src="../js/financialSection.js"></script>
+  <script src="../resources/sweetAlert.js"></script>
+	<!-- End custom js for this page -->
+
+</body>
+</html>

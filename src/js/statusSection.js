@@ -51,8 +51,9 @@ async function saveStatusToServer(){
         let progress = document.getElementById('progress').value
         let apptDate = document.getElementById('apptDate').value
         let creditStatus = document.getElementById('creditStatus').value
-        let ss = document.getElementById('ss').value
-        let docs = document.getElementById('docs').value
+        let ss = document.getElementById('ss').check
+        let docs = document.getElementById('docs').check
+        console.log(docs);
       
     // se debe agregar el status a la bd leadData
       const projectInfoData = query(collection(db, 'leadData'), where('voltioIdKey', '==', voltioId));

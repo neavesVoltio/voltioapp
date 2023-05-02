@@ -10,15 +10,13 @@ googleButton.addEventListener('click', async () => {
     
     const provider = new GoogleAuthProvider()
     try{
-      console.log('google clicked');
       const credentials = await signInWithPopup(auth, provider)
       onAuthStateChanged(auth, async(user) => {
         if(user){
             let name = user.displayName;
             let userId = user.uid
-            console.log(userId);
-            console.log(name);
-            console.log(user.email);
+            let email = user.email
+            
         } else{
             console.log('no user logged xxx');
             document.getElementById('navbar').style.display = 'none'

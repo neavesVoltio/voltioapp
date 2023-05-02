@@ -67,94 +67,141 @@ License: For each use you must have a valid license purchased only from above li
                               <label for="inputAddress" class="form-label">Name</label>
                               <input type="text" class="form-control border-info" id="profileName">
                             </div>
-                            <div class="col-md-6">
-                                <label for="profileRouting" class="form-label">Routing Number</label>
-                                <input type="number" class="form-control border-info bg-dark opacity-75 text-white" id="profileRouting">
+                            <div class="col-md-4">
+                              <label for="profileCountry" class="form-label">Country</label>
+                              <select id="profileCountry" class="form-select border-info bg-dark opacity-75 text-white">
+                                  <option></option>
+                                  <option>USA</option>
+                                  <option>MX</option>
+                              </select>
+                          </div>
+<!-- USA Section    -->                          
+                          <div class="usaSection" style="display: none;">
+                            <div class="row mb-2">
+                              <div class="col-md-6">
+                                  <label for="profileRouting" class="form-label">Routing Number</label>
+                                  <input type="number" class="form-control border-info bg-dark opacity-75 text-white" id="profileRouting">
+                              </div>
+                              <div class="col-md-6">
+                                  <label for="profileAccountNumber" class="form-label">Account Number</label>
+                                  <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="profileAccountNumber">
+                              </div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="profileAccountNumber" class="form-label">Account Number</label>
-                                <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="profileAccountNumber">
-                            </div>
-                            <div class="col-12">
+                            <div class="col-12 mb-2">
                               <label for="profileAddress" class="form-label">Address</label>
                               <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="profileAddress" placeholder="1234 Main st">
                             </div>
-                            <div class="col-md-6">
-                              <label for="inputCity" class="form-label">City</label>
-                              <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="inputCity">
+                            <div class="row mb-2">
+                              <div class="col-md-6">
+                                <label for="inputCity" class="form-label">City</label>
+                                <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="inputCity">
+                              </div>
+                              <div class="col-md-4">
+                                <label for="inputState" class="form-label">State</label>
+                                <select id="inputState" class="form-select border-info bg-dark opacity-75 text-white">
+                                  <option selected>Choose...</option>
+                                  <option>AA</option>
+                                  <option>AE</option>
+                                  <option>AK</option>
+                                  <option>AL</option>
+                                  <option>AP</option>
+                                  <option>AR</option>
+                                  <option>AS</option>
+                                  <option>AZ</option>
+                                  <option>CA</option>
+                                  <option>CO</option>
+                                  <option>CT</option>
+                                  <option>DC</option>
+                                  <option>DE</option>
+                                  <option>FL</option>
+                                  <option>FM</option>
+                                  <option>GA</option>
+                                  <option>GU</option>
+                                  <option>HI</option>
+                                  <option>IA</option>
+                                  <option>ID</option>
+                                  <option>IL</option>
+                                  <option>IN</option>
+                                  <option>KS</option>
+                                  <option>KY</option>
+                                  <option>LA</option>
+                                  <option>MA</option>
+                                  <option>MD</option>
+                                  <option>ME</option>
+                                  <option>MH</option>
+                                  <option>MI</option>
+                                  <option>MN</option>
+                                  <option>MO</option>
+                                  <option>MP</option>
+                                  <option>MS</option>
+                                  <option>MT</option>
+                                  <option>NC</option>
+                                  <option>ND</option>
+                                  <option>NE</option>
+                                  <option>NH</option>
+                                  <option>NJ</option>
+                                  <option>NM</option>
+                                  <option>NV</option>
+                                  <option>NY</option>
+                                  <option>OH</option>
+                                  <option>OK</option>
+                                  <option>OR</option>
+                                  <option>PA</option>
+                                  <option>PR</option>
+                                  <option>PW</option>
+                                  <option>RI</option>
+                                  <option>SC</option>
+                                  <option>SD</option>
+                                  <option>TN</option>
+                                  <option>TX</option>
+                                  <option>UT</option>
+                                  <option>VA</option>
+                                  <option>VI</option>
+                                  <option>VT</option>
+                                  <option>WA</option>
+                                  <option>WI</option>
+                                  <option>WV</option>
+                                  <option>WY</option>
+                                </select>
+                              </div>
+                              <div class="col-md-2">
+                                <label for="inputZip" class="form-label">Zip</label>
+                                <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="inputZip">
+                              </div>
                             </div>
-                            <div class="col-md-4">
-                              <label for="inputState" class="form-label">State</label>
-                              <select id="inputState" class="form-select border-info bg-dark opacity-75 text-white">
-                                <option selected>Choose...</option>
-                                <option>AA</option>
-                                <option>AE</option>
-                                <option>AK</option>
-                                <option>AL</option>
-                                <option>AP</option>
-                                <option>AR</option>
-                                <option>AS</option>
-                                <option>AZ</option>
-                                <option>CA</option>
-                                <option>CO</option>
-                                <option>CT</option>
-                                <option>DC</option>
-                                <option>DE</option>
-                                <option>FL</option>
-                                <option>FM</option>
-                                <option>GA</option>
-                                <option>GU</option>
-                                <option>HI</option>
-                                <option>IA</option>
-                                <option>ID</option>
-                                <option>IL</option>
-                                <option>IN</option>
-                                <option>KS</option>
-                                <option>KY</option>
-                                <option>LA</option>
-                                <option>MA</option>
-                                <option>MD</option>
-                                <option>ME</option>
-                                <option>MH</option>
-                                <option>MI</option>
-                                <option>MN</option>
-                                <option>MO</option>
-                                <option>MP</option>
-                                <option>MS</option>
-                                <option>MT</option>
-                                <option>NC</option>
-                                <option>ND</option>
-                                <option>NE</option>
-                                <option>NH</option>
-                                <option>NJ</option>
-                                <option>NM</option>
-                                <option>NV</option>
-                                <option>NY</option>
-                                <option>OH</option>
-                                <option>OK</option>
-                                <option>OR</option>
-                                <option>PA</option>
-                                <option>PR</option>
-                                <option>PW</option>
-                                <option>RI</option>
-                                <option>SC</option>
-                                <option>SD</option>
-                                <option>TN</option>
-                                <option>TX</option>
-                                <option>UT</option>
-                                <option>VA</option>
-                                <option>VI</option>
-                                <option>VT</option>
-                                <option>WA</option>
-                                <option>WI</option>
-                                <option>WV</option>
-                                <option>WY</option>
-                              </select>
+                          </div>
+<!-- end USA Section    --> 
+                          <div id="mxSection" style="display: none;">
+                            <div class="row mb-2">
+                              <div class="col-md-6">
+                                <label for="profileCardNumber" class="form-label">Debit Card Number</label>
+                                <input type="number" class="form-control border-info bg-dark opacity-75 text-white" id="profileCardNumber">
+                              </div>
+                              <div class="col-md-6">
+                                  <label for="profileClabe" class="form-label">Clabe</label>
+                                  <input type="number" class="form-control border-info bg-dark opacity-75 text-white" id="profileClabe">
+                              </div>
                             </div>
-                            <div class="col-md-2">
-                              <label for="inputZip" class="form-label">Zip</label>
-                              <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="inputZip">
+                            <div class="col-12 mb-2">
+                              <label for="profileMxAddress" class="form-label">Address</label>
+                              <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="profileMxAddress" placeholder="Calle principal #123">
                             </div>
+                            <div class="row mb-2">
+                              <div class="col-md-6">
+                                <label for="inputMxCity" class="form-label">City</label>
+                                <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="inputMxCity">
+                              </div>
+                              <div class="col-md-4">
+                                <label for="inputMxState" class="form-label">State</label>
+                                <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="inputMxState">
+                              </div>
+                              <div class="col-md-2">
+                                <label for="inputMxZip" class="form-label">Zip</label>
+                                <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="inputMxZip">
+                              </div>
+                            </div>
+                          </div>
+<!--End MX section-->
                             <div class="col-12">
                                 <label for="profileNotes" class="form-label">Notes</label>
                                 <input type="text" class="form-control border-info bg-dark opacity-75 text-white" id="profileNotes" placeholder="...">
@@ -246,6 +293,6 @@ License: For each use you must have a valid license purchased only from above li
   <script type="module" src="../js/updateProfile.js"></script>
   <script src="../resources/sweetAlert.js"></script>
 	<!-- End custom js for this page -->
-
+  
 </body>
 </html>

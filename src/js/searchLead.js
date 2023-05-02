@@ -3,6 +3,7 @@ import { app, auth } from '../firebase/config.js'
 import { onAuthStateChanged, updateProfile } from '../firebase/firebaseAuth.js';
 import { calculations } from '../js/calculator.js'
 import '../js/signature_pad.js'
+import { showLoadingAlert } from '../js/loadSweetAlert.js'
 
 const db = getFirestore(app) 
 let voltioId 
@@ -60,6 +61,9 @@ let statusFilter = document.getElementById('statusFilter');
 let statusFilterData = 'In-Progress 🚀'
 let progressFilter
 let runCreditView = document.getElementById('runCreditView');
+let upFileCustomer = document.getElementById('upFileCustomer');
+let getProjectImagesButton = document.getElementById('getProjectImagesButton');
+
 navProposalsMenu.addEventListener('click', function (e) {
   console.log(e.target.id);
   if(e.target.id === 'navTabUtility'){
@@ -104,9 +108,10 @@ navProposalsMenu.addEventListener('click', function (e) {
   }
 });
 
+
 onAuthStateChanged(auth, async(user) => {
     if(user){
-
+      console.log(user.email);
       viewProjectsButton.addEventListener('click', (e) => {
         if(viewProjectsButton.dataset.status === 'Project'){
           status = 'Project'
@@ -114,6 +119,7 @@ onAuthStateChanged(auth, async(user) => {
           viewProjectsButton.dataset.status = 'lead'
           viewProjectsButton.innerHTML = 'VIEW LEADS'
           inputBox.value = ''
+          viewProjectsButton.value = ''
           
         } else {
           viewProjectsButton.dataset.status = 'Project'
@@ -121,31 +127,26 @@ onAuthStateChanged(auth, async(user) => {
           getLeadOrProjectData()
           viewProjectsButton.innerHTML = 'VIEW PROJECTS'
           inputBox.value = ''
+          viewProjectsButton.value = ''
         }
         
       })
 
       //getFirestoreDataToPagination()
       getLeadOrProjectData()
+
       statusFilter.addEventListener('change', function (e) {
         statusFilterData = e.target.value
         console.log(statusFilterData);
-        getLeadOrProjectData()
+        getLeadOrProjectData(statusFilterData)
       });
 
-      async function getLeadOrProjectData(){
-          data = []
+      async function getLeadOrProjectData(filter){
+        data = []
+        if(!filter){
           let querySnapshoot
-          if(statusFilterData === ''){
-            const projectInfo = query(collection(db, 'leadData'), where('status', '==', status));
-            querySnapshoot = await getDocs(projectInfo)
-          } else if(!progressFilter){
-            const projectInfo = query(collection(db, 'leadData'), where('status', '==', status), where('projectStatus', '==', statusFilterData));
-            querySnapshoot = await getDocs(projectInfo)
-          } else {
-            const projectInfo = query(collection(db, 'leadData'), where('status', '==', status), where('projectStatus', '==', statusFilterData), where('progress', '==', progressFilter));
-            querySnapshoot = await getDocs(projectInfo)
-          } 
+          const projectInfo = query(collection(db, 'leadData'), where('status', '==', status));
+          querySnapshoot = await getDocs(projectInfo)
 
           const allData = querySnapshoot.forEach( async(doc) => {
               data.push([
@@ -159,6 +160,31 @@ onAuthStateChanged(auth, async(user) => {
           })
         
           searchLeadByInput()
+        } else {
+          let querySnapshoot
+          if(statusFilterData === ''){
+            const projectInfo = query(collection(db, 'leadData'), where('status', '==', status));
+            querySnapshoot = await getDocs(projectInfo)
+          } else if(!progressFilter){
+            const projectInfo = query(collection(db, 'leadData'), where('status', '==', status), where('projectStatus', '==', statusFilterData));
+            querySnapshoot = await getDocs(projectInfo)
+          }  
+
+          const allData = querySnapshoot.forEach( async(doc) => {
+              data.push([
+                  doc.data().voltioIdKey,
+                  doc.data().customerName,
+                  doc.data().progress,
+                  doc.data().status,
+                  doc.data().projectStatus,
+                  
+              ])
+          })
+        
+          searchLeadByInput()
+
+        }
+          
       }
 
       searchLeadViewSection.forEach( (e) => { 
@@ -168,7 +194,7 @@ onAuthStateChanged(auth, async(user) => {
           document.querySelector('#addNewLeadSection').style.display = 'none'
           document.querySelector('#searchProjectSection').style.display = 'block'
           document.querySelector('#profileViewSection').style.display = 'none'
-          document.getElementById('imageCustomerGallery').innerHTML = ''
+          //document.getElementById('imageCustomerGallery').innerHTML = ''
           document.getElementById('customerFilesUpload').value = ''
           const projectInfo = query(collection(db, 'leadData'), where('status', '==', 'lead'));
           const querySnapshoot = await getDocs(projectInfo)
@@ -269,14 +295,16 @@ inputBox.addEventListener('input', () => {
 projectAddOnSystem.addEventListener('change', function (e) {
   calculations()
 });
-
+// THIS LET IS USED TO GET PROJECT DOC ID, AND HANDLE EDIT ACTIONS
 let docId
 
+// FUNCTION TO READ ALL LEAD INFO FROM DB AND SET ON EACH FIELD
 async function setDataToProfileView(voltioId){
     document.getElementById('titleOfEditLeadView').innerHTML = 'Lead'
     document.getElementById('searchProjectSection').style.display = 'none'
     document.getElementById('profileViewSection').style.display = 'block'
     let progressBar = document.getElementById('progressBar')
+    // THIS QUERY GET LEAD PROFILE DATA
     const projectInfo = query(collection(db, 'leadData'), where('voltioIdKey', '==', voltioId));
         const querySnapshoot = await getDocs(projectInfo)
         const allData = querySnapshoot.forEach( async(doc) => {
@@ -292,7 +320,7 @@ async function setDataToProfileView(voltioId){
             document.getElementById('leadEmail').value = doc.data().customerEmail
             docId = doc.id
         })
-    
+    // WE USE LEAD STATUS TO SET DATA ON STATUS VIEW SECTION
     const docRef = doc(db, "leadStatus", voltioId);
     const docSnap = await getDoc(docRef);
 
@@ -304,8 +332,8 @@ async function setDataToProfileView(voltioId){
       progressBar.innerHTML = docSnap.data().progress
       document.getElementById('apptDate').value = docSnap.data().apptDate
       document.getElementById('creditStatus').value = docSnap.data().creditStatus
-      document.getElementById('ss').value = docSnap.data().ss
-      document.getElementById('docs').value = docSnap.data().docs
+      document.getElementById('ss').check = docSnap.data().ss
+      document.getElementById('docs').check = docSnap.data().docs
       let progressValues = 
       [['Missing stips', '3%'],
       ['Missing utility bill', '6%'],
@@ -346,12 +374,16 @@ async function setDataToProfileView(voltioId){
       ['Job completed', '100%']]
       let cons = progressValues.map( r => r[0])
       const posIndex = cons.indexOf(docSnap.data().progress)
-      console.log(posIndex);
       const value = progressValues[posIndex][1]
-      console.log(value);
       progressBar.style.width = value
+      // THIS FUNCTIONS AREA USED TO COMPLETE DATA ON SOME SECTIONS
+      // LIKE COMMENTS, CALCULATOR DATA AND CREDIT INFO, JUST IS PENDING CREDIT LINKS
       getComments()
       getDataFromProjectDetails()
+      getCreditInfo()
+      console.log('start calculation on load');
+      
+
     } else {
       // doc.data() will be undefined in this case
      console.log("No such document!");
@@ -460,7 +492,9 @@ projectMPU.addEventListener('change', () => {
 })
 
 designArea.addEventListener('change', async function (e) {
-  designAreaOnChange()
+  
+  // designAreaOnChange()
+  
 });
 
 proyectInstaller.addEventListener('change', function (e) {
@@ -724,23 +758,35 @@ function setProjectDetailsToForm(data){
   addersDataBd = data.addersData
   console.log('setProjectDetailsToForm');
   getAddersByInstaller()
+  console.log(addersDataBd);
+  let sum = 0 // LET USED TO SUM ADDS
   addersDataBd.forEach(function(item) {
       console.log(item);
+      // NO ES POSIBLE SUMAR DESDE AQUI LOS ADDERS AL MENOS QUE SE PUEDA MODIFICAR LA VARIABLE AL CAMBIAR ADDERS EN EL DROPDOWN
+      // revisar por que no se han agregado los adders al lead
+      console.log(item.adderNameData);
+      console.log('sum of adds by array');
+      
+      sum += item.qtyData
+      console.log(sum);
       let newName = item.adderNameData
       let newValue = item.qtyData
       console.log(newName + ' ' + newValue);
       createAdderButton(newName, newValue)
+      calculations()
   });
 
   panelLocationClass.forEach((e)=>{ e.classList.remove('border-info')})
   document.getElementById(data.solarPanelLocation).classList.toggle('border-info');
   utilityAverageMonthly.value = (projectUsage.value / 12 ).toFixed(0)
   averageMonthlyPayment.value = (totalYearlyPayment.value / 12).toFixed(0)
-  
 }
 
 async function designAreaOnChangeWithPromise(designArea, installer) {
+  
   return new Promise((resolve) => {
+    console.log(installer);
+  console.log(designArea);
     designAreaOnChange(designArea, installer);
     resolve();
   }).then(() => {
@@ -752,9 +798,10 @@ async function designAreaOnChangeWithPromise(designArea, installer) {
   });
 }
 
-async function designAreaOnChange(region, installer){
+async function designAreaOnChange(designArea, installer){
   console.log('change design area');
-  const docRef = doc(db, "coverageArea", region);
+  
+  const docRef = doc(db, "coverageArea", designArea);
   const docSnap = await getDoc(docRef);
   let proyectInstaller = document.getElementById('proyectInstaller');
   proyectInstaller.innerHTML = ''
@@ -771,7 +818,7 @@ async function designAreaOnChange(region, installer){
       proyectInstaller.append(option)
     });
     proyectInstaller.value = installer;
-
+    calculations()
 
   } else {
     // doc.data() will be undefined in this case
@@ -779,15 +826,28 @@ async function designAreaOnChange(region, installer){
   }
 }
 
-  
+// START SECTION TO UPLOAD IMAGES
+
   let customerFilesUpload =  document.querySelector('#customerFilesUpload');
   
   customerFilesUpload.addEventListener('change', function (e) {
+    // Inicia el sweet alert 
+    const progressAlert = Swal.fire({
+      title: 'loading file...',
+      html: '<div class="progress"><div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>',
+      showCancelButton: false,
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false
+    });
+    // termina el sweet alert
+
+    console.log('customer files upload chganged');
     let url = "https://script.google.com/macros/s/AKfycbxXIJUh1IuSUsuaktTU4m6zd82FTMJXpK7H1D7x5EdRhD0CchBon0OvkoY_nDuQt_10/exec"
     console.log('file change');
     let fr = new FileReader()
     fr.addEventListener('loadend', function (e) {
-      console.log('load ens start');
       let res = fr.result
       
       let spt = res.split('base64,')[1]
@@ -810,6 +870,15 @@ async function designAreaOnChange(region, installer){
           console.log(response.link);
           
           saveToUtilityBillCollection(response.link)
+          // Cerrar el Sweet Alert
+          progressAlert.close();
+          // Mostrar una alerta de éxito
+          Swal.fire({
+            icon: 'success',
+            title: 'File loaded',
+            text: `The file has been loaded`,
+            confirmButtonText: 'OK'
+          });
         } catch (e) {
           console.error("Error al analizar la respuesta JSON: ", e);
         }
@@ -836,6 +905,7 @@ async function designAreaOnChange(region, installer){
   }
   
   let viewCustomersImageButton = document.getElementById('viewCustomersImageButton');
+
   viewCustomersImageButton.addEventListener('click', function (e) {
     getImagesFromUtilityBillCollection()
   });
@@ -909,7 +979,8 @@ async function designAreaOnChange(region, installer){
     container.innerHTML = ''
     thumbnails.forEach((thumbnail) => container.appendChild(thumbnail));
   }
-  
+// END OF UPLOAD IMAGE SECTION
+// FUNCTION TO CLEAR PROJECT ITS USED TO RESET PROJECT VIEW
   function clearProjectInfo(){
     projectUsage.value = 0
     totalYearlyPayment.value = 0
@@ -934,33 +1005,16 @@ async function designAreaOnChange(region, installer){
     targetCommission.innerHTML = ''
     projectCost.innerHTML = ''
   }
-  // start pagination
-  let lastVisible = null
-  
-async function getFirestoreDataToPagination(){
-    // Query the first page of docs
-    const first = query(collection(db, "leadData"), where('status', '==', status), orderBy("customerName"), startAfter(lastVisible), limit(2));
-    const documentSnapshots = await getDocs(first);
-    
-    documentSnapshots.forEach(function(item) {
-      let leadData = [item.data().voltioIdKey, item.data().customerName, item.data().progress, item.data().status, item.data().projectStatus]  
-      data.push(leadData)
-    });
-    // Get the last visible document
-    lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
-    
-    searchLeadByInput()
-    // Construct a new query starting at this document,
-    // get the next 25 cities.
-}
 
+  // START CREDIT INFO SECTION
+let runCreditDataView = document.getElementById('runCreditDataView');
 
-runCreditView.addEventListener('change', function (e) {
+runCreditDataView.addEventListener('change', function (e) {
     console.log(e.target.id)
     let dob = document.getElementById('leadDob').value;
     let job = document.getElementById('leadJobOcupation').value;
     let ssn = document.getElementById('leadSSN').value;
-    let annualIncome = document.getElementById('leadAnnualIncome').value;
+    let annualIncome = document.getElementById('leadAnnualIncome').value;    
     createOrEditCreditInfo(dob, job, ssn, annualIncome)
 });
 
@@ -986,6 +1040,7 @@ async function createOrEditCreditInfo(dob, job, ssn, annualIncome) {
     console.error("Error al crear o editar elemento: ", error);
   }
 }
+
 const leadSSN = document.getElementById("leadSSN");
 leadSSN.addEventListener("input", () => {
   const value = leadSSN.value;
@@ -996,6 +1051,35 @@ leadSSN.addEventListener("input", () => {
     leadSSN.style.borderColor = "";
   }
 });
+
+// get credit info
+
+async function getCreditInfo() {
+  try {
+    // Obtener la referencia del documento
+    const docRef = doc(db, 'creditInfo', voltioId);
+
+    // Obtener los datos del documento
+    const docSnap = await getDoc(docRef);
+
+    // Comprobar si el documento existe
+    if (docSnap.exists()) {
+      // Obtener los datos del documento
+       const  voltioData = docSnap.data()
+        document.getElementById('leadDob').value = voltioData.dob
+        document.getElementById('leadJobOcupation').value = voltioData.job
+        document.getElementById('leadSSN').value = voltioData.ssn
+        document.getElementById('leadAnnualIncome').value = voltioData.annualIncome
+        // Devolver el objeto con los datos de Voltio
+        console.log(voltioData.dob);
+      
+    } else {
+      console.log('El documento no existe');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 // firmar pad
 
@@ -1009,7 +1093,7 @@ const signaturePad = new SignaturePad(canvas, {
   backgroundColor: "black",
   penColor: "white"
 });
-
+let progressAlert
 // Función para guardar la firma como imagen
 function saveSignature() {
   saveSignatureButton.style.display = 'none'
@@ -1017,11 +1101,22 @@ function saveSignature() {
     alert("Por favor, firme antes de guardar");
     saveSignatureButton.style.display = 'block'
   } else {
+    // Inicia el sweet alert 
+    progressAlert = Swal.fire({
+      title: 'loading file...',
+      html: '<div class="progress"><div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>',
+      showCancelButton: false,
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false
+    });
+    // termina el sweet alert
     // Convertir la firma a una imagen base64
     const dataUrl = signaturePad.toDataURL();
     // Hacer algo con la imagen, como enviarla al servidor o guardarla en Firebase Storage
     savePadSignatureOnDrive(dataUrl)
-    console.log(dataUrl);
+    
   }
 }
 
@@ -1120,6 +1215,16 @@ async function getImagesFromSignaturePadCollection(){
     container.innerHTML = ''
     thumbnails.forEach((thumbnail) => container.appendChild(thumbnail));
     saveSignatureButton.style.display = 'block'
+    // Cerrar el Sweet Alert
+    progressAlert.close();
+    // Mostrar una alerta de éxito
+    Swal.fire({
+      icon: 'success',
+      title: 'File loaded',
+      text: `The file has been loaded`,
+      confirmButtonText: 'OK'
+    });
+    
   }
 
   // add an event to get signature images
@@ -1127,5 +1232,228 @@ async function getImagesFromSignaturePadCollection(){
   viewSignatures.addEventListener('click', function (e) {
     getImagesFromSignaturePadCollection()
   });
+  // approve credit by Admin
+  let approvedByAdminBtn = document.getElementById('approvedByAdminBtn');
+  approvedByAdminBtn.addEventListener('click', async function (e) {
+    const creditInfoRef = doc(collection(db, "creditInfo"), voltioId);
+
+    try {
+      // Se guarda el elemento en Firestore
+      await setDoc(creditInfoRef, {approved: 'Yes'}, { merge: true });
+      console.log("Elemento creado o editado correctamente");
+    } catch (error) {
+      console.error("Error al crear o editar elemento: ", error);
+    }
+  });
+
+  // START SECTION TO UPLOAD CREDIT IMAGES
+
+  let creditFilesUpload = document.getElementById('creditFilesUpload');
+
   
+  creditFilesUpload.addEventListener('change', function (e) {
+    // Inicia el sweet alert 
+    const progressAlert = Swal.fire({
+      title: 'loading file...',
+      html: '<div class="progress"><div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>',
+      showCancelButton: false,
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      allowEnterKey: false
+    });
+    // termina el sweet alert
+
+    console.log('customer files upload chganged');
+    let url = "https://script.google.com/macros/s/AKfycbweLOiqVU501vGESJXZ1iZo0Z-lJQaIbZef1PRazpHtZe_BxAh_KPrkSeLwOe-7yhsL/exec"
+    console.log('file change');
+    let fr = new FileReader()
+    fr.addEventListener('loadend', function (e) {
+      let res = fr.result
+      
+      let spt = res.split('base64,')[1]
+      console.log(creditFilesUpload.files[0].type);
+      let obj = {
+        base64:spt,
+        type:creditFilesUpload.files[0].type,
+        name:voltioId
+      }
+      console.log(obj);
+      let response =  fetch(url, {
+          method:'POST',
+          body: JSON.stringify(obj),
+        })
+      .then(r=>r.text())
+      .then(data => {
+        console.log(data);
+        try {
+          const response = JSON.parse(data);
+          console.log(response.link);
+          
+          saveToCreditInfoImagesCollection(response.link)
+          // Cerrar el Sweet Alert
+          progressAlert.close();
+          // Mostrar una alerta de éxito
+          Swal.fire({
+            icon: 'success',
+            title: 'File loaded',
+            text: `The file has been loaded`,
+            confirmButtonText: 'OK'
+          });
+        } catch (e) {
+          console.error("Error al analizar la respuesta JSON: ", e);
+        }
+      })
+      .catch(err => {
+        console.error("Error en la solicitud POST: ", err);
+      });
+    });
+    fr.readAsDataURL(creditFilesUpload.files[0])
+});
+
+async function saveToCreditInfoImagesCollection(link) {
+  try {
+
+    const docRef = await addDoc(collection(db, 'creditInfoImages'), {
+      voltioId: voltioId,
+      link: link,
+      timestamp: new Date().toISOString()
+    }).then(getImagesFromcreditInfoImagesCollection())
+
+  } catch (error) {
+    console.error('Error al guardar los datos:', error);
+  }
+}
+
+let viewCreditImageButton = document.getElementById('viewCreditImageButton');
+console.log(viewCreditImageButton);
+viewCreditImageButton.addEventListener('click', function (e) {
+  console.log('click credit button');
+  getImagesFromcreditInfoImagesCollection()
+});
+
+async function getImagesFromcreditInfoImagesCollection(){
+  const billsCol = collection(db, 'creditInfoImages');
+  const q = query(billsCol, where('voltioId', '==', voltioId));
+  const querySnapshot = await getDocs(q);
+  const bills = querySnapshot.docs.map((doc) => doc.data());
+  console.log(bills);
+  //generateUtilityBillImagesHTML(bills)
+  const thumbnailElements = bills.map((thumbnail) => generateThumbnail(thumbnail.link, thumbnail.voltioId));
+  insertThumbnailsCredit(thumbnailElements);
   
+}
+
+function insertThumbnailsCredit(thumbnails) {
+  const container = document.getElementById('previewCreditFiles');
+  const upFileCredit = document.getElementById('creditFilesUpload');
+  upFileCredit.value = ''
+  container.innerHTML = ''
+  thumbnails.forEach((thumbnail) => container.appendChild(thumbnail));
+}
+// END OF UPLOAD IMAGE SECTION
+
+// START PROJECT IMAGES UPLOAD SECTION
+projectImagesInput
+getProjectImagesButton 
+
+
+  
+projectImagesInput.addEventListener('change', function (e) {
+  // Inicia el sweet alert 
+  const progressAlert = Swal.fire({
+    title: 'loading file...',
+    html: '<div class="progress"><div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>',
+    showCancelButton: false,
+    showConfirmButton: false,
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    allowEnterKey: false
+  });
+  // termina el sweet alert
+
+  console.log('project files upload chganged');
+  let url = "https://script.google.com/macros/s/AKfycbypzkBqI-Hl-8b-J_Pz7u7-nzHuE69moHyUJD6ufU1s0Qrl-oZGeDvF6gdtwwDT7buEZg/exec"
+  console.log('file change');
+  let fr = new FileReader()
+  fr.addEventListener('loadend', function (e) {
+    let res = fr.result
+    
+    let spt = res.split('base64,')[1]
+    console.log(projectImagesInput.files[0].type);
+    let obj = {
+      base64:spt,
+      type:projectImagesInput.files[0].type,
+      name:voltioId
+    }
+    console.log(obj);
+    let response =  fetch(url, {
+        method:'POST',
+        body: JSON.stringify(obj),
+      })
+    .then(r=>r.text())
+    .then(data => {
+      console.log(data);
+      try {
+        const response = JSON.parse(data);
+        console.log(response.link);
+        
+        saveToProjectImagesCollection(response.link)
+        // Cerrar el Sweet Alert
+        progressAlert.close();
+        // Mostrar una alerta de éxito
+        Swal.fire({
+          icon: 'success',
+          title: 'File loaded',
+          text: `The file has been loaded`,
+          confirmButtonText: 'OK'
+        });
+      } catch (e) {
+        console.error("Error al analizar la respuesta JSON: ", e);
+      }
+    })
+    .catch(err => {
+      console.error("Error en la solicitud POST: ", err);
+    });
+  });
+  fr.readAsDataURL(projectImagesInput.files[0])
+});
+
+async function saveToProjectImagesCollection(link) {
+try {
+
+  const docRef = await addDoc(collection(db, 'projectImages'), {
+    voltioId: voltioId,
+    link: link,
+    timestamp: new Date().toISOString()
+  }).then(getImagesFromProjectImagesCollection())
+
+} catch (error) {
+  console.error('Error al guardar los datos:', error);
+}
+}
+
+getProjectImagesButton.addEventListener('click', function (e) {
+console.log('click project button');
+getImagesFromProjectImagesCollection()
+});
+
+async function getImagesFromProjectImagesCollection(){
+const projectCol = collection(db, 'projectImages');
+const q = query(projectCol, where('voltioId', '==', voltioId));
+const querySnapshot = await getDocs(q);
+const images = querySnapshot.docs.map((doc) => doc.data());
+const thumbnailElements = images.map((thumbnail) => generateThumbnail(thumbnail.link, thumbnail.voltioId));
+insertThumbnailsProjectImages(thumbnailElements);
+
+}
+
+function insertThumbnailsProjectImages(thumbnails) {
+const container = document.getElementById('imageProjectGallery');
+const projectImagesInput = document.getElementById('projectImagesInput');
+projectImagesInput.value = ''
+container.innerHTML = ''
+thumbnails.forEach((thumbnail) => container.appendChild(thumbnail));
+}
+// END OF UPLOAD PROJECT IMAGE SECTION
+

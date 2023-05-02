@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 projectUsage
 totalYearlyPayment
 designArea
@@ -19,7 +18,10 @@ al actualizar el installer se deb tomar sus valores de redline y
 
 6. Agregar la sección para editar los prestamos por instaladora
 13. Al cargar los datos de la caluladora no se estan sumando los adders
-14. filtrar por estatus 937
+    sumOfAddersfunction
+    737 // revisar por que no se han agregado los adders al lead
+14. filtrar por estatus 937 (descartado)
+15. ProjectInfo debe ser solo vista por el administrador general
 */ 1. Habilitar el boton para que guarde la calculadora y que se pueda elegir la principal y las secundarias.
 */ 2. Habilitar la sección para subir fotos a Drive y poder traerlas al abrir el proyecto.
 */ 3. Quitar los cuadros no necesarios */
@@ -32,36 +34,3 @@ al actualizar el installer se deb tomar sus valores de redline y
 */ 11. hacer que las imagenes se guarden con el voltioId en firebase junto con el link en una collection llamada 
 */ 12. asignar un dataset al boton borrar imagen para que al darle click, elimine esa imagen de firebase(*No se podra borrar desde el sistema)
 
-=======
-projectUsage
-totalYearlyPayment
-designArea
-proyectInstaller
-projectPanelsNumber
-projectAddOnSystem
-ProjectCustomerCashBack
-addersData (Objeto)
-projectCmsMod
-solarPanelLocation
-roofCondition
-roofingMaterial
-projectElectricPanelBrand
-
-Sig pasos:
-
-al actualizar el installer se deb tomar sus valores de redline y 
-
-6. Agregar la sección para editar los prestamos por instaladora
-13. Al cargar los datos de la caluladora no se estan sumando los adders
-*/ 1. Habilitar el boton para que guarde la calculadora y que se pueda elegir la principal y las secundarias.
-*/ 2. Habilitar la sección para subir fotos a Drive y poder traerlas al abrir el proyecto.
-*/ 3. Quitar los cuadros no necesarios */
-*/ 4. Cambiar el menu para que salga como pestañas y así se separen las secciones */
-*/ 5. Hacer el formato del menú de leads y proyectos con los filtros necesarios. */
-*/ 7. Guardar calculadora en firebase
-*/ 8. Leer los datos de firebase y guardarlos en un object para obtener la calculadora
-*/ 9. Subir imagenes a Drive
-*/ 10. hacer que las imagenes se guarden con el voltioId en drive
-*/ 11. hacer que las imagenes se guarden con el voltioId en firebase junto con el link en una collection llamada 
-*/ 12. asignar un dataset al boton borrar imagen para que al darle click, elimine esa imagen de firebase(*No se podra borrar desde el sistema)
->>>>>>> 1b8218655caacdba1a8442d43f6aca3a38b83f89

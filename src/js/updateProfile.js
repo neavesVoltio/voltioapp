@@ -3,10 +3,8 @@ import { app, auth } from '../firebase/config.js'
 import { onAuthStateChanged, updateProfile } from '../firebase/firebaseAuth.js';
 const db = getFirestore(app) 
 
-
-
 let updateProfileButton = document.querySelector('#updateProfileButton')
-let docId
+
 onAuthStateChanged(auth, async(user) => {
     document.getElementById('profileName').value = user.displayName
     const profileBd = query(collection(db, 'userProfile'), where('userId', '==', user.uid));
@@ -36,6 +34,21 @@ onAuthStateChanged(auth, async(user) => {
             document.getElementById('profileTeam').value = !doc.data().profileTeam ? '' : doc.data().profileTeam
         }
     })
+    let profileCountry = document.getElementById('profileCountry');
+profileCountry.addEventListener('change', function (e) {
+    country()
+});
+   function country(){
+      
+      if(profileCountry.value === 'USA'){
+        console.log(profileCountry.value);
+        document.getElementById('usaSection').style.display = 'block';
+        document.getElementById('mxSection').style.display = 'none';
+      } else if (profileCountry.value === 'MX') {
+        document.getElementById('usaSection').style.display = 'none';
+        document.getElementById('mxSection').style.display = 'block';
+      }
+   }
 })
 
 updateProfileButton.addEventListener('click', (e) =>{
@@ -135,3 +148,5 @@ updateProfileButton.addEventListener('click', (e) =>{
     })
 })
 
+
+  
